@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html body {
+  margin: 0;
+   font-family: 'IBM Plex Sans', sans-serif;
+
+}
+.link{
+    @apply pt-4 pb-4  relative cursor-pointer rounded-md ;
+}
+.link .route i{
+  @apply mr-5 
+}
+.route{
+  @apply no-underline  ml-4 text-gray-500 ;
+  transition: .3s;
+}
+.link .route.active{
+  color: #0d6efc;
+}
+.link:hover .link .route,
+.link .route:hover{
+  color: #0d6efc;
+}
+.page{
+  @apply bg-slate-50  rounded-md p-4;
+  height: calc(100vh - 48px);
+  margin-top: 48px;
+}
