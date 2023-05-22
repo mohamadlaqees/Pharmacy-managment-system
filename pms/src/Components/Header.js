@@ -20,7 +20,7 @@ function Header({ set, check }) {
           ></i>
           <div
             class={`w-80 h-80 rounded-md bg-slate-100 absolute right-44 top-12 shadow-md transition duration-.3s overflow-auto ${
-              show ? "opacity-100" : "opacity-0"
+              show ? "block" : "hidden"
             } `}
           >
             <div class="p-2 hover:bg-slate-200 transition-all border border-b-4 border-gray-500">
