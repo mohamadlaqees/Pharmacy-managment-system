@@ -1,7 +1,7 @@
 import React from "react";
 
 function Store() {
-  return <div  className="page">Store3</div>;
+  return <div  className="page">Store4</div>;
 }
 
 export default Store;
