@@ -18,7 +18,7 @@ module.exports = {
       width:{
         '88%':'88%',
         '12%':'12%',
-        'custom':'1480px'
+        'custom':'96.5%'
       },
       transitionDuration:{
         '.3s':'.3s'
