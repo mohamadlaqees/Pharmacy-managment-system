@@ -35,7 +35,7 @@ const routes = createBrowserRouter([
     children: [
       { index: true, element: <Content /> },
       { path: "store", element: <Store /> },
-      { path: "users", element: <Employees /> },
+      { path: "employees", element: <Employees /> },
       { path: "stock", element: <Stock /> },
       { path: "reports", element: <Reports /> },
       { path: "backups", element: <Backups /> },
