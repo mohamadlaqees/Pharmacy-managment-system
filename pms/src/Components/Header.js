@@ -18,20 +18,20 @@ function Header({ set, check }) {
     <div class=" p-1 flex justify-between   bg-white rounded-md shadow-sm ">
       <div>
         <i
-          class="fa fa-light fa-align-left  text-gray-500 cursor-pointer hover:text-blue-600 text-xl transition-all mt-2 ml-2"
+          class="fa fa-light fa-align-left  text-gray-500 cursor-pointer hover:text-blue-600 text-xl transition-all mt-3 ml-2"
           onClick={() => set(!check)}
         ></i>
       </div>
-      <div class="flex gap-3">
+      <div class="flex">
         <div class=" border-r-2 border-gray-200 " ref={pop}>
           <i
             class={`fa-solid fa-bell w-fit -rotate-12 text-xl ${
               show ? "text-blue-600" : "text-gray-500"
-            } cursor-pointer transition-all hover:text-blue-600 mt-2 mr-2 `}
+            } cursor-pointer transition-all hover:text-blue-600 mt-3 mr-2 `}
             onClick={() => setShow(!show)}
           ></i>
           <div
-            class={`w-80 h-80 rounded-md bg-slate-100 absolute right-44 top-12 shadow-md transition duration-.3s overflow-auto ${
+            class={`w-80 h-80 rounded-md bg-slate-100 absolute right-44 top-14 shadow-md transition duration-.3s overflow-auto ${
               show ? "opacity-100 visible" : "opacity-0 invisible"
             } `}
           >
@@ -82,12 +82,14 @@ function Header({ set, check }) {
             </div>
           </div>
         </div>
-        <div>
-          <i class="fa-solid fa-user text-blue-600   transition-all mt-2"></i>
-        </div>
-        <div class="">
-          <span class="block text-sm">Mohammad Laqees</span>
-          <span class="text-gray-500 block text-sm">Admin</span>
+        <div className="flex gap-3 hover:bg-slate-100  transition-all cursor-pointer">
+          <div>
+            <i class="fa-solid fa-user text-blue-600   transition-all mt-2 text-xl"></i>
+          </div>
+          <div class="">
+            <span class="block text-sm">Mohammad Laqees</span>
+            <span class="text-gray-500 block text-sm">Admin</span>
+          </div>
         </div>
       </div>
     </div>
