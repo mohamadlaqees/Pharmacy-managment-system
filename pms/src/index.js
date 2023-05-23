@@ -12,8 +12,9 @@ import Content from "./pages/Content";
 import Store from "./pages/Store";
 import Stock from "./pages/Stock";
 import Backups from "./pages/Backups";
-import Reports from "./pages/Reports";
+import Reports from "./pages/Orders";
 import Employees from "./pages/Employees";
+import Orders from "./pages/Orders";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -37,7 +38,7 @@ const routes = createBrowserRouter([
       { path: "store", element: <Store /> },
       { path: "employees", element: <Employees /> },
       { path: "stock", element: <Stock /> },
-      { path: "reports", element: <Reports /> },
+      { path: "orders", element: <Orders /> },
       { path: "backups", element: <Backups /> },
     ],
   },

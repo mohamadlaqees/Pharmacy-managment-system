@@ -18,7 +18,7 @@ function Header({ set, check }) {
     <div class=" p-1 flex justify-between   bg-white rounded-md shadow-sm ">
       <div>
         <i
-          class="fa fa-light fa-align-left  text-gray-500 cursor-pointer hover:text-blue-600 text-xl transition-all mt-3 ml-2"
+          class="fa fa-light fa-align-left  text-gray-500 cursor-pointer hover:text-blue-600 text-xl transition-all mt-2 ml-2"
           onClick={() => set(!check)}
         ></i>
       </div>
@@ -27,7 +27,7 @@ function Header({ set, check }) {
           <i
             class={`fa-solid fa-bell w-fit -rotate-12 text-xl ${
               show ? "text-blue-600" : "text-gray-500"
-            } cursor-pointer transition-all hover:text-blue-600 mt-3 mr-2 `}
+            } cursor-pointer transition-all hover:text-blue-600 mt-2 mr-2 `}
             onClick={() => setShow(!show)}
           ></i>
           <div
@@ -82,7 +82,7 @@ function Header({ set, check }) {
             </div>
           </div>
         </div>
-        <div className="flex gap-3 hover:bg-slate-100  transition-all cursor-pointer">
+        <div className="flex gap-3   transition-all cursor-pointer ml-1">
           <div>
             <i class="fa-solid fa-user text-blue-600   transition-all mt-2 text-xl"></i>
           </div>
