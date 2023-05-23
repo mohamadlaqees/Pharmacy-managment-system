@@ -31,7 +31,7 @@ function Header({ set, check }) {
             onClick={() => setShow(!show)}
           ></i>
           <div
-            class={`w-80 h-80 rounded-md bg-slate-100 absolute right-44 top-14 shadow-md transition duration-.3s overflow-auto ${
+            class={`w-80 h-80 rounded-md bg-slate-100 absolute right-40 top-12 shadow-md transition duration-.3s overflow-auto ${
               show ? "opacity-100 visible" : "opacity-0 invisible"
             } `}
           >
