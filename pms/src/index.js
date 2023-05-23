@@ -10,10 +10,10 @@ import Register from "./pages/Register";
 import Dashboard from "./layout/Dashboard";
 import Content from "./pages/Content";
 import Store from "./pages/Store";
-import Users from "./pages/Users";
 import Stock from "./pages/Stock";
 import Backups from "./pages/Backups";
 import Reports from "./pages/Reports";
+import Employees from "./pages/Employees";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -35,15 +35,12 @@ const routes = createBrowserRouter([
     children: [
       { index: true, element: <Content /> },
       { path: "store", element: <Store /> },
-      { path: "users", element: <Users /> },
+      { path: "users", element: <Employees /> },
       { path: "stock", element: <Stock /> },
       { path: "reports", element: <Reports /> },
       { path: "backups", element: <Backups /> },
     ],
   },
-
-
- 
 ]);
 root.render(
   <RouterProvider router={routes}>
