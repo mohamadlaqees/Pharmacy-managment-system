@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function Header({ set, check }) {
   const [show, setShow] = useState(false);
+  const pop = useRef();
+  useEffect(() => {
+    let popHandler = (e) => {
+      if (!pop.current.contains(e.target)) {
+        setShow(!show);
+      }
+    };
+    document.addEventListener("mousedown", popHandler);
+    return () => {
+      document.removeEventListener("mousedown", popHandler);
+    };
+  });
   return (
     <div class=" p-1 flex justify-between   bg-white rounded-md shadow-sm ">
       <div>
@@ -11,7 +23,7 @@ function Header({ set, check }) {
         ></i>
       </div>
       <div class="flex gap-3">
-        <div class=" border-r-2 border-gray-200 ">
+        <div class=" border-r-2 border-gray-200 " ref={pop}>
           <i
             class={`fa-solid fa-bell w-fit -rotate-12 text-xl ${
               show ? "text-blue-600" : "text-gray-500"
