@@ -41,7 +41,7 @@ function SideBar() {
             </li>
             <li className={`link`}>
               <NavLink className="route" to={"orders"}>
-                <i class="fas fa-file"></i> {check ? "" : "Orders"}
+                <i class="fa-solid fa-list"></i> {check ? "" : "Orders"}
               </NavLink>
             </li>
             <li className={`link`}>
