@@ -1,6 +1,6 @@
 import React from "react";
 
-function Users() {
+function Employees() {
   return (
     <div  className="page">
      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci numquam
@@ -11,4 +11,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default Employees;
