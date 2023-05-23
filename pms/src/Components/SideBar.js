@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { checkContext } from "../layout/Dashboard";
 function SideBar() {
   const check = useContext(checkContext);
-  console.log(check);
   return (
     <Fragment>
       <div
