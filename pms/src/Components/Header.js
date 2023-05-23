@@ -6,7 +6,7 @@ function Header({ set, check }) {
   useEffect(() => {
     let popHandler = (e) => {
       if (!pop.current.contains(e.target)) {
-        setShow(!show);
+        setShow(false);
       }
     };
     document.addEventListener("mousedown", popHandler);
