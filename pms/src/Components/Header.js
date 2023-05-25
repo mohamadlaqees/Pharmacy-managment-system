@@ -1,12 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 
 function Header({ set, check }) {
-  const [show, setShow] = useState(false);
+  const [showN, setShowN] = useState(false);
+  const [showP, setShowP] = useState(false);
   const pop = useRef();
+  const prof = useRef();
   useEffect(() => {
     let popHandler = (e) => {
       if (!pop.current.contains(e.target)) {
-        setShow(false);
+        setShowN(false);
+      }
+      if (!prof.current.contains(e.target)) {
+        setShowP(false);
       }
     };
     document.addEventListener("mousedown", popHandler);
@@ -26,13 +31,13 @@ function Header({ set, check }) {
         <div class=" border-r-2 border-gray-200 " ref={pop}>
           <i
             class={`fa-solid fa-bell w-fit -rotate-12 text-xl ${
-              show ? "text-blue-600" : "text-gray-500"
+              showN ? "text-blue-600" : "text-gray-500"
             } cursor-pointer transition-all hover:text-blue-600 mt-2 mr-2 `}
-            onClick={() => setShow(!show)}
+            onClick={() => setShowN(!showN)}
           ></i>
           <div
             class={`w-80 h-80 rounded-md bg-slate-100 absolute right-40 top-12 shadow-md transition duration-.3s overflow-auto ${
-              show ? "opacity-100 visible" : "opacity-0 invisible"
+              showN ? "opacity-100 visible" : "opacity-0 invisible"
             } `}
           >
             <div class="p-2 hover:bg-slate-200 transition-all border border-b-4 border-gray-500">
@@ -82,13 +87,32 @@ function Header({ set, check }) {
             </div>
           </div>
         </div>
-        <div className="flex gap-3   transition-all cursor-pointer ml-1">
+        <div
+          className="flex gap-3   transition-all cursor-pointer ml-1"
+          onClick={() => setShowP(!showP)}
+          ref={prof}
+        >
           <div>
             <i class="fa-solid fa-user text-blue-600   transition-all mt-2 text-xl"></i>
           </div>
           <div class="">
             <span class="block text-sm">Mohammad Laqees</span>
             <span class="text-gray-500 block text-sm">Admin</span>
+          </div>
+          <div
+            class={`w-40 h-80 rounded-md bg-slate-100 absolute right-0 top-12 shadow-md transition duration-.3s overflow-auto ${
+              showP ? "opacity-100 visible" : "opacity-0 invisible"
+            } `}
+          >
+            <div class="p-2 hover:bg-slate-200 transition-all border border-b-4 border-gray-500">
+              <h5>Title</h5>
+              <span class="block h-11 overflow-hidden cursor-pointer text-ellipsis ">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
+                facilis maxime dignissimos iusto veritatis, vel modi non
+                accusantium dolor! Asperiores sapiente possimus doloremque
+                recusandae perferendis beatae unde earum, minima obcaecati?
+              </span>
+            </div>
           </div>
         </div>
       </div>
