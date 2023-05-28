@@ -16,6 +16,7 @@ import Reports from "./pages/Orders";
 import Employees from "./pages/Employees";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const routes = createBrowserRouter([
       { path: "orders", element: <Orders /> },
       { path: "backups", element: <Backups /> },
       { path: "profile", element: <Profile /> },
+      { path: "editProfile", element: <EditProfile /> },
     ],
   },
 ]);

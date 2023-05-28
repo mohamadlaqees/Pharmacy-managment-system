@@ -10,7 +10,7 @@ function SideBar() {
           check ? "w-14" : "w-12%"
         }  rounded-m transition-all h-page`}
       >
-        <div class="text-primary text-3xl  mt-2 border-b-2">
+        <div class="text-blue-600 text-3xl  mt-2 border-b-2">
           <i class="fa-solid fa-hospital ml-3 mb-2"></i>
         </div>
         <div class="mt-2 ">

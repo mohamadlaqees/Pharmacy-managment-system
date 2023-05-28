@@ -51,7 +51,7 @@ export default function Register() {
           <Form onSubmit={formik.handleSubmit}>
             <div class="flex gap-3 mb-3">
               <Form.Group className="col-sm-6 " controlId="formBasicEmail">
-                <Form.Label class="text-primary">First name</Form.Label>
+                <Form.Label class="text-blue-600">First name</Form.Label>
                 <Form.Control
                   name="Fname"
                   type="text"
@@ -69,7 +69,7 @@ export default function Register() {
               </Form.Group>
 
               <Form.Group className="col-sm-6 " controlId="formBasicEmail">
-                <Form.Label class="text-primary">Last name</Form.Label>
+                <Form.Label class="text-blue-600">Last name</Form.Label>
                 <Form.Control
                   name="Lname"
                   type="text"
@@ -88,7 +88,7 @@ export default function Register() {
             </div>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label class="text-primary">Email</Form.Label>
+              <Form.Label class="text-blue-600">Email</Form.Label>
               <Form.Control
                 name="email"
                 type="email"
@@ -109,7 +109,7 @@ export default function Register() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label class="text-primary">Password</Form.Label>
+              <Form.Label class="text-blue-600">Password</Form.Label>
               <Form.Control
                 name="password"
                 type="password"
@@ -123,7 +123,7 @@ export default function Register() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label class="text-primary">Phone</Form.Label>
+              <Form.Label class="text-blue-600">Phone</Form.Label>
               <Form.Control
                 name="phone"
                 type="text"

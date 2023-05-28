@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 
 function Header({ set, check }) {
   const [showN, setShowN] = useState(false);
@@ -27,7 +28,7 @@ function Header({ set, check }) {
           onClick={() => set(!check)}
         ></i>
       </div>
-      <div class="flex">
+      <div class="flex gap-3">
         <div class=" border-r-2 border-gray-200 " ref={pop}>
           <i
             class={`fa-solid fa-bell w-fit -rotate-12 text-xl ${
@@ -87,31 +88,51 @@ function Header({ set, check }) {
             </div>
           </div>
         </div>
-        <div
-          className="flex gap-3   transition-all cursor-pointer ml-1"
-          onClick={() => setShowP(!showP)}
-          ref={prof}
-        >
-          <div>
-            <i class="fa-solid fa-user text-blue-600   transition-all mt-2 text-xl"></i>
-          </div>
-          <div class="">
-            <span class="block text-sm">Mohammad Laqees</span>
-            <span class="text-gray-500 block text-sm">Admin</span>
+        <div class=" transition-all  " ref={prof}>
+          <div
+            className="flex gap-3 cursor-pointer"
+            onClick={() => setShowP(!showP)}
+          >
+            <div>
+              <i
+                class={`fa-solid fa-user text-xl ${"text-blue-600"} cursor-pointer transition-all hover:text-SSReg mt-2 mr-2 `}
+              ></i>
+            </div>
+            <div class=" ">
+              <span class="block text-sm">Mohammad Laqees</span>
+              <span class="text-gray-500 block text-sm">Admin</span>
+            </div>
           </div>
           <div
-            class={`w-40 h-80 rounded-md bg-slate-100 absolute right-0 top-12 shadow-md transition duration-.3s overflow-auto ${
+            class={`w-48 h-80 rounded-md bg-slate-100 absolute right-0 top-12 shadow-md transition duration-.3s overflow-auto ${
               showP ? "opacity-100 visible" : "opacity-0 invisible"
             } `}
           >
-            <div class="p-2 hover:bg-slate-200 transition-all border border-b-4 border-gray-500">
-              <h5>Title</h5>
-              <span class="block h-11 overflow-hidden cursor-pointer text-ellipsis ">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius
-                facilis maxime dignissimos iusto veritatis, vel modi non
-                accusantium dolor! Asperiores sapiente possimus doloremque
-                recusandae perferendis beatae unde earum, minima obcaecati?
-              </span>
+            <div class="p-2 flex gap-3 justify-center  hover:bg-slate-200  border border-b-4 border-gray-500 hover:text-blue-600 transition-all">
+              <div>
+                <i class="fa-regular fa-user"></i>{" "}
+              </div>
+              <div>
+                <Link
+                  className="no-underline text-gray-500 hover:text-gray-500"
+                  to={"profile"}
+                >
+                  My profile
+                </Link>
+              </div>
+            </div>
+            <div class="p-2 flex gap-3 justify-center  hover:bg-slate-200  border border-b-4 border-gray-500 hover:text-blue-600 transition-all">
+              <div>
+                <i class="fa-regular fa-pen-to-square"></i>{" "}
+              </div>
+              <div>
+                <Link
+                  className="no-underline text-gray-500 hover:text-gray-500"
+                  to={"editProfile"}
+                >
+                  Edit profile
+                </Link>
+              </div>
             </div>
           </div>
         </div>
