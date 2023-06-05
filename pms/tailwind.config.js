@@ -18,12 +18,14 @@ module.exports = {
       },
       translate: {
         "10%": "10%",
+        "30%": "30%",
       },
       width: {
         "88%": "88%",
         "12%": "12%",
         custom: "96.5%",
         form: "500px",
+        form2: "750px",
       },
       transitionDuration: {
         ".3s": ".3s",
