@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#81d6fd",
-        secondry: "#d7eeff",
+        secondry:"#0d6efc",
         SWord: "#5fb9f7",
         SReg: "#52b0ed",
         font1: "#4f4f4f",
@@ -29,6 +29,12 @@ module.exports = {
       },
       transitionDuration: {
         ".3s": ".3s",
+      },
+      screens: {
+        show: "1200px",
+      },
+      gridTemplateColumns: {
+        fluid: "repeat(auto-fill, minmax(20rem, 1fr))",
       },
     },
   },
