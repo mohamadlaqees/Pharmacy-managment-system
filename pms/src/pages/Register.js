@@ -182,7 +182,7 @@ export default function Register() {
               </Button>
             </div>
             <span className=" block text-center">
-              Already have an account{" "}
+              Already have an account ?{" "}
               <span>
                 <Link
                   className="hover:text-blue-600 text-gray-400  transition no-underline"
