@@ -12,11 +12,11 @@ import Content from "./pages/Content";
 import Store from "./pages/Store";
 import Stock from "./pages/Stock";
 import Backups from "./pages/Backups";
-import Reports from "./pages/Orders";
 import Employees from "./pages/Employees";
 import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import Product from "./pages/Product";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -44,6 +44,7 @@ const routes = createBrowserRouter([
       { path: "backups", element: <Backups /> },
       { path: "profile", element: <Profile /> },
       { path: "editProfile", element: <EditProfile /> },
+      { path: "store/product/:id", element: <Product /> },
     ],
   },
 ]);

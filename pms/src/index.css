@@ -3,29 +3,93 @@
 @tailwind utilities;
 html body {
   margin: 0;
-   font-family: 'IBM Plex Sans', sans-serif;
-
+  font-family: "IBM Plex Sans", sans-serif;
 }
-.link{
-    @apply pt-4 pb-4  relative cursor-pointer rounded-md ;
+.link {
+  @apply pt-4 pb-4  relative cursor-pointer rounded-md;
 }
-.link .route i{
-  @apply mr-5 
+.link .route i {
+  @apply mr-5;
 }
-.route{
-  @apply no-underline  ml-4 text-gray-500 ;
-  transition: .3s;
+.route {
+  @apply no-underline  ml-4 text-gray-500;
+  transition: 0.3s;
 }
-.link .route.active{
+.link .route.active {
   color: #0d6efc;
 }
 .link:hover .link .route,
-.link .route:hover{
+.link .route:hover {
   color: #0d6efc;
 }
-.page{
+.page {
   @apply bg-slate-50  rounded-md p-4;
   height: calc(100vh - 50px);
   margin-top: 48px;
   overflow: auto;
+}
+.page2 {
+  @apply bg-slate-50  rounded-md p-4;
+  height: 108vh;
+  margin-top: 48px;
+  overflow: auto;
+}
+@media (min-width: 500px) {
+  .page2 {
+    height: calc(100vh - 50px);
+  }
+}
+.menu {
+  width: 500px;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+@media (max-width: 640px) {
+  .menu {
+    width: 350px;
+  }
+}
+.menu:hover {
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  color: #0d6efc;
+}
+
+.drop {
+  width: 500px;
+  position: relative;
+  padding: 10px;
+  border-radius: 6px;
+  transition: 0.2s;
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+  top: -45px;
+  height: 0;
+}
+@media (max-width: 640px) {
+  .drop {
+    width: 350px;
+  }
+}
+@media (max-width: 640px) {
+  .drop.drop.active {
+    width: 350px;
+    margin-bottom: 3px;
+  }
+}
+.drop.active {
+  position: relative;
+  transition: 0.3s;
+  width: 500px;
+  padding: 10px;
+  border-radius: 6px;
+  top: 0;
+  height: fit-content;
+  visibility: visible;
+  opacity: 100%;
+  max-height: 150px;
 }
