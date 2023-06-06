@@ -93,3 +93,6 @@ html body {
   opacity: 100%;
   max-height: 150px;
 }
+.css-dev-only-do-not-override-yp8pcc.ant-checkbox-wrapper+.ant-checkbox-wrapper{
+  margin-left: 0;
+}

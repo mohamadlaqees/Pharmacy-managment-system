@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { message } from "antd";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { Checkbox } from "antd";
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -49,7 +50,18 @@ function EditProfile() {
       navigate("profile");
     },
   });
-
+  const plainOptions = [
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ];
+  const onChange = (checkedValues) => {
+    console.log("checked = ", checkedValues);
+  };
   return (
     <Form onSubmit={formik.handleSubmit}>
       <div className="page flex justify-center gap-4">
@@ -64,7 +76,7 @@ function EditProfile() {
           <div className="d-grid gap-2 mb-8">
             <button
               type="submit"
-              class=" mt-3 p-1 border-secondry border-2 text-secondry rounded-md hover:text-white hover:bg-secondry hover:border-secondry duration-.3s  text-center"
+              className=" mt-3 p-1 border-secondry border-2 text-secondry rounded-md hover:text-white hover:bg-secondry hover:border-secondry duration-.3s  text-center"
             >
               Save
             </button>
@@ -161,6 +173,22 @@ function EditProfile() {
               />
             </div>
           </Form.Group>
+        </div>
+        <div className=" rounded-md bg-white shadow-md p-4 w-64 h-form  mt-24  hidden md:block md:visible    ">
+          <span className=" text-blue-600 ml-5">WorkDays</span>
+          <Checkbox.Group
+            className="days"
+            options={plainOptions}
+            onChange={onChange}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              marginLeft: "20px",
+              marginRight: "20px",
+              marginTop: "30px",
+            }}
+          />
         </div>
       </div>
     </Form>

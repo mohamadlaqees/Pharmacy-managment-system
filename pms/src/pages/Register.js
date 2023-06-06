@@ -6,9 +6,9 @@ import { message } from "antd";
 import { useFormik } from "formik";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { TimePicker } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { Checkbox } from "antd";
 export default function Register() {
   const navigate = useNavigate();
   const SignupSchema = Yup.object().shape({
@@ -47,6 +47,15 @@ export default function Register() {
       navigate("/login");
     },
   });
+  const plainOptions = [
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ];
   const [Saturday, setSaturday] = useState([]);
   const [Sunday, setSunday] = useState([]);
   const [Monday, setMonday] = useState([]);
@@ -55,14 +64,17 @@ export default function Register() {
   const [Thursday, setThursday] = useState([]);
   const [Friday, setFriday] = useState([]);
   console.log(dayjs(Saturday[0]).format("HH:mm:ss"));
+  const onChange = (checkedValues) => {
+    console.log("checked = ", checkedValues);
+  };
   return (
     <React.Fragment>
-      <div class="flex justify-between">
-        <div class="flex gap-8 w-form md:w-form2  m-auto relative translate-y-1/4 xl:translate-y-30%  text-start shadow-xl pt-5 pb-5 pr-4 pl-4 rounded-md bg-slate-100 xl:-translate-x-1% xl:bottom-48 tra">
+      <div className="flex justify-between">
+        <div className="flex gap-8 w-form md:w-form2  m-auto relative translate-y-3% md:translate-y-20% xl:translate-y-30%  text-start shadow-xl pt-5 pb-5 pr-4 pl-4 rounded-md bg-slate-100 xl:-translate-x-1% xl:bottom-48 tra">
           <Form onSubmit={formik.handleSubmit}>
-            <div class="flex gap-3 mb-3">
-              <Form.Group className="col-sm-6 " controlId="formBasicEmail">
-                <Form.Label class="text-blue-600">First name</Form.Label>
+            <div className="flex gap-3 mb-3">
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">First name</Form.Label>
                 <Form.Control
                   name="Fname"
                   type="text"
@@ -79,8 +91,8 @@ export default function Register() {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group className="col-sm-6 " controlId="formBasicEmail">
-                <Form.Label class="text-blue-600">Last name</Form.Label>
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">Last name</Form.Label>
                 <Form.Control
                   name="Lname"
                   type="text"
@@ -98,8 +110,8 @@ export default function Register() {
               </Form.Group>
             </div>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label class="text-blue-600">Email</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label className="text-blue-600">Email</Form.Label>
               <Form.Control
                 name="email"
                 type="email"
@@ -119,8 +131,8 @@ export default function Register() {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label class="text-blue-600">Password</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label className="text-blue-600">Password</Form.Label>
               <Form.Control
                 name="password"
                 type="password"
@@ -133,8 +145,8 @@ export default function Register() {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label class="text-blue-600">Phone</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label className="text-blue-600">Phone</Form.Label>
               <Form.Control
                 name="phone"
                 type="text"
@@ -146,81 +158,34 @@ export default function Register() {
                 onBlur={formik.handleBlur}
               />
             </Form.Group>
-            <div className="block mt-4 mb-4 w-72 mr-auto ml-auto md:hidden md:invisible ">
-              <div className="pb-2">
-                <Form.Label class="text-blue-600">Saturday</Form.Label>
-                <TimePicker.RangePicker
-                  value={Saturday}
-                  onChange={(e, timeString) => {
-                    setSaturday(e);
-                  }}
-                />
-              </div>
-              <div className="pb-2">
-                <Form.Label class="text-blue-600">Sunday</Form.Label>
-                <TimePicker.RangePicker
-                  value={Sunday}
-                  onChange={(e, timeString) => {
-                    setSunday(e);
-                  }}
-                />
-              </div>
-              <div className="pb-2">
-                <Form.Label class="text-blue-600">Monday</Form.Label>
-                <TimePicker.RangePicker
-                  value={Monday}
-                  onChange={(e, timeString) => {
-                    setMonday(e);
-                  }}
-                />
-              </div>
-              <div className="pb-2">
-                <Form.Label class="text-blue-600">Tuesday</Form.Label>
-                <TimePicker.RangePicker
-                  value={Tuesday}
-                  onChange={(e, timeString) => {
-                    setTuesday(e);
-                  }}
-                />
-              </div>
-              <div className="pb-2">
-                <Form.Label class="text-blue-600">Wednesday</Form.Label>
-                <TimePicker.RangePicker
-                  value={Wednesday}
-                  onChange={(e, timeString) => {
-                    setWednesday(e);
-                  }}
-                />
-              </div>
-              <div className="pb-2">
-                <Form.Label class="text-blue-600">Thursday</Form.Label>
-                <TimePicker.RangePicker
-                  value={Thursday}
-                  onChange={(e, timeString) => {
-                    setThursday(e);
-                  }}
-                />
-              </div>
-              <div className="pb-2">
-                <Form.Label class="text-blue-600">Friday</Form.Label>
-                <TimePicker.RangePicker
-                  value={Friday}
-                  onChange={(e, timeString) => {
-                    setFriday(e);
-                  }}
-                />
-              </div>
+            <div className="block mt-4 mb-4 w-72 text-center ml-auto mr-auto md:hidden md:invisible">
+              <span className="  text-blue-600 md:ml-5">WorkDays</span>
+              <Checkbox.Group
+                className="days"
+                options={plainOptions}
+                defaultValue={["Apple"]}
+                onChange={onChange}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                  marginLeft: "20px",
+                  marginRight: "20px",
+                  marginTop: "30px",
+                }}
+              />
             </div>
             <div className="d-grid gap-2 mb-8">
               <Button variant="outline-primary" type="submit">
                 Register
               </Button>
             </div>
-            <span class=" block text-center">
+            <span className=" block text-center">
               Already have an account{" "}
               <span>
                 <Link
-                  class="hover:text-blue-600 text-gray-400  transition no-underline"
+                  className="hover:text-blue-600 text-gray-400  transition no-underline"
                   to={"/login"}
                 >
                   Login
@@ -228,76 +193,100 @@ export default function Register() {
               </span>
             </span>
           </Form>
-          <div className="hidden md:block md:visible ">
-            <div className="pb-2">
-              <Form.Label class="text-blue-600">Saturday</Form.Label>
-              <TimePicker.RangePicker
-                value={Saturday}
-                onChange={(e, timeString) => {
-                  setSaturday(e);
-                }}
-              />
-            </div>
-            <div className="pb-2">
-              <Form.Label class="text-blue-600">Sunday</Form.Label>
-              <TimePicker.RangePicker
-                value={Sunday}
-                onChange={(e, timeString) => {
-                  setSunday(e);
-                }}
-              />
-            </div>
-            <div className="pb-2">
-              <Form.Label class="text-blue-600">Monday</Form.Label>
-              <TimePicker.RangePicker
-                value={Monday}
-                onChange={(e, timeString) => {
-                  setMonday(e);
-                }}
-              />
-            </div>
-            <div className="pb-2">
-              <Form.Label class="text-blue-600">Tuesday</Form.Label>
-              <TimePicker.RangePicker
-                value={Tuesday}
-                onChange={(e, timeString) => {
-                  setTuesday(e);
-                }}
-              />
-            </div>
-            <div className="pb-2">
-              <Form.Label class="text-blue-600">Wednesday</Form.Label>
-              <TimePicker.RangePicker
-                value={Wednesday}
-                onChange={(e, timeString) => {
-                  setWednesday(e);
-                }}
-              />
-            </div>
-            <div className="pb-2">
-              <Form.Label class="text-blue-600">Thursday</Form.Label>
-              <TimePicker.RangePicker
-                value={Thursday}
-                onChange={(e, timeString) => {
-                  setThursday(e);
-                }}
-              />
-            </div>
-            <div className="pb-2">
-              <Form.Label class="text-blue-600">Friday</Form.Label>
-              <TimePicker.RangePicker
-                value={Friday}
-                onChange={(e, timeString) => {
-                  setFriday(e);
-                }}
-              />
-            </div>
+          <div className=" hidden md:block md:visible ">
+            <span className=" text-blue-600 ml-5">WorkDays</span>
+            <Checkbox.Group
+              className="days"
+              options={plainOptions}
+              defaultValue={["Apple"]}
+              onChange={onChange}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+                marginLeft: "20px",
+                marginRight: "20px",
+                marginTop: "30px",
+              }}
+            />
           </div>
         </div>
-        <div class="h-full">
-          <img src="/images/a.png" alt="" class="h-photo hidden xl:block " />
+        <div className="h-full">
+          <img
+            src="/images/a.png"
+            alt=""
+            className="h-photo hidden xl:block "
+          />
         </div>
       </div>
     </React.Fragment>
   );
+}
+
+{
+  /* <div className="hidden md:block md:visible ">
+<div className="pb-2">
+  <Form.Label className="text-blue-600">Saturday</Form.Label>
+  <TimePicker.RangePicker
+    value={Saturday}
+    onChange={(e, timeString) => {
+      setSaturday(e);
+    }}
+  />
+</div>
+<div className="pb-2">
+  <Form.Label className="text-blue-600">Sunday</Form.Label>
+  <TimePicker.RangePicker
+    value={Sunday}
+    onChange={(e, timeString) => {
+      setSunday(e);
+    }}
+  />
+</div>
+<div className="pb-2">
+  <Form.Label className="text-blue-600">Monday</Form.Label>
+  <TimePicker.RangePicker
+    value={Monday}
+    onChange={(e, timeString) => {
+      setMonday(e);
+    }}
+  />
+</div>
+<div className="pb-2">
+  <Form.Label className="text-blue-600">Tuesday</Form.Label>
+  <TimePicker.RangePicker
+    value={Tuesday}
+    onChange={(e, timeString) => {
+      setTuesday(e);
+    }}
+  />
+</div>
+<div className="pb-2">
+  <Form.Label className="text-blue-600">Wednesday</Form.Label>
+  <TimePicker.RangePicker
+    value={Wednesday}
+    onChange={(e, timeString) => {
+      setWednesday(e);
+    }}
+  />
+</div>
+<div className="pb-2">
+  <Form.Label className="text-blue-600">Thursday</Form.Label>
+  <TimePicker.RangePicker
+    value={Thursday}
+    onChange={(e, timeString) => {
+      setThursday(e);
+    }}
+  />
+</div>
+<div className="pb-2">
+  <Form.Label className="text-blue-600">Friday</Form.Label>
+  <TimePicker.RangePicker
+    value={Friday}
+    onChange={(e, timeString) => {
+      setFriday(e);
+    }}
+  />
+</div>
+</div> */
 }
