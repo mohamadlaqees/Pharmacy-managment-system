@@ -28,7 +28,7 @@ function Profile() {
           <span className="text-font2  w-72 flex flex-wrap">bla bla</span>
         </div>
         <div className="flex justify-between  border-b-2 border-slate-100  p-3 text-font1">
-          <span className="block"> Date</span>
+          <span className="block">Birth date</span>
           <span className="text-font2  w-72 flex flex-wrap">bla bla</span>
         </div>
         <div className="flex justify-between   p-3 text-font1">

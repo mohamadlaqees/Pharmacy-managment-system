@@ -15,6 +15,7 @@ export default function Register() {
     Fname: Yup.string().required("Required").min(2, "Too Short!"),
     Lname: Yup.string().required("Required").min(2, "Too Short!"),
     phone: Yup.number().required("Required"),
+    birthDate: Yup.date().required("Required"),
   });
   const msg = (type, msg) => {
     switch (type) {
@@ -35,6 +36,7 @@ export default function Register() {
       email: "",
       password: "",
       phone: "",
+      birthDate: "",
     },
     validationSchema: SignupSchema,
     onSubmit: async () => {
@@ -135,20 +137,36 @@ export default function Register() {
                 onBlur={formik.handleBlur}
               />
             </Form.Group>
+            <div className="flex gap-3 mb-3">
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">Phone</Form.Label>
+                <Form.Control
+                  name="phone"
+                  type="text"
+                  vlaue={formik.values.phone}
+                  onChange={formik.handleChange}
+                  isInvalid={formik.touched.phone && !!formik.errors.phone}
+                  isValid={formik.touched.phone && !formik.errors.phone}
+                  placeholder="Phone"
+                  onBlur={formik.handleBlur}
+                />
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label className="text-blue-600">Phone</Form.Label>
-              <Form.Control
-                name="phone"
-                type="text"
-                vlaue={formik.values.phone}
-                onChange={formik.handleChange}
-                isInvalid={formik.touched.phone && !!formik.errors.phone}
-                isValid={formik.touched.phone && !formik.errors.phone}
-                placeholder="Phone"
-                onBlur={formik.handleBlur}
-              />
-            </Form.Group>
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">Birth date</Form.Label>
+                <Form.Control
+                  name="birthDate"
+                  type="date"
+                  vlaue={formik.values.birthDate}
+                  onChange={formik.handleChange}
+                  isInvalid={
+                    formik.touched.birthDate && !!formik.errors.birthDate
+                  }
+                  isValid={formik.touched.birthDate && !formik.errors.birthDate}
+                  onBlur={formik.handleBlur}
+                />
+              </Form.Group>
+            </div>
             <div className="block mt-4 mb-4 w-72 text-center ml-auto mr-auto md:hidden md:invisible">
               <span className="  text-blue-600 md:ml-5">WorkDays</span>
               <Checkbox.Group

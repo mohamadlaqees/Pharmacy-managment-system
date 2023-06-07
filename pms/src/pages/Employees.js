@@ -189,7 +189,10 @@ function Employees() {
                   <Link className="text-red-500 hover:text-red-600 text-xl transition-all">
                     <i class="fa-solid fa-trash"></i>
                   </Link>
-                  <Link to={`details/${inx}`} className="text-gray-500 hover:text-gray-600 text-xl transition-all">
+                  <Link
+                    to={`details/${inx}`}
+                    className="text-gray-500 hover:text-gray-600 text-xl transition-all"
+                  >
                     <i class="fas fa-edit"></i>
                   </Link>
                 </div>
@@ -197,7 +200,6 @@ function Employees() {
             );
           })}
         </div>
-
         <div className="bg-white pt-4 pb-4 shadow-md rounded-md w-1/2 relative">
           <div className="absolute top-0 w-full p-1  bg-blue-600 text-white font-bold text-center rounded-md">
             job applications
@@ -230,7 +232,7 @@ function Employees() {
                   <Link className="text-red-500 hover:text-red-600 text-xl transition-all">
                     <i class="fa-solid fa-trash"></i>
                   </Link>
-                  <Link className="text-green-500 hover:text-green-600 text-xl transition-all">
+                  <Link to={`application/${inx}`} className="text-green-500 hover:text-green-600 text-xl transition-all">
                     <i class="fas fa-folder-open"></i>{" "}
                   </Link>
                 </div>
