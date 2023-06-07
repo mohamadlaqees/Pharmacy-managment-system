@@ -232,7 +232,10 @@ function Employees() {
                   <Link className="text-red-500 hover:text-red-600 text-xl transition-all">
                     <i class="fa-solid fa-trash"></i>
                   </Link>
-                  <Link to={`application/${inx}`} className="text-green-500 hover:text-green-600 text-xl transition-all">
+                  <Link
+                    to={`application/${inx}`}
+                    className="text-green-500 hover:text-green-600 text-xl transition-all"
+                  >
                     <i class="fas fa-folder-open"></i>{" "}
                   </Link>
                 </div>
