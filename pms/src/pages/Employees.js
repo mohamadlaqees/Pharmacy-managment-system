@@ -189,7 +189,7 @@ function Employees() {
                   <Link className="text-red-500 hover:text-red-600 text-xl transition-all">
                     <i class="fa-solid fa-trash"></i>
                   </Link>
-                  <Link className="text-gray-500 hover:text-gray-600 text-xl transition-all">
+                  <Link to={`details/${inx}`} className="text-gray-500 hover:text-gray-600 text-xl transition-all">
                     <i class="fas fa-edit"></i>
                   </Link>
                 </div>

@@ -17,6 +17,7 @@ import Orders from "./pages/Orders";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Product from "./pages/Product";
+import EmployeesDetails from "./pages/EmployeesDetails";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -38,13 +39,14 @@ const routes = createBrowserRouter([
     children: [
       { index: true, element: <Content /> },
       { path: "store", element: <Store /> },
+      { path: "store/product/:id", element: <Product /> },
       { path: "employees", element: <Employees /> },
+      { path: "employees/details/:id", element: <EmployeesDetails /> },
       { path: "stock", element: <Stock /> },
       { path: "orders", element: <Orders /> },
       { path: "backups", element: <Backups /> },
       { path: "profile", element: <Profile /> },
       { path: "editProfile", element: <EditProfile /> },
-      { path: "store/product/:id", element: <Product /> },
     ],
   },
 ]);

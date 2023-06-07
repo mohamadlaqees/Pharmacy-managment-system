@@ -6,8 +6,6 @@ import { message } from "antd";
 import { useFormik } from "formik";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
-import { useState } from "react";
 import { Checkbox } from "antd";
 export default function Register() {
   const navigate = useNavigate();
@@ -56,14 +54,7 @@ export default function Register() {
     "Thursday",
     "Friday",
   ];
-  const [Saturday, setSaturday] = useState([]);
-  const [Sunday, setSunday] = useState([]);
-  const [Monday, setMonday] = useState([]);
-  const [Tuesday, setTuesday] = useState([]);
-  const [Wednesday, setWednesday] = useState([]);
-  const [Thursday, setThursday] = useState([]);
-  const [Friday, setFriday] = useState([]);
-  console.log(dayjs(Saturday[0]).format("HH:mm:ss"));
+
   const onChange = (checkedValues) => {
     console.log("checked = ", checkedValues);
   };
@@ -221,72 +212,4 @@ export default function Register() {
       </div>
     </React.Fragment>
   );
-}
-
-{
-  /* <div className="hidden md:block md:visible ">
-<div className="pb-2">
-  <Form.Label className="text-blue-600">Saturday</Form.Label>
-  <TimePicker.RangePicker
-    value={Saturday}
-    onChange={(e, timeString) => {
-      setSaturday(e);
-    }}
-  />
-</div>
-<div className="pb-2">
-  <Form.Label className="text-blue-600">Sunday</Form.Label>
-  <TimePicker.RangePicker
-    value={Sunday}
-    onChange={(e, timeString) => {
-      setSunday(e);
-    }}
-  />
-</div>
-<div className="pb-2">
-  <Form.Label className="text-blue-600">Monday</Form.Label>
-  <TimePicker.RangePicker
-    value={Monday}
-    onChange={(e, timeString) => {
-      setMonday(e);
-    }}
-  />
-</div>
-<div className="pb-2">
-  <Form.Label className="text-blue-600">Tuesday</Form.Label>
-  <TimePicker.RangePicker
-    value={Tuesday}
-    onChange={(e, timeString) => {
-      setTuesday(e);
-    }}
-  />
-</div>
-<div className="pb-2">
-  <Form.Label className="text-blue-600">Wednesday</Form.Label>
-  <TimePicker.RangePicker
-    value={Wednesday}
-    onChange={(e, timeString) => {
-      setWednesday(e);
-    }}
-  />
-</div>
-<div className="pb-2">
-  <Form.Label className="text-blue-600">Thursday</Form.Label>
-  <TimePicker.RangePicker
-    value={Thursday}
-    onChange={(e, timeString) => {
-      setThursday(e);
-    }}
-  />
-</div>
-<div className="pb-2">
-  <Form.Label className="text-blue-600">Friday</Form.Label>
-  <TimePicker.RangePicker
-    value={Friday}
-    onChange={(e, timeString) => {
-      setFriday(e);
-    }}
-  />
-</div>
-</div> */
 }
