@@ -40,6 +40,12 @@ function SideBar() {
               </NavLink>
             </li>
             <li className={`link`}>
+              <NavLink className="route" to={"supplier"}>
+                <i class="fa-solid fa-truck"></i>
+                {check ? "" : "Supplier"}
+              </NavLink>
+            </li>
+            <li className={`link`}>
               <NavLink className="route" to={"orders"}>
                 <i className="fa-solid fa-list"></i> {check ? "" : "Orders"}
               </NavLink>
@@ -50,17 +56,17 @@ function SideBar() {
                 {check ? "" : "Backups"}
               </NavLink>
             </li>
+            <span className="  text-gray-500   cursor-pointer absolute bottom-0  pt-4 pb-3 rounded-md">
+              <NavLink
+                className=" route  hover:text-red-500 "
+                to={"/login"}
+                replace={true}
+              >
+                <i className="fa-solid fa-right-from-bracket mr-5"></i>
+                {check ? "" : "Logout"}
+              </NavLink>
+            </span>
           </ul>
-        </div>
-        <div className="mt-80  text-gray-500   cursor-pointer ">
-          <NavLink
-            className=" route  hover:text-red-500 "
-            to={"/"}
-            replace={true}
-          >
-            <i className="fa-solid fa-right-from-bracket mr-5"></i>
-            {check ? "" : "Logout"}
-          </NavLink>
         </div>
       </div>
     </Fragment>

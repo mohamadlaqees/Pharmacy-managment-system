@@ -24,7 +24,7 @@ html body {
 }
 .page {
   @apply bg-slate-50  rounded-md p-4;
-  height: calc(100vh - 50px);
+  height:93vh;
   margin-top: 48px;
   overflow: auto;
 }
