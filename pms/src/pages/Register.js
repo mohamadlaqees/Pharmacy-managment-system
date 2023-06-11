@@ -8,6 +8,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "antd";
 export default function Register() {
+  const [checked, setChecked] = React.useState(false);
   const navigate = useNavigate();
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
@@ -40,11 +41,15 @@ export default function Register() {
     },
     validationSchema: SignupSchema,
     onSubmit: async () => {
-      msg(
-        "success",
-        "your request was sent to admin \n please check your email"
-      );
-      navigate("/login");
+      if (checked) {
+        msg(
+          "success",
+          "your request was sent to admin \n please check your email"
+        );
+        navigate("/login");
+      } else {
+        msg("error", "WorkDays must not be empty");
+      }
     },
   });
   const plainOptions = [
@@ -56,8 +61,12 @@ export default function Register() {
     "Thursday",
     "Friday",
   ];
-
   const onChange = (checkedValues) => {
+    if (checkedValues.length !== 0) {
+      setChecked(true);
+    } else if (checkedValues.length == 0) {
+      setChecked(false);
+    }
     console.log("checked = ", checkedValues);
   };
   return (
