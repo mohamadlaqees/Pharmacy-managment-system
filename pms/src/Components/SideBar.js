@@ -40,7 +40,7 @@ function SideBar() {
               </NavLink>
             </li>
             <li className={`link`}>
-              <NavLink className="route" to={"supplier"}>
+              <NavLink className="route" to={"supplierContent"}>
                 <i class="fa-solid fa-truck"></i>
                 {check ? "" : "Supplier"}
               </NavLink>

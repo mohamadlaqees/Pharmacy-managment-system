@@ -20,6 +20,8 @@ import Product from "./pages/Product";
 import EmployeesDetails from "./pages/EmployeesDetails";
 import JobApplications from "./pages/JobApplications";
 import Supplier from "./pages/Supplier";
+import Reports from "./pages/Reports";
+import SupplierContent from "./pages/SupplierContent";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -46,7 +48,15 @@ const routes = createBrowserRouter([
       { path: "employees/details/:id", element: <EmployeesDetails /> },
       { path: "employees/application/:id", element: <JobApplications /> },
       { path: "stock", element: <Stock /> },
-      { path: "supplier", element: <Supplier /> },
+      {
+        path: "supplierContent",
+        element: <SupplierContent />,
+        children: [
+          { index: true, element: <Supplier end /> },
+          { path: "supplier", element: <Supplier /> },
+          { path: "reports", element: <Reports /> },
+        ],
+      },
       { path: "orders", element: <Orders /> },
       { path: "backups", element: <Backups /> },
       { path: "profile", element: <Profile /> },
