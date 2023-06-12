@@ -3,83 +3,188 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { Pagination } from "antd";
+import DropDown from "../Components/DropDown";
 
 function Supplier() {
   let map = [
     {
+      id: "1",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "2",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "3",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "4",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "5",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "6",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "7",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "8",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "9",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "10",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "11",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
     {
+      id: "12",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "13",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "14",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "15",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "16",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "17",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "18",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "19",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+
+    {
+      id: "20",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "21",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "22",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "23",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "24",
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      id: "25",
       name: "bla",
       price: "bla",
       img: "/images/med.jpg",
       brand: "brand",
     },
   ];
-  const [show1, setShow1] = useState(false);
+  const [show1, setShow1] = useState(new Map([[false, null]]));
   const [currentPage, setCurrentPage] = useState(1);
   const dataInPage = 5;
   const lastIndex = currentPage * dataInPage;
@@ -109,16 +214,17 @@ function Supplier() {
           </InputGroup>
         </div>
         <div>
-          <div className="menu2" onClick={() => setShow1(!show1)}>
-            {data.map((e, inx) => {
+          <div>
+            {data.map(({ name, id }, i) => {
               return (
                 <div
                   className={`p-2 ${
-                    inx === map.length - 1 ? "border-b-0 mb-1" : "border-b-2"
+                    i === map.length - 1 ? "border-b-0 mb-1" : "border-b-2"
                   } border-gray-200 ${
-                    inx === 0 ? "mt-2" : ""
-                  } flex justify-between cursor-pointer hover:bg-slate-200 transition-all`}
-                  key={inx}
+                    i === 0 ? "mt-2" : ""
+                  } flex justify-between cursor-pointer hover:bg-slate-200 transition-all relative`}
+                  key={id}
+                  onClick={() => setShow1([!show1[0], id])}
                 >
                   <div className="flex gap-3">
                     <div>
@@ -129,23 +235,21 @@ function Supplier() {
                       />
                     </div>
                     <div className="flex justify-center items-center">
-                      <span className="text-font2">{e.name}</span>
+                      <span className="text-font2">{name}</span>
                     </div>
                   </div>
                   <div className="flex items-center">
                     <div className="text-gray-500 hover:text-blue-600 text-xl transition-all">
-                      <i className="fa-solid fa-arrow-down"></i>
+                      <i
+                        className="fa-solid fa-arrow-down"
+                        onClick={() => setShow1([!show1[0], id])}
+                      ></i>
                     </div>
                   </div>
+                  <DropDown show1={show1} id={id} />
                 </div>
               );
             })}
-          </div>
-          <div className={`drop ${show1 ? "drop active" : "drop"}`}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati
-            dolore facere quos veritatis iusto! Cumque at ab veniam expedita
-            sunt, laudantium totam odit voluptas incidunt fuga eligendi
-            reprehenderit ullam dolor?
           </div>
         </div>
         <div className="mt-3 p-2   ">

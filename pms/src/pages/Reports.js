@@ -1,7 +1,7 @@
 import React from "react";
 
 function Reports() {
-  return <div className="page">Reports</div>;
+  return <div>Reports</div>;
 }
 
 export default Reports;
