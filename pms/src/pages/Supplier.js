@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
+import { Pagination } from "antd";
 
 function Supplier() {
-  const [show1, setShow1] = useState(false);
-
   let map = [
     {
       name: "bla",
@@ -31,9 +30,64 @@ function Supplier() {
       img: "/images/med.jpg",
       brand: "brand",
     },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
+    {
+      name: "bla",
+      price: "bla",
+      img: "/images/med.jpg",
+      brand: "brand",
+    },
   ];
+  const [show1, setShow1] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const dataInPage = 5;
+  const lastIndex = currentPage * dataInPage;
+  const firstIndex = lastIndex - dataInPage;
+  const data = map.slice(firstIndex, lastIndex);
+
   return (
-    <div className="page">
+    <div>
       <div className="bg-white rounded-md p-8 w-full">
         <div className=" w-full m-auto show:w-1/2 block mb-3  ">
           <InputGroup>
@@ -56,7 +110,7 @@ function Supplier() {
         </div>
         <div>
           <div className="menu2" onClick={() => setShow1(!show1)}>
-            {map.map((e, inx) => {
+            {data.map((e, inx) => {
               return (
                 <div
                   className={`p-2 ${
@@ -93,6 +147,19 @@ function Supplier() {
             sunt, laudantium totam odit voluptas incidunt fuga eligendi
             reprehenderit ullam dolor?
           </div>
+        </div>
+        <div className="mt-3 p-2   ">
+          <ul className="flex justify-center gap-3 ">
+            <Pagination
+              defaultCurrent={1}
+              total={map.length}
+              pageSize={dataInPage}
+              onChange={(pN, pS) => {
+                setCurrentPage(pN);
+              }}
+              showSizeChanger={false}
+            />
+          </ul>
         </div>
       </div>
     </div>
