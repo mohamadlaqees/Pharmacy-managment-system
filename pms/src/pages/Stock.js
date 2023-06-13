@@ -239,7 +239,7 @@ function Stock() {
                     </td>
                     <td className="p-4 text-center">{price}</td>
                     <td className="p-4 text-center">{randomQ()}</td>
-                   <Amount show={show} id={id} setShow={setShow}></Amount>
+                    <Amount show={show} id={id} setShow={setShow}></Amount>
                     <td className="p-4 text-center">{`Mohammad laqees`}</td>
                     <td className="p-4 ">
                       <div className="flex gap-3 items-center justify-center">

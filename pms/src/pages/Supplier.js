@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
 import { Pagination } from "antd";
 import DropDown from "../Components/DropDown";
 
@@ -184,6 +183,7 @@ function Supplier() {
       brand: "brand",
     },
   ];
+
   const [show1, setShow1] = useState(new Map([[false, null]]));
   const [currentPage, setCurrentPage] = useState(1);
   const dataInPage = 5;
@@ -215,7 +215,7 @@ function Supplier() {
         </div>
         <div>
           <div>
-            {data.map(({ name, id }, i) => {
+            {data.map(({ name, id, brand, price }, i) => {
               return (
                 <div
                   className={`p-2 ${
@@ -224,9 +224,11 @@ function Supplier() {
                     i === 0 ? "mt-2" : ""
                   } flex justify-between cursor-pointer hover:bg-slate-200 transition-all relative`}
                   key={id}
-                  onClick={() => setShow1([!show1[0], id])}
                 >
-                  <div className="flex gap-3">
+                  <div
+                    className="flex gap-3 flex-1"
+                    onClick={() => setShow1([true, id])}
+                  >
                     <div>
                       <img
                         src="/images/med.jpg"
@@ -246,7 +248,14 @@ function Supplier() {
                       ></i>
                     </div>
                   </div>
-                  <DropDown show1={show1} id={id} />
+                  <DropDown
+                    show1={show1}
+                    id={id}
+                    name={name}
+                    brand={brand}
+                    price={price}
+                    setShow1={setShow1}
+                  />
                 </div>
               );
             })}
