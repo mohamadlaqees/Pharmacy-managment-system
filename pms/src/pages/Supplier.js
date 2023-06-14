@@ -3,6 +3,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Pagination } from "antd";
 import DropDown from "../Components/DropDown";
+import { Link, useNavigate } from "react-router-dom";
 
 function Supplier() {
   let map = [

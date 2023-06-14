@@ -17,7 +17,7 @@ const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
             <th className="p-4">#</th>
             <th className="p-4">Medicin</th>
             <th className="p-4">Price</th>
-            <th className="p-4">Context</th>
+            <th className="p-4">Tax</th>
             <th className="p-4">Bonus</th>
             <th className="p-4">Action</th>
           </tr>
@@ -31,8 +31,13 @@ const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
             </td>
             <td className="p-4 text-center">{price}</td>
             <td className="p-4 text-center">---</td>
-            <Amount show={show} id={id} setShow={setShow}></Amount>
-            <td className="p-4 ">
+            <td className=" ">
+              <div className="flex justify-center">
+                <Amount show={show} id={id} setShow={setShow}></Amount>
+                <span className="mt-4">$</span>
+              </div>
+            </td>
+            <td className="pt-4 ">
               <div className="flex gap-3 items-center justify-center">
                 <button
                   onClick={() => {
@@ -47,6 +52,11 @@ const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
           </tr>
         </tbody>
       </Table>
+      <div className="  w-64 p-1 border-secondry border-2 text-secondry rounded-md hover:text-white hover:bg-secondry hover:border-secondry duration-.3s  text-center">
+        <button>
+          <i class="fa-solid fa-cart-shopping mr-3"></i> purchase
+        </button>
+      </div>
     </div>
   );
 };

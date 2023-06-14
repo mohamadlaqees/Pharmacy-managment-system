@@ -7,7 +7,7 @@ const Amount = ({ show, id, setShow }) => {
     setShow(null);
   };
   return (
-    <td className="p-4 text-center">
+    <td className="pt-4 text-center">
       {
         <div>
           <div className={`${show === id ? "block" : "hidden visible"}`}>
