@@ -21,6 +21,7 @@ const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
             <th className="p-4">Tax</th>
             <th className="p-4">Bonus</th>
             <th className="p-4">Quantity</th>
+            <th className="p-4">Processed By</th>
             <th className="p-4">Action</th>
           </tr>
         </thead>
@@ -40,6 +41,8 @@ const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
               </div>
             </td>
             <Amount show={showQ} id={id} setShow={setShowQ}></Amount>
+            <td className="p-4 text-center">{`Mohammad laqees`}</td>
+
             <td className="pt-4 ">
               <div className="flex gap-3 items-center justify-center">
                 <button
