@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import Amount from "../Components/Amount";
 
 const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
-  const [show, setShow] = useState(null);
+  const [showB, setShowB] = useState(null);
+  const [showQ, setShowQ] = useState(null);
   return (
     <div
       className={`drop2 ${
@@ -19,6 +20,7 @@ const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
             <th className="p-4">Price</th>
             <th className="p-4">Tax</th>
             <th className="p-4">Bonus</th>
+            <th className="p-4">Quantity</th>
             <th className="p-4">Action</th>
           </tr>
         </thead>
@@ -33,15 +35,17 @@ const DropDown = ({ show1, id, name, brand, price, setShow1 }) => {
             <td className="p-4 text-center">---</td>
             <td className=" ">
               <div className="flex justify-center">
-                <Amount show={show} id={id} setShow={setShow}></Amount>
+                <Amount show={showB} id={id} setShow={setShowB}></Amount>
                 <span className="mt-4">$</span>
               </div>
             </td>
+            <Amount show={showQ} id={id} setShow={setShowQ}></Amount>
             <td className="pt-4 ">
               <div className="flex gap-3 items-center justify-center">
                 <button
                   onClick={() => {
-                    setShow(id);
+                    setShowB(id);
+                    setShowQ(id);
                   }}
                   className="text-gray-500 hover:text-gray-600 text-xl transition-all"
                 >
