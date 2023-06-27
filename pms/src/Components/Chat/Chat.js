@@ -68,8 +68,8 @@ function Chat() {
    <Fragment>
    
         <div className='container mt-14 h-page '>
-        <div class='mb-1'>
-        <input type="text" class='p-1 rounded-md outline-1 outline-primary border border-gray-100 'value={username} onChange={(e)=>setUserName(e.target.value)}/>
+        <div className='mb-1'>
+        <input type="text" className='p-1 rounded-md outline-1 outline-primary border border-gray-100 'value={username} onChange={(e)=>setUserName(e.target.value)}/>
         </div>
        {
          messages.map((e)=>{
@@ -93,11 +93,11 @@ function Chat() {
           }
         </div>
         <form action="" className='container p-2 flex' onSubmit={(e)=>submitHandler(e)} >
-          <label htmlFor="inputTag" class='cursor-pointer'>
-          <i class="fa-solid fa-paperclip p-2 text-gray-500 text-xl"></i>
+          <label htmlFor="inputTag" className='cursor-pointer'>
+          <i className="fa-solid fa-paperclip p-2 text-gray-500 text-xl"></i>
           </label>
-          <input type="file" id='inputTag' class='hidden' onChange={(e)=>uploadFile(e)}/>
-        <input placeholder='Write messages' type="text" class=' rounded-md outline-1 outline-primary border border-gray-100 w-full p-2' value={message} onChange={(e)=>setMessage(e.target.value)}/>
+          <input type="file" id='inputTag' className='hidden' onChange={(e)=>uploadFile(e)}/>
+        <input placeholder='Write messages' type="text" className=' rounded-md outline-1 outline-primary border border-gray-100 w-full p-2' value={message} onChange={(e)=>setMessage(e.target.value)}/>
         </form>
    </Fragment>
   );

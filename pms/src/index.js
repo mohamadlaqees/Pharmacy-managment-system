@@ -10,10 +10,18 @@ import Register from "./pages/Register";
 import Dashboard from "./layout/Dashboard";
 import Content from "./pages/Content";
 import Store from "./pages/Store";
-import Users from "./pages/Users";
 import Stock from "./pages/Stock";
 import Backups from "./pages/Backups";
+import Employees from "./pages/Employees";
+import Orders from "./pages/Orders";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import Product from "./pages/Product";
+import EmployeesDetails from "./pages/EmployeesDetails";
+import JobApplications from "./pages/JobApplications";
+import Supplier from "./pages/Supplier";
 import Reports from "./pages/Reports";
+import SupplierContent from "./pages/SupplierContent";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -35,15 +43,26 @@ const routes = createBrowserRouter([
     children: [
       { index: true, element: <Content /> },
       { path: "store", element: <Store /> },
-      { path: "users", element: <Users /> },
+      { path: "store/product/:id", element: <Product /> },
+      { path: "employees", element: <Employees /> },
+      { path: "employees/details/:id", element: <EmployeesDetails /> },
+      { path: "employees/application/:id", element: <JobApplications /> },
       { path: "stock", element: <Stock /> },
-      { path: "reports", element: <Reports /> },
+      {
+        path: "supplierContent",
+        element: <SupplierContent />,
+        children: [
+          { index: true, element: <Supplier end /> },
+          { path: "supplier", element: <Supplier /> },
+          { path: "reports", element: <Reports /> },
+        ],
+      },
+      { path: "orders", element: <Orders /> },
       { path: "backups", element: <Backups /> },
+      { path: "profile", element: <Profile /> },
+      { path: "editProfile", element: <EditProfile /> },
     ],
   },
-
-
- 
 ]);
 root.render(
   <RouterProvider router={routes}>

@@ -32,17 +32,17 @@ export default function Login() {
     },
     validationSchema: SignupSchema,
     onSubmit: async () => {
-      navigate("/dashboard",{replace:true});
-      msg("success",'Login success');
+      navigate("/dashboard", { replace: true });
+      msg("success", "Login success");
     },
   });
   return (
     <React.Fragment>
-      <div class="flex justify-between">
-        <div class="w-96 h-96 m-auto relative translate-y-1/2  text-start shadow-xl p-5 rounded-md bg-slate-100 xl:-translate-x-10% xl:bottom-48 tra">
+      <div className="flex justify-between">
+        <div className="w-96 h-96 m-auto relative translate-y-1/2  text-start shadow-xl p-5 rounded-md bg-slate-100 xl:-translate-x-10% xl:bottom-48 tra">
           <Form onSubmit={formik.handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label class="text-primary">Email</Form.Label>
+              <Form.Label className="text-blue-600">Email</Form.Label>
               <Form.Control
                 name="email"
                 type="email"
@@ -63,7 +63,7 @@ export default function Login() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label class="text-primary">Password</Form.Label>
+              <Form.Label className="text-blue-600">Password</Form.Label>
               <Form.Control
                 name="password"
                 type="password"
@@ -80,11 +80,11 @@ export default function Login() {
                 Login
               </Button>
             </div>
-            <span class=" block text-center">
+            <span className=" block text-center">
               Don't have an account{" ? "}
               <span>
                 <Link
-                  class="hover:text-blue-600 text-gray-400  transition no-underline"
+                  className="hover:text-blue-600 text-gray-400  transition no-underline"
                   to={"/register"}
                 >
                   Register
@@ -93,8 +93,12 @@ export default function Login() {
             </span>
           </Form>
         </div>
-        <div class="h-full">
-          <img src="/images/a.png" alt="" class="h-photo hidden xl:block " />
+        <div className="h-full">
+          <img
+            src="/images/a.png"
+            alt=""
+            className="h-photo hidden xl:block "
+          />
         </div>
       </div>
     </React.Fragment>

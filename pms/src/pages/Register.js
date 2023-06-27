@@ -6,7 +6,9 @@ import { message } from "antd";
 import { useFormik } from "formik";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { Checkbox } from "antd";
 export default function Register() {
+  const [checked, setChecked] = React.useState(false);
   const navigate = useNavigate();
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
@@ -14,6 +16,7 @@ export default function Register() {
     Fname: Yup.string().required("Required").min(2, "Too Short!"),
     Lname: Yup.string().required("Required").min(2, "Too Short!"),
     phone: Yup.number().required("Required"),
+    birthDate: Yup.date().required("Required"),
   });
   const msg = (type, msg) => {
     switch (type) {
@@ -34,24 +37,46 @@ export default function Register() {
       email: "",
       password: "",
       phone: "",
+      birthDate: "",
     },
     validationSchema: SignupSchema,
     onSubmit: async () => {
-      msg(
-        "success",
-        "your request was sent to admin \n please check your email"
-      );
-      navigate("/login");
+      if (checked) {
+        msg(
+          "success",
+          "your request was sent to admin \n please check your email"
+        );
+        navigate("/login");
+      } else {
+        msg("error", "WorkDays must not be empty");
+      }
     },
   });
+  const plainOptions = [
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+  ];
+  const onChange = (checkedValues) => {
+    if (checkedValues.length !== 0) {
+      setChecked(true);
+    } else if (checkedValues.length == 0) {
+      setChecked(false);
+    }
+    console.log("checked = ", checkedValues);
+  };
   return (
     <React.Fragment>
-      <div class="flex justify-between">
-        <div class="w-96  m-auto relative translate-y-1/2  text-start shadow-xl p-5 rounded-md bg-slate-100 xl:-translate-x-10% xl:bottom-48 tra">
+      <div className="flex justify-between">
+        <div className="flex gap-8 w-form md:w-form2  m-auto relative translate-y-3% md:translate-y-20% xl:translate-y-30%  text-start shadow-xl pt-5 pb-5 pr-4 pl-4 rounded-md bg-slate-100 xl:-translate-x-1% xl:bottom-48 tra">
           <Form onSubmit={formik.handleSubmit}>
-            <div class="flex gap-3 mb-3">
-              <Form.Group className="col-sm-6 " controlId="formBasicEmail">
-                <Form.Label class="text-primary">First name</Form.Label>
+            <div className="flex gap-3 mb-3">
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">First name</Form.Label>
                 <Form.Control
                   name="Fname"
                   type="text"
@@ -68,8 +93,8 @@ export default function Register() {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group className="col-sm-6 " controlId="formBasicEmail">
-                <Form.Label class="text-primary">Last name</Form.Label>
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">Last name</Form.Label>
                 <Form.Control
                   name="Lname"
                   type="text"
@@ -87,8 +112,8 @@ export default function Register() {
               </Form.Group>
             </div>
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label class="text-primary">Email</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label className="text-blue-600">Email</Form.Label>
               <Form.Control
                 name="email"
                 type="email"
@@ -108,8 +133,8 @@ export default function Register() {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label class="text-primary">Password</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label className="text-blue-600">Password</Form.Label>
               <Form.Control
                 name="password"
                 type="password"
@@ -121,30 +146,64 @@ export default function Register() {
                 onBlur={formik.handleBlur}
               />
             </Form.Group>
+            <div className="flex gap-3 mb-3">
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">Phone</Form.Label>
+                <Form.Control
+                  name="phone"
+                  type="text"
+                  vlaue={formik.values.phone}
+                  onChange={formik.handleChange}
+                  isInvalid={formik.touched.phone && !!formik.errors.phone}
+                  isValid={formik.touched.phone && !formik.errors.phone}
+                  placeholder="Phone"
+                  onBlur={formik.handleBlur}
+                />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label class="text-primary">Phone</Form.Label>
-              <Form.Control
-                name="phone"
-                type="text"
-                vlaue={formik.values.phone}
-                onChange={formik.handleChange}
-                isInvalid={formik.touched.phone && !!formik.errors.phone}
-                isValid={formik.touched.phone && !formik.errors.phone}
-                placeholder="Phone"
-                onBlur={formik.handleBlur}
+              <Form.Group className="col-sm-6 ">
+                <Form.Label className="text-blue-600">Birth date</Form.Label>
+                <Form.Control
+                  name="birthDate"
+                  type="date"
+                  vlaue={formik.values.birthDate}
+                  onChange={formik.handleChange}
+                  isInvalid={
+                    formik.touched.birthDate && !!formik.errors.birthDate
+                  }
+                  isValid={formik.touched.birthDate && !formik.errors.birthDate}
+                  onBlur={formik.handleBlur}
+                />
+              </Form.Group>
+            </div>
+            <div className="block mt-4 mb-4 w-72 text-center ml-auto mr-auto md:hidden md:invisible">
+              <span className="  text-blue-600 md:ml-5">WorkDays</span>
+              <Checkbox.Group
+                className="days"
+                options={plainOptions}
+                defaultValue={["Apple"]}
+                onChange={onChange}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                  marginLeft: "20px",
+                  marginRight: "20px",
+                  marginTop: "30px",
+                }}
               />
-            </Form.Group>
+            </div>
             <div className="d-grid gap-2 mb-8">
               <Button variant="outline-primary" type="submit">
                 Register
               </Button>
             </div>
-            <span class=" block text-center">
-              Already have an account{" "}
+            <span className=" block text-center">
+              Already have an account ?{" "}
               <span>
                 <Link
-                  class="hover:text-blue-600 text-gray-400  transition no-underline"
+                  className="hover:text-blue-600 text-gray-400  transition no-underline"
                   to={"/login"}
                 >
                   Login
@@ -152,9 +211,30 @@ export default function Register() {
               </span>
             </span>
           </Form>
+          <div className=" hidden md:block md:visible ">
+            <span className=" text-blue-600 ml-5">WorkDays</span>
+            <Checkbox.Group
+              className="days"
+              options={plainOptions}
+              defaultValue={["Apple"]}
+              onChange={onChange}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+                marginLeft: "20px",
+                marginRight: "20px",
+                marginTop: "30px",
+              }}
+            />
+          </div>
         </div>
-        <div class="h-full">
-          <img src="/images/a.png" alt="" class="h-photo hidden xl:block " />
+        <div className="h-full">
+          <img
+            src="/images/a.png"
+            alt=""
+            className="h-photo hidden xl:block "
+          />
         </div>
       </div>
     </React.Fragment>
