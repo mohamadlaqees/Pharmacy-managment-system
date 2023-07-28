@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from "react";
-import { Alert, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Col, Row } from "react-bootstrap";
 import OrderCard from "../Components/OrderCard";
 import { useState } from "react";
 
-function Orders() {
+function MyOrders() {
   const [showDate, setShowDate] = useState(false);
   const [showstatuses, SetShowstatuses] = useState(false);
   return (
@@ -68,29 +68,19 @@ function Orders() {
           </div>
         </Col>
         <Col xs={4}>
-        <InputGroup>
-        <InputGroup.Text
-          id="basic-addon1"
-          class="flex items-center justify-center  bg-secondry text-white p-2 rounded-md cursor-pointer hover:bg-blue-600 duration-.3s"
-        >
-          <i className="fas fa-search"></i>
-        </InputGroup.Text>
-        <Form.Control
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="basic-addon2"
-          style={{
-            boxShadow: "none",
-            border: "2px solid #0d6efc",
-          }}
-        /></InputGroup>
-
+          <Alert
+            className="d-flex justify-content-center align-items-center "
+            style={{ maxHeight: "40px" }}
+          >
+            username
+          </Alert>
         </Col>
       </Row>
+
       <OrderCard />
       <OrderCard />
     </div>
   );
 }
 
-export default Orders;
+export default MyOrders;
