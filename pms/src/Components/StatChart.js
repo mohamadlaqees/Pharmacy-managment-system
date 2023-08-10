@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Col, Container, Row } from "react-bootstrap";
@@ -6,14 +6,17 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 function StatChart() {
-  const [stat, setstat] = React.useState(false);
-  // const dispatch = useDispatch()
-  const {data} =useSelector(state=>state.chart)
-  console.log(data)
+  const [period, setPeriod] = useState ('day');
+  const [statType, setStatType] = useState ('revenue');
+  const [stat, setstat] = useState(false);
+  const dispatch = useDispatch()
+  // const {data} =useSelector(state=>state.chart)
+  // console.log(data)
   // a function to change the chart's data
-  const handleChart=()=>{
+useEffect(()=>{
+      dispatch(fetchChart({stat:'revenue-chart',period:'year'}))
+},[period,statType])
 
-  }
 // fetch chart is a function to fetch the data 
 
     // if  stat is customers map two datasets 
@@ -47,7 +50,9 @@ function StatChart() {
         >
           {["Day", "Weak", "Month", "Year"].map((period) => {
             return (
-              <button key={period} className="hover:bg-SReg  w-25 rounded duration-.3s hover:text-white mx-sm-1">
+              <button 
+
+              key={period} className="hover:bg-SReg  w-25 rounded duration-.3s hover:text-white mx-sm-1">
                 {period}
               </button>
             );

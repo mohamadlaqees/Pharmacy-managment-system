@@ -1,17 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../axios";
-
-const fetchChart = createAsyncThunk(
+export const fetchChart = createAsyncThunk(
   "chart/fetchChart",
   async (item, { rejectWithValue }) => {
     const todayDate = new Date().toISOString().slice(0, 10);
-    const url = `dashboard/${item.stat}?date=${todayDate}&period=${item.period}.toLowerCase()`;
+    const url = `dashboard/${item.stat}?date=${todayDate}&period=${item.period.toLowerCase()}`;
+    console.log(url)
     try {
       const res = await axios.get(url);
-      console.log(res.data.data)
+      console.log(res)
       return res.data.data;
     } catch (error) {
-      console.log(error.response.data.message)
+      console.log("Error",error)
       return rejectWithValue(error.response.data.message);
     }
   }
