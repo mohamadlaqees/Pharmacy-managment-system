@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Col, Container, Row } from "react-bootstrap";
-import { fetchChart } from "../store/ChartSlice";
+import { fetchChart } from "../states/ChartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Dropdown, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 function StatChart() {
-  const items = ["orders", "revenue","customers"].map((statistic) => {
+  const items = ["orders", "revenue", "customers"].map((statistic) => {
     return {
       key: statistic,
       label: (
@@ -54,8 +54,8 @@ function StatChart() {
   const chartData = {
     //peroid
     labels: data.map((data1) => {
-      if(data1[Object.keys(data1)[0]]===18){
-        console.log(data1[Object.keys(data1)])
+      if (data1[Object.keys(data1)[0]] === 18) {
+        console.log(data1[Object.keys(data1)]);
       }
       return data1[Object.keys(data1)[0]];
     }),
@@ -72,11 +72,11 @@ function StatChart() {
   useEffect(() => {
     console.log(
       data.map((data1) => {
-        if(data1[Object.keys(data1)[0]]===18){
-          console.log(data1[Object.keys(data1)[2]])
+        if (data1[Object.keys(data1)[0]] === 18) {
+          console.log(data1[Object.keys(data1)[2]]);
         }
         return data1[Object.keys(data1)[0]];
-      }),
+      })
     );
   }, [data]);
 
