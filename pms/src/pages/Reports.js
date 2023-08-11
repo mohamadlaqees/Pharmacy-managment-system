@@ -5,7 +5,6 @@ import { Pagination } from "antd";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useCallback } from "react";
-import Amount from "../Components/Amount";
 
 function Stock() {
   let map = [
