@@ -38,7 +38,7 @@ function Content() {
             </Col>
           </Row>
           <Row className="mt-3">
-            <Col md={8} sm={12} style={{ height: "60vh" }} className="">
+            <Col md={8} sm={12} style={{ height: "60vh" }}>
             <StatChart />
             </Col>
             <Col

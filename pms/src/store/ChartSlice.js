@@ -4,14 +4,12 @@ export const fetchChart = createAsyncThunk(
   "chart/fetchChart",
   async (item, { rejectWithValue }) => {
     const todayDate = new Date().toISOString().slice(0, 10);
-    const url = `dashboard/${item.stat}?date=${todayDate}&period=${item.period.toLowerCase()}`;
+    const url = `dashboard/${item.stat}?date=${todayDate}&period=${item.period}`;
     console.log(url)
     try {
       const res = await axios.get(url);
-      console.log(res)
       return res.data.data;
     } catch (error) {
-      console.log("Error",error)
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -28,7 +26,6 @@ const ChartSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(fetchChart.pending, state => {
-      state.data= []
       state.loading = true
       state.error = false
     })
