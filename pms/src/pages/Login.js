@@ -4,10 +4,12 @@ import Form from "react-bootstrap/Form";
 import * as Yup from "yup";
 import { message, Space } from "antd";
 import { useFormik } from "formik";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../states/authSlice";
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),

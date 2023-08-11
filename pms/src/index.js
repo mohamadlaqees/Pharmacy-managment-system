@@ -22,6 +22,8 @@ import JobApplications from "./pages/JobApplications";
 import Supplier from "./pages/Supplier";
 import Reports from "./pages/Reports";
 import SupplierContent from "./pages/SupplierContent";
+import { Provider } from "react-redux";
+import store from "./states";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const routes = createBrowserRouter([
   {
@@ -65,9 +67,11 @@ const routes = createBrowserRouter([
   },
 ]);
 root.render(
-  <RouterProvider router={routes}>
-    <App />
-  </RouterProvider>
+  <Provider store={store}>
+    <RouterProvider router={routes}>
+      <App />
+    </RouterProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

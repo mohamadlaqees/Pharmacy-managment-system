@@ -6,8 +6,6 @@ module.exports = {
       colors: {
         primary: "#81d6fd",
         secondry:"#0d6efc",
-        SWord: "#5fb9f7",
-        SReg: "#52b0ed",
         font1: "#4f4f4f",
         font2: "#757575",
       },
@@ -15,6 +13,7 @@ module.exports = {
         photo: "753px",
         page: "100vh",
         form: "420px",
+        form2: "440px",
       },
       translate: {
         "10%": "10%",
