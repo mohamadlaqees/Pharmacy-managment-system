@@ -8,6 +8,7 @@ module.exports = {
         secondry: "#0d6efc",
         font1: "#4f4f4f",
         font2: "#757575",
+        SReg: "#52b0ed",
       },
       height: {
         photo: "753px",
