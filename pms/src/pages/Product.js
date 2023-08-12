@@ -1,46 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
-import { InputNumber, Spin } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 
-import {
-  addAllergyMedicin,
-  addRate,
-  addWishMedicins,
-  checkAllergy,
-  checkWishMedicins,
-  getProdcutDetails,
-  getRate,
-  reset,
-} from "../states/StoreSlice";
+import { getProdcutDetails, getRate } from "../states/StoreSlice";
 import { message } from "antd";
 
 function Product() {
-  const antIcon = (
-    <LoadingOutlined
-      style={{
-        fontSize: 24,
-        color: "#5fb9f7",
-      }}
-      spin
-    />
-  );
   const { id } = useParams();
   let available;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const {
-    loading,
-    details,
-    success,
-    error,
-    allergyMessage,
-    wishMessage,
-    numOfRate,
-  } = useSelector((state) => state.storeSlice);
+  const { details, success, error, numOfRate } = useSelector(
+    (state) => state.storeSlice
+  );
 
   const msg = (type, msg) => {
     switch (type) {
@@ -66,9 +40,6 @@ function Product() {
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
-  const green = "GREEN: User is not allergic to this product";
-  const yellow = "YELLO: User might be allergic to this product";
-  const red = "RED: User is allergic to this product";
 
   useEffect(() => {
     dispatch(getProdcutDetails(+id));

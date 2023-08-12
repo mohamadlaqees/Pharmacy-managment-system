@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#81d6fd",
-        secondry:"#0d6efc",
+        secondry: "#0d6efc",
         font1: "#4f4f4f",
         font2: "#757575",
       },
@@ -36,6 +36,10 @@ module.exports = {
       },
       gridTemplateColumns: {
         fluid: "repeat(auto-fill, minmax(20rem, 1fr))",
+      },
+      maxHeight: {
+        mInfo: "391px",
+        mCont: "420px",
       },
     },
   },
