@@ -4,12 +4,15 @@ import { Container } from "react-bootstrap";
 function topProduct({ title, data=[] }) {
   return (
     <>
-      <Container className="overflow-auto text-white text-bold fs-5  h-100 bg-SReg shadow-md shadow-SReg rounded ">
+      <Container className="overflow-auto text-white text-bold fs-5 bg-SReg h-100  shadow-md shadow-SReg rounded ">
         {title}
         <ol className="list-group m-0 p-0 overflow-auto ">
-          {
-            // console.log(data)
-            data.map((product) => {
+        {
+          console.log("data",data)
+        }  
+        {
+           
+            data.map((product) => { 
             return (
               <li className="list-group-item hover:border-2 cursor-pointer hover:border-SReg  d-flex justify-content-between  mb-1 ">
                 {product.name}

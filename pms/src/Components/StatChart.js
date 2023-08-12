@@ -30,7 +30,7 @@ function StatChart() {
   const [period, setPeriod] = useState("day");
   const [statType, setStatType] = useState("revenue-chart");
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state) => state.chart);
+  const { data, loading } = useSelector((state) => state.ChartReducer);
   const antIcon = (
     <LoadingOutlined
       style={{

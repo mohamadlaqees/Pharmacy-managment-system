@@ -4,9 +4,9 @@ import storeSlice from "./StoreSlice";
 import ChartReducer from "./ChartSlice";
 const store = configureStore({
   reducer: {
+    ChartReducer,
     authSlice,
     storeSlice,
-    ChartReducer,
   },
 });
 export default store;
