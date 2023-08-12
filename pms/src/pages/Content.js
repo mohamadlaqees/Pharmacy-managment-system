@@ -1,17 +1,17 @@
 import React, { Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import BestSelling from "../Components/BestSelling";
-import StatCard from "../Components/StatCard";
-import StatTile from "../Components/StatTile";
-import { useState } from "react";
-import StatChart from "../Components/StatChart";
+// import BestSelling from "../Components/BestSelling";
+// import StatCard from "../Components/StatCard";
+// import StatTile from "../Components/StatTile";
+// import { useState } from "react";
+// import StatChart from "../Components/StatChart";
 
 function Content() {
 
 
   return (
     <>
-      <div className="page pb-0">
+      {/* <div className="page pb-0">
         <Container fluid>
           <Row>
             <Col md={4} sm={6} className="mb-1">
@@ -51,7 +51,7 @@ function Content() {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> */}
     </>
   );
 }

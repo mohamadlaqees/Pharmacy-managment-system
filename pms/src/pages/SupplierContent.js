@@ -8,7 +8,7 @@ function SupplierContent() {
       <div className="p-2 flex justify-end gap-2 border-b-2 border-slate-200">
         <div>
           <NavLink
-            to={`supplier`}
+            to={``}
             className="w-72 h-form rounded-md pt-3 mb-3 cursor-pointer transition-all no-underline "
             style={({ isActive, isPending }) => {
               return {

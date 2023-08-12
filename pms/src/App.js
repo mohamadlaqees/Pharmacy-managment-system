@@ -12,7 +12,7 @@ import Store from "./pages/Store";
 import Employees from "./pages/Employees";
 import EmployeesDetails from "./pages/EmployeesDetails";
 import JobApplications from "./pages/JobApplications";
-import Stock from "./pages/Reports";
+import Stock from "./pages/Stock";
 import SupplierContent from "./pages/SupplierContent";
 import Supplier from "./pages/Supplier";
 import Orders from "./pages/Orders";
@@ -22,20 +22,15 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="dashboard" element={<Dashboard />}>
-          <Route path="dashboard" element={<Content />} />
-          <Route path="store" element={<Store />}>
-            <Route path="product/:id" element={<Product />} />
-          </Route>
-          <Route path="employees" element={<Employees />}>
-            <Route path="details/:id" element={<EmployeesDetails />} />
-          </Route>
-          <Route
-            path="employees/application/:id"
-            element={<JobApplications />}
-          />
+          <Route path="" element={<Content />} />
+          <Route path="store" element={<Store />} />
+          <Route path="store/product/:id" element={<Product />} />
+          <Route path="employees" element={<Employees />} />
+          <Route path="employees/details/:id" element={<EmployeesDetails />} />
+          <Route path="employees/application/:id" element={<JobApplications />}/>
           <Route path="stock" element={<Stock />} />
           <Route path="supplierContent" element={<SupplierContent />}>
-            <Route path="supplierContent" element={<Supplier end />} />
+            <Route path="" element={<Supplier  />} />
             <Route path="reports" element={<Reports />} />
           </Route>
           <Route path="orders" element={<Orders />} />

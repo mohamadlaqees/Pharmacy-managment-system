@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "../axios";
+import axios from "../Components/axios";
 export const fetchChart = createAsyncThunk(
   "chart/fetchChart",
   async (item, { rejectWithValue }) => {
