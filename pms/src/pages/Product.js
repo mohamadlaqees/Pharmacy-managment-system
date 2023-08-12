@@ -73,31 +73,12 @@ function Product() {
   useEffect(() => {
     dispatch(getProdcutDetails(+id));
     if (localStorage.getItem("email")) {
-      dispatch(checkAllergy(+id));
-      dispatch(checkWishMedicins(+id));
       dispatch(getRate(+id));
     }
   }, [dispatch, id]);
   if (details.availability) {
     available = details.availability;
   }
-  const allergyHandler = (id) => {
-    if (localStorage.getItem("email")) {
-      dispatch(addAllergyMedicin(id));
-      dispatch(checkAllergy(id));
-    } else {
-      navigate("/ph-login");
-    }
-  };
-  const wishHandler = (id) => {
-    dispatch(addWishMedicins(id));
-    dispatch(checkWishMedicins(+id));
-    dispatch(reset());
-  };
-  const rateHandler = (e, id) => {
-    dispatch(addRate({ id, num: e }));
-    dispatch(getRate(id));
-  };
   return (
     <div className="page2">
       <div className="flex flex-wrap gap-5 justify-center items-center max-h-mCont">
@@ -115,7 +96,7 @@ function Product() {
                   <span className="text-3xl">{details.name}</span>
                 </span>
               </div>
-              <Rate onChange={(e) => rateHandler(e, +id)} value={numOfRate} />
+              <Rate value={numOfRate} />
             </div>
             <span className=" mb-1 block mt-4 text-blue-600 text-xl">
               {`${available ? `${details.price} $` : ""}`}
