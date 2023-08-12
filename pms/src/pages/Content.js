@@ -10,7 +10,7 @@ import StatTile from "../Components/StatTile";
 import { useState } from "react";
 import StatChart from "../Components/StatChart";
 import TopPrducts from "../Components/TopProducts";
-import axios from "../axios";
+import axios from "../Components/axios";
 
 async function fetchBestSelling() {
   try {
