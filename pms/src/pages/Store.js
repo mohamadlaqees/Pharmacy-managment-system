@@ -58,7 +58,7 @@ function Store() {
           otc: otc !== null ? otc : "",
           maxPrice,
           minPrice,
-          rating: rating !== null ? rating : "",
+          rating: rating !== null ? rating : 0,
         })
       );
     } else if (availability !== null) {
@@ -69,7 +69,7 @@ function Store() {
           otc: otc !== null ? otc : "",
           maxPrice: maxPrice !== null ? maxPrice : "",
           minPrice: minPrice !== null ? minPrice : "",
-          rating: rating !== null ? rating : "",
+          rating: rating !== null ? rating : 0,
         })
       );
     } else if (otc !== null) {
@@ -80,7 +80,7 @@ function Store() {
           otc,
           maxPrice: maxPrice !== null ? maxPrice : "",
           minPrice: minPrice !== null ? minPrice : "",
-          rating: rating !== null ? rating : "",
+          rating: rating !== null ? rating : 0,
         })
       );
     } else if (rating > 0) {

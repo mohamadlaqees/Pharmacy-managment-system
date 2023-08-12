@@ -53,7 +53,7 @@ function SideBar() {
             <span className="  text-gray-500   cursor-pointer absolute bottom-0  pt-4 pb-3 rounded-md">
               <NavLink
                 className=" route  hover:text-red-500 "
-                to={"/login"}
+                to={"/"}
                 replace={true}
               >
                 <i className="fa-solid fa-right-from-bracket mr-5"></i>

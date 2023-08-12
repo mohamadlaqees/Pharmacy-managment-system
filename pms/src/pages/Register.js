@@ -204,7 +204,7 @@ export default function Register() {
               <span>
                 <Link
                   className="hover:text-blue-600 text-gray-400  transition no-underline"
-                  to={"/login"}
+                  to={"/"}
                 >
                   Login
                 </Link>

@@ -6,7 +6,8 @@ html body {
   font-family: "IBM Plex Sans", sans-serif;
 }
 .link {
-  @apply pt-4 pb-4  relative cursor-pointer rounded-md;
+  @apply pt-4 pb-3  relative cursor-pointer rounded-md;
+  height: 76px;
 }
 .link .route i {
   @apply mr-5;

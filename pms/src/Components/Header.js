@@ -399,7 +399,10 @@ function Header({ set, check }) {
                       </div>
                     </div>
                     <div className="p-2  transition-all  border-gray-300">
-                      <Checkbox onChange={onChangeRa}>Rating</Checkbox>
+                      <div className="text-sm mb-2">Rating</div>
+                      <div>
+                        <Rate onChange={(e) => onChangeRa(e)} />
+                      </div>
                     </div>
                   </div>
                 </div>
