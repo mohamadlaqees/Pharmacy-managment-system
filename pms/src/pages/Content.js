@@ -76,62 +76,31 @@ function Content() {
       .catch((error) => console.error("Error fetching revenue data:", error));
   }, []);
 
-  return (
-    <>
-      {/* <div className="page pb-0">
+    return (
+      <div className="page pb-0">
         <Container fluid>
           <Row>
             <Col md={4} sm={6} className="mb-1">
-              <StatCard icon="fa-solid fa-list" title="Orders" data="234" />
-      <div className="page pb-0  ">
-        <Container fluid className="">
-          <Row className="">
-            <Col md={4} sm={6} className="mb-1 h-25">
               <StatCard icon="fa-solid fa-list" title="Orders" data={OrderCount} />
             </Col>
-            <Col md={4} xs={12} sm={6} className="mb-1 h-25">
-              <StatCard
-                icon="fas fa-hand-holding-usd"
-                title="Revenue"
-                data={`$ ${Revenue}`}
-              />
+            <Col md={4} xs={12} sm={6} className="mb-1">
+              <StatCard icon="fas fa-hand-holding-usd" title="Revenue" data={`$${Revenue}`} />
             </Col>
-            <Col
-              md={4}
-              sm={12}
-              style={{ height: "25vh" }}
-              className="text-center "
-            >
-              {
-                 <TopPrducts title=" most profitable products" data={MostProfitable} />
-              }{" "}
+            <Col md={4} sm={12} style={{ height: "25vh" }} className="text-center">
+              <TopPrducts title="Most Profitable Products" data={MostProfitable} />
             </Col>
-            {/*
-          <StatTile icon="fa fa-line-chart" title="Revenue" data="$50000" />
-          <StatTile
-            icon="fa-solid fa-users"
-            title="New Customers"
-            data="152"
-          />
-          */}
-      {/* </Row>
+          </Row>
           <Row className="mt-3">
             <Col md={8} sm={12} style={{ height: "60vh" }}>
-              <StatChart />
+              <StatChart  />
             </Col>
-            <Col
-              md={4}
-              sm={12}
-              style={{ height: "60vh" }}
-              className="text-center "
-            >
+            <Col md={4} sm={12} style={{ height: "60vh" }} className="text-center">
               <TopPrducts title="Bestselling" data={BestSelling} />
             </Col>
           </Row>
         </Container>
-      </div> */}
-    </>
-  );
-}
-
-export default Content;
+      </div>
+    );
+  }
+  
+  export default Content;

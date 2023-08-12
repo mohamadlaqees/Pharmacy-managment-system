@@ -30,7 +30,7 @@ function StatChart() {
   const [period, setPeriod] = useState("day");
   const [statType, setStatType] = useState("revenue-chart");
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state) => state.chart);
+  const { data, loading } = useSelector((state) => state.ChartReducer);
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -81,7 +81,7 @@ function StatChart() {
   }, [data]);
 
   return (
-    <Container className="text-bold text-secondary  overflow-auto bg-SSReg shadow-md shadow-SReg rounded px-3 pt-1 ">
+    <Container className="text-bold text-secondary  overflow-auto bg-SSReg shadow-md shadow-primary rounded px-3 pt-1 ">
       <Row>
         <Col //button to  select the period
           md={10}
