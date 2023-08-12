@@ -81,7 +81,7 @@ function StatChart() {
   }, [data]);
 
   return (
-    <Container className="text-bold text-secondary  overflow-auto bg-Stext-blue-600 shadow-md shadow-text-blue-600 rounded px-3 pt-1 ">
+    <Container className="text-bold text-secondary  overflow-auto bg-SSReg shadow-md shadow-primary rounded px-3 pt-1 ">
       <Row>
         <Col //button to  select the period
           md={10}
@@ -100,8 +100,8 @@ function StatChart() {
                 key={Period}
                 className={`${
                   Period.toLowerCase() === period
-                    ? "bg-text-blue-600  text-white"
-                    : "hover:border-text-blue-600 hover:text-text-blue-600"
+                    ? "bg-SReg  text-white"
+                    : "hover:border-SReg hover:text-SReg"
                 } border-slate-300  border-2   w-25 rounded
                  duration-.25s  mx-sm-1`}
               >
