@@ -16,7 +16,6 @@ import Stock from "./pages/Stock";
 import SupplierContent from "./pages/SupplierContent";
 import Supplier from "./pages/Supplier";
 import Orders from "./pages/Orders";
-import Backups from "./pages/Backups";
 function App() {
   return (
     <div className="App">
@@ -34,7 +33,6 @@ function App() {
             <Route path="reports" element={<Reports />} />
           </Route>
           <Route path="orders" element={<Orders />} />
-          <Route path="backups" element={<Backups />} />
           <Route path="profile" element={<Profile />} />
           <Route path="editProfile" element={<EditProfile />} />
         </Route>

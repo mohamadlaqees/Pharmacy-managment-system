@@ -50,12 +50,6 @@ function SideBar() {
                 <i className="fa-solid fa-list"></i> {check ? "" : "Orders"}
               </NavLink>
             </li>
-            <li className={`link`}>
-              <NavLink className="route" to={"backups"}>
-                <i className="fa-solid fa-database"></i>
-                {check ? "" : "Backups"}
-              </NavLink>
-            </li>
             <span className="  text-gray-500   cursor-pointer absolute bottom-0  pt-4 pb-3 rounded-md">
               <NavLink
                 className=" route  hover:text-red-500 "
