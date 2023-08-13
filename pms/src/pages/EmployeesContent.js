@@ -1,8 +1,7 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 
-function SupplierContent() {
+function EmployeesContent() {
   return (
     <div className="page">
       <div className="p-2 flex justify-end gap-2 border-b-2 border-slate-200">
@@ -16,13 +15,13 @@ function SupplierContent() {
               };
             }}
           >
-            Supplier
+            Employees
           </NavLink>
         </div>
         <div className="text-gray-500 text-2xl">/</div>
         <div>
           <NavLink
-            to={`reports`}
+            to={`jobApplications`}
             className="w-72 h-form rounded-md pt-3 mb-3 cursor-pointer transition-all no-underline "
             style={({ isActive, isPending }) => {
               return {
@@ -30,7 +29,7 @@ function SupplierContent() {
               };
             }}
           >
-            Reports
+            Job applications
           </NavLink>
         </div>
       </div>
@@ -39,4 +38,4 @@ function SupplierContent() {
   );
 }
 
-export default SupplierContent;
+export default EmployeesContent;

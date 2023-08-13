@@ -27,7 +27,7 @@ function Loading({ loading, children }) {
     return loading ? (
       <span
         className={
-          "flex items-center justify-center  text-gray-600  h-20 text-3xl "
+          "flex items-center justify-center mt-2  text-gray-600  h-20 text-3xl "
         }
       >
         Loading <Spin indicator={antIcon} />
@@ -36,8 +36,6 @@ function Loading({ loading, children }) {
       children
     );
   }
-
-  //  else{}
 }
 
 export default Loading;
