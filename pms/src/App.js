@@ -9,13 +9,15 @@ import Content from "./pages/Content";
 import Dashboard from "./layout/Dashboard";
 import Register from "./pages/Register";
 import Store from "./pages/Store";
-import Employees from "./pages/Employees";
+import EmployeesContent from "./pages/EmployeesContent";
 import EmployeesDetails from "./pages/EmployeesDetails";
-import JobApplications from "./pages/JobApplications";
+import ApplicationDetails from "./pages/ApplicationDetails";
 import Stock from "./pages/Stock";
 import SupplierContent from "./pages/SupplierContent";
 import Supplier from "./pages/Supplier";
 import Orders from "./pages/Orders";
+import Employees from "./pages/Employees";
+import JobApplications from "./pages/JobApplications";
 function App() {
   return (
     <div className="App">
@@ -24,12 +26,21 @@ function App() {
           <Route path="" element={<Content />} />
           <Route path="store" element={<Store />} />
           <Route path="store/product/:id" element={<Product />} />
-          <Route path="employees" element={<Employees />} />
-          <Route path="employees/details/:id" element={<EmployeesDetails />} />
-          <Route path="employees/application/:id" element={<JobApplications />}/>
+          <Route path="employeesContent" element={<EmployeesContent />}>
+            <Route path="" element={<Employees />} />
+            <Route path="jobApplications" element={<JobApplications />} />
+          </Route>
+          <Route
+            path="employeesContent/jobApplications/application/:id"
+            element={<ApplicationDetails />}
+          />
+          <Route
+            path="employeesContent/details/:id"
+            element={<EmployeesDetails />}
+          />
           <Route path="stock" element={<Stock />} />
           <Route path="supplierContent" element={<SupplierContent />}>
-            <Route path="" element={<Supplier  />} />
+            <Route path="" element={<Supplier />} />
             <Route path="reports" element={<Reports />} />
           </Route>
           <Route path="orders" element={<Orders />} />
