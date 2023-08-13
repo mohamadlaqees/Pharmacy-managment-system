@@ -5,6 +5,8 @@ import { Rate } from "antd";
 function AllProducts({ data, img }) {
   const navigate = useNavigate();
   return data.map((e, inx) => {
+    console.log(e.id)
+    console.log(e.product_id)
     return (
       <div
         className="w-72 h-form2 rounded-md shadow-md hover:bg-slate-100 p-3 mb-3 cursor-pointer transition-all "

@@ -88,50 +88,57 @@ function Header({ set, check }) {
 
   const onChangeN = useCallback(() => {
     setCheckN(!checkN);
-    dispatch(setName(true));
-    dispatch(setBrand(false));
-    dispatch(setCategory(false));
-    dispatch(setDosage(false));
-    dispatch(setRoute(false));
     setCheckB(false);
     setCheckC(false);
     setCheckD(false);
     setCheckR(false);
     !checkN ? setPlaceHolder("Search by name") : setPlaceHolder("Search");
-  }, [checkN]);
-  const onChangeB = useCallback(() => {
-    setCheckB(!checkB);
-    dispatch(setBrand(true));
-    dispatch(setName(false));
+    if (name === false || name === null) {
+      dispatch(setName(true));
+    } else {
+      dispatch(setName(false));
+    }
+    dispatch(setBrand(false));
     dispatch(setCategory(false));
     dispatch(setDosage(false));
     dispatch(setRoute(false));
+  }, [checkN]);
+  const onChangeB = useCallback(() => {
+    setCheckB(!checkB);
     setCheckN(false);
     setCheckC(false);
     setCheckD(false);
     setCheckR(false);
     !checkB ? setPlaceHolder("Search by brand") : setPlaceHolder("Search");
+    if (brand === false || brand === null) {
+      dispatch(setBrand(true));
+    } else {
+      dispatch(setBrand(false));
+    }
+    dispatch(setName(false));
+    dispatch(setCategory(false));
+    dispatch(setDosage(false));
+    dispatch(setRoute(false));
   }, [checkB]);
   const onChangeC = useCallback(() => {
     setCheckC(!checkC);
-    dispatch(setCategory(true));
-    dispatch(setBrand(false));
-    dispatch(setName(false));
-    dispatch(setDosage(false));
-    dispatch(setRoute(false));
     setCheckN(false);
     setCheckD(false);
     setCheckR(false);
     setCheckB(false);
     !checkC ? setPlaceHolder("Search by Category") : setPlaceHolder("Search");
+    if (category === false || category === null) {
+      dispatch(setCategory(true));
+    } else {
+      dispatch(setCategory(false));
+    }
+    dispatch(setBrand(false));
+    dispatch(setName(false));
+    dispatch(setDosage(false));
+    dispatch(setRoute(false));
   }, [checkC]);
   const onChangeD = useCallback(() => {
     setCheckD(!checkD);
-    dispatch(setDosage(true));
-    dispatch(setBrand(false));
-    dispatch(setName(false));
-    dispatch(setCategory(false));
-    dispatch(setRoute(false));
     setCheckC(false);
     setCheckN(false);
     setCheckR(false);
@@ -139,19 +146,32 @@ function Header({ set, check }) {
     !checkD
       ? setPlaceHolder("Search by dosage form")
       : setPlaceHolder("Search");
-  }, [checkD]);
-  const onChangeR = useCallback(() => {
-    setCheckR(!checkR);
-    dispatch(setRoute(true));
+    if (dosage === false || dosage === null) {
+      dispatch(setDosage(true));
+    } else {
+      dispatch(setDosage(false));
+    }
     dispatch(setBrand(false));
     dispatch(setName(false));
     dispatch(setCategory(false));
-    dispatch(setDosage(false));
+    dispatch(setRoute(false));
+  }, [checkD]);
+  const onChangeR = useCallback(() => {
+    setCheckR(!checkR);
     setCheckD(false);
     setCheckC(false);
     setCheckN(false);
     setCheckB(false);
     !checkR ? setPlaceHolder("Search by route") : setPlaceHolder("Search");
+    if (route === false || route === null) {
+      dispatch(setRoute(true));
+    } else {
+      dispatch(setRoute(false));
+    }
+    dispatch(setBrand(false));
+    dispatch(setName(false));
+    dispatch(setCategory(false));
+    dispatch(setDosage(false));
   }, [checkR]);
 
   const onChangeP = (event, newValue) => {

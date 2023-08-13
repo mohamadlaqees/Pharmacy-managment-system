@@ -94,7 +94,7 @@ function Supplier() {
         <div>
           <Loading loading={loading}>
             <div>
-              {data.map(({ name, id, labeller, price }, i) => {
+              {data.map(({ name, id, product_id, labeller, price }, i) => {
                 return (
                   <div
                     className={`p-2 ${
@@ -120,7 +120,13 @@ function Supplier() {
                       <div className="text-gray-500 hover:text-blue-600 text-xl transition-all">
                         <i
                           className="fa-solid fa-arrow-right"
-                          onClick={() => navigate(`SupplyProducts/${id}`)}
+                          onClick={() =>
+                            navigate(
+                              `SupplyProducts/${
+                                id ? id : product_id ? product_id : ""
+                              }`
+                            )
+                          }
                         ></i>
                       </div>
                     </div>

@@ -13,11 +13,11 @@ const initialState = {
   wishMedicins: [],
   wishMessage: null,
   numOfRate: null,
-  name: false,
-  brand: false,
-  category: false,
-  dosage: false,
-  route: false,
+  name: null,
+  brand: null,
+  category: null,
+  dosage: null,
+  route: null,
   searchInput: null,
   otc: null,
   minPrice: null,
@@ -175,19 +175,19 @@ const storeSlice = createSlice({
       state.allergyMessage = null;
     },
     setName: (state, action) => {
-      state.name = !state.name;
+      state.name = action.payload;
     },
     setBrand: (state, action) => {
-      state.brand = !state.brand;
+      state.brand = action.payload;
     },
     setCategory: (state, action) => {
-      state.category = !state.category;
+      state.category = action.payload;
     },
     setDosage: (state, action) => {
-      state.dosage = !state.dosage;
+      state.dosage = action.payload;
     },
     setRoute: (state, action) => {
-      state.route = !state.route;
+      state.route = action.payload;
     },
     setSearchValue: (state, action) => {
       state.searchInput = action.payload;
@@ -271,6 +271,7 @@ const storeSlice = createSlice({
       state.error = null;
       state.loading = false;
       state.data = action.payload.data;
+      console.log(action);
     });
     builder.addCase(searchByName.rejected, (state, action) => {
       state.error = action.payload.response.data.message;
