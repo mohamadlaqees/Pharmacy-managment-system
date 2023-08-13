@@ -118,5 +118,27 @@ html body {
   visibility: visible;
   opacity: 100%;
   margin-left: -8px;
+}
+.Fpass {
+  @apply w-96 h-96 m-auto relative translate-y-1/2  text-start shadow-xl p-5 rounded-md bg-slate-100 xl:-translate-x-10% xl:bottom-48;
+  position: relative;
+}
+.Fpass::before {
+  @apply w-full h-10 flex justify-center items-center text-xl tracking-wider	  bg-email font-bold text-white rounded-t-md;
+  content: "Reset password";
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
+.Rpass {
+  @apply w-96 h-96 m-auto relative translate-y-1/2  text-start shadow-xl p-5 rounded-md bg-slate-100 xl:-translate-x-10% xl:bottom-48;
+  position: relative;
+}
+.Rpass::before {
+  @apply w-full h-10 flex justify-center items-center text-xl tracking-wider	  bg-email font-bold text-white rounded-t-md;
+  content: "New password";
+  position: absolute;
+  top: 0;
+  left: 0;
 }
