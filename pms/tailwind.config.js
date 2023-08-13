@@ -10,6 +10,7 @@ module.exports = {
         font2: "#757575",
         main: "#0d6efc",
         Hmain: "#1d4ed8",
+        email: "#0270e9",
         SReg: "#52b0ed",
       },
       height: {

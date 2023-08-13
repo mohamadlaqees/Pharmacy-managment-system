@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Reports from "./pages/Reports";
@@ -7,7 +8,6 @@ import EditProfile from "./pages/EditProfile";
 import Login from "./pages/Login";
 import Content from "./pages/Content";
 import Dashboard from "./layout/Dashboard";
-import Register from "./pages/Register";
 import Store from "./pages/Store";
 import EmployeesContent from "./pages/EmployeesContent";
 import EmployeesDetails from "./pages/EmployeesDetails";
@@ -18,6 +18,9 @@ import Supplier from "./pages/Supplier";
 import Orders from "./pages/Orders";
 import Employees from "./pages/Employees";
 import JobApplications from "./pages/JobApplications";
+import SupplyProducts from "./pages/SupplyProducts";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 function App() {
   return (
     <div className="App">
@@ -43,12 +46,17 @@ function App() {
             <Route path="" element={<Supplier />} />
             <Route path="reports" element={<Reports />} />
           </Route>
+          <Route
+            path="supplierContent/SupplyProducts/:id"
+            element={<SupplyProducts />}
+          />
           <Route path="orders" element={<Orders />} />
           <Route path="profile" element={<Profile />} />
           <Route path="editProfile" element={<EditProfile />} />
         </Route>
         <Route path="/" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="password-reset/:token" element={<ResetPassword />} />
       </Routes>
     </div>
   );

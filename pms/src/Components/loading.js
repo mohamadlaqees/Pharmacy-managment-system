@@ -6,18 +6,18 @@ function Loading({ loading, children }) {
     <LoadingOutlined
       style={{
         fontSize: 24,
-        color: "#5fb9f7",
+        color: "#0270e9",
       }}
       spin
     />
   );
-  const elementType = children.props.type;
+  const elementType = children?.props?.type;
   if (elementType === "submit") {
     const cloneButton = React.cloneElement(
       children,
       {
         className:
-          "p-1 border-SReg  border-2 text-SReg rounded-md  duration-.3s",
+          "p-1 border-main  border-2 text-main rounded-md  duration-.3s",
       },
       "Loading ",
       <Spin indicator={antIcon} />
@@ -27,10 +27,10 @@ function Loading({ loading, children }) {
     return loading ? (
       <span
         className={
-          "flex items-center justify-center mt-2  text-gray-600  h-20 text-3xl "
+          "flex gap-2 items-center justify-center mt-2  text-gray-600  h-20 text-3xl "
         }
       >
-        Loading <Spin indicator={antIcon} />
+        <span>Loading</span> <Spin indicator={antIcon} />
       </span>
     ) : (
       children

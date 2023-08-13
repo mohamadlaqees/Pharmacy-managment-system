@@ -8,7 +8,7 @@ import { Rate } from "antd";
 import { getProdcutDetails, getRate } from "../states/StoreSlice";
 import { message } from "antd";
 
-function Product() {
+function SupplyProducts() {
   const { id } = useParams();
   let available;
   const dispatch = useDispatch();
@@ -134,22 +134,6 @@ function Product() {
                   }`}
                 </div>
               </div>
-              <div className="menu" onClick={() => setShow2(!show2)}>
-                <div className="flex justify-between">
-                  Delivery Info
-                  <i className="fa-solid fa-arrow-right"></i>
-                </div>
-              </div>
-              <div
-                className={`${
-                  show2 ? "drop active overflow-auto" : "drop bg-all"
-                }`}
-              >
-                Delivery is{" "}
-                <span className="font-bold">
-                  {available ? "Available" : "Not available"}
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -158,4 +142,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default SupplyProducts;

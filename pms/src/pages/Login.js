@@ -1,14 +1,15 @@
 import * as React from "react";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import * as Yup from "yup";
-import { message, Space } from "antd";
+import { message } from "antd";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../states/authSlice";
-export default function Login() {
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "../states/loginSlice";
+import { getCSRF, getUserData } from "../states/authSlice";
+export default function PhLogin() {
+  const { errorL, successL } = useSelector((state) => state.loginSlice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const SignupSchema = Yup.object().shape({
@@ -34,14 +35,28 @@ export default function Login() {
     },
     validationSchema: SignupSchema,
     onSubmit: async () => {
+      // dispatch(
+      //   login({ email: formik.values.email, password: formik.values.password })
+      // );
       navigate("/dashboard", { replace: true });
-      msg("success", "Login success");
+
     },
   });
+  React.useEffect(() => {
+    if (successL !== null) {
+      msg("success", successL);
+      dispatch(getUserData());
+      localStorage.setItem("email", formik.values.email);
+      navigate("/", { replace: true });
+    }
+    if (errorL !== null) {
+      msg("error", errorL);
+    }
+  }, [errorL, successL, dispatch, navigate, formik.values.email]);
   return (
     <React.Fragment>
       <div className="flex justify-between">
-        <div className="w-96 h-96 m-auto relative translate-y-1/2  text-start shadow-xl p-5 rounded-md bg-slate-100 xl:-translate-x-10% xl:bottom-48 tra">
+        <div className="w-96  m-auto relative translate-y-1/2  text-start shadow-xl p-5 rounded-md bg-slate-100 xl:-translate-x-10% xl:bottom-48 ">
           <Form onSubmit={formik.handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label className="text-blue-600">Email</Form.Label>
@@ -78,21 +93,23 @@ export default function Login() {
               />
             </Form.Group>
             <div className="d-grid gap-2 mb-8">
-              <Button variant="outline-primary" type="submit">
+              <button
+                type="submit"
+                className="p-1 border-main border-2 text-main rounded-md hover:text-white hover:bg-Hmain hover:border-Hmain duration-.3s"
+              >
                 Login
-              </Button>
-            </div>
-            <span className=" block text-center">
-              Don't have an account{" ? "}
-              <span>
-                <Link
-                  className="hover:text-blue-600 text-gray-400  transition no-underline"
-                  to={"/register"}
-                >
-                  Register
-                </Link>
+              </button>
+              <span className=" block text-center text-main ">
+                <span>
+                  <Link
+                    className="hover:text-main text-gray-400  transition no-underline"
+                    to={"/forgot-password"}
+                  >
+                    Forgot password
+                  </Link>
+                </span>
               </span>
-            </span>
+            </div>
           </Form>
         </div>
         <div className="h-full">

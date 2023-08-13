@@ -15,7 +15,7 @@ function Employees() {
   }, [dispatch]);
   return (
     <div>
-      <div className="bg-white pt-4 pb-4 shadow-md h-fit rounded-md w-full mt-4 relative">
+      <div className="bg-white pt-4 pb-4 shadow-md h-fit rounded-md w-full mt-1 relative">
         <div className="absolute top-0 w-full p-1  bg-blue-600 text-white font-bold text-center rounded-md">
           Employees
         </div>
