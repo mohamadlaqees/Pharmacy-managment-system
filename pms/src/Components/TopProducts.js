@@ -11,14 +11,15 @@ function topProduct({ title, data=[] }) {
           console.log("data",data)
         }  
         {
-           
+           data.length>0?
             data.map((product) => { 
             return (
               <li className="list-group-item hover:border-2 cursor-pointer hover:border-SReg  d-flex justify-content-between  mb-1 ">
                 {product.name}
               </li>
             );
-          })
+          }) :"loading" 
+        
         }
         </ol>
       </Container>
