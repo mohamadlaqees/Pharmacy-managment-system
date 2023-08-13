@@ -9,8 +9,8 @@ module.exports = {
         font1: "#4f4f4f",
         font2: "#757575",
         main: "#0d6efc",
-        SReg: "#52b0ed",
         Hmain: "#1d4ed8",
+        SReg: "#52b0ed",
       },
       height: {
         photo: "753px",
