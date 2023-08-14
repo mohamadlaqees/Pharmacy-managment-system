@@ -3,7 +3,7 @@ import Slider from "@mui/material/Slider";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Checkbox } from "antd";
-import {  Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Rate } from "antd";
@@ -423,11 +423,11 @@ function Header({ set, check }) {
         <div className="text-gray-500 text-4xl">|</div>
         <div className=" transition-all  " ref={prof}>
           <div
-            className="flex  cursor-pointer w-40"
+            className="flex gap-6 cursor-pointer w-40"
             onClick={() => setShowP(!showP)}
           >
-            <div className="">
-              <div className="p-1 mr-10">
+            <div className="mr-4">
+              <div className="p-1">
                 <img
                   src={image ? image : "/images/user.jpg"}
                   alt=""
@@ -441,11 +441,11 @@ function Header({ set, check }) {
               </span>
               <span className="text-gray-500 block text-sm">Admin</span>
               <div
-                className={`w-40 h-40 rounded-md bg-slate-100 absolute right-0 top-11 shadow-md transition duration-.3s overflow-auto ${
+                className={`w-40 h-40 rounded-md bg-slate-100 absolute -right-10 top-11 shadow-md transition duration-.3s overflow-auto ${
                   showP ? "opacity-100 visible" : "opacity-0 invisible"
                 } `}
               >
-                <div className="p-2 flex gap-3 justify-center  hover:bg-slate-200 border border-b-4 border-gray-500 hover:text-blue-600 transition-all">
+                <div className="p-2 flex gap-3 justify-center  hover:bg-slate-200 border border-b-4 border-gray-500 hover:text-SSReg transition-all">
                   <div>
                     <i className="fa-regular fa-user"></i>{" "}
                   </div>
@@ -458,7 +458,7 @@ function Header({ set, check }) {
                     </Link>
                   </div>
                 </div>
-                <div className="p-2 flex gap-3 justify-center  hover:bg-slate-200  border border-b-4 border-gray-500 hover:text-blue-600 transition-all">
+                <div className="p-2 flex gap-3 justify-center  hover:bg-slate-200  border border-b-4 border-gray-500 hover:text-SSReg transition-all">
                   <div>
                     <i className="fa-regular fa-edit"></i>{" "}
                   </div>

@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAccount,
+  getUserData,
   setAddress,
   setBirthDate,
   setFirstName,
@@ -32,15 +33,15 @@ function EditProfile() {
   const mobile = useRef(userData.mobile);
   const photo = useRef(image);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getUserData());
-  //   if (successA !== null) {
-  //     msg("success", successA);
-  //   }
-  //   if (errorA !== null) {
-  //     msg("error", errorA);
-  //   }
-  // }, [errorA, successA, dispatch]);
+  useEffect(() => {
+    dispatch(getUserData());
+    if (successA !== null) {
+      msg("success", successA);
+    }
+    if (errorA !== null) {
+      msg("error", errorA);
+    }
+  }, [errorA, successA, dispatch]);
   const SignupSchema = Yup.object().shape({
     gender: Yup.string().required("Required"),
     firstName: Yup.string().required("Required").min(2, "Too Short!"),
