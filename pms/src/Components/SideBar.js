@@ -1,8 +1,17 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useDispatch, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { checkContext } from "../layout/Dashboard";
+import { resetA } from "../states/authSlice";
+import { logout, resetL } from "../states/loginSlice";
 function SideBar() {
   const check = useContext(checkContext);
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(logout());
+    dispatch(resetA());
+    dispatch(resetL());
+    localStorage.removeItem("email");
+  };
   return (
     <Fragment>
       <div
@@ -55,6 +64,7 @@ function SideBar() {
                 className=" route  hover:text-red-500 "
                 to={"/"}
                 replace={true}
+                onClick={() => logoutHandler()}
               >
                 <i className="fa-solid fa-right-from-bracket mr-5"></i>
                 {check ? "" : "Logout"}

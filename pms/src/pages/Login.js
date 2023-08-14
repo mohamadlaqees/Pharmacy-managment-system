@@ -6,8 +6,8 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout } from "../states/loginSlice";
-import { getCSRF, getUserData } from "../states/authSlice";
+import { login } from "../states/loginSlice";
+import { getUserData } from "../states/authSlice";
 export default function PhLogin() {
   const { errorL, successL } = useSelector((state) => state.loginSlice);
   const dispatch = useDispatch();

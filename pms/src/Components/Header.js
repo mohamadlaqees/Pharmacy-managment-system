@@ -3,11 +3,9 @@ import Slider from "@mui/material/Slider";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Checkbox } from "antd";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, resetL } from "../states/loginSlice";
-import { resetA } from "../states/authSlice";
 import { Rate } from "antd";
 import {
   getProdcut,
@@ -212,16 +210,6 @@ function Header({ set, check }) {
   };
   const onChangeRa = (e) => {
     dispatch(setRating(e));
-  };
-  const logoutHandler = () => {
-    localStorage.removeItem("email");
-    dispatch(logout());
-    dispatch(resetA());
-    dispatch(resetL());
-  };
-
-  const go_logIn = () => {
-    navigate("/");
   };
   const onSearch = (value) => {
     if (value) {
