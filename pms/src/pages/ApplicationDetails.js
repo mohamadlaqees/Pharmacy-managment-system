@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCV, showAppliaction } from "../states/jobSlice";
+import { acceptApplicant, getCV, showAppliaction } from "../states/jobSlice";
 
 function ApplicationDetails() {
   const [file, setFile] = useState();
@@ -31,6 +31,9 @@ function ApplicationDetails() {
     dispatch(showAppliaction(id));
     dispatch(getCV(id));
   }, [dispatch, id]);
+  const acceptHanlder = () => {
+    dispatch(acceptApplicant(id));
+  };
   return (
     <div className="page">
       <div className="bg-white rounded-md p-4 ">
@@ -101,7 +104,8 @@ function ApplicationDetails() {
           <div className="d-grid  ">
             <button
               type="submit"
-              className="  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-white rounded-md bg-green-500  hover:text-white hover:bg-green-700 hover:border-green-700 duration-.3s  text-center"
+              className="  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-green-500  rounded-md  hover:text-white hover:bg-green-500  duration-.3s  text-center"
+              onClick={() => acceptHanlder()}
             >
               Acceptance{" "}
             </button>
@@ -109,7 +113,7 @@ function ApplicationDetails() {
           <div className="d-grid">
             <button
               type="submit"
-              className="  pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-white rounded-md bg-red-500 hover:text-white hover:bg-red-700 hover:border-red-700 duration-.3s  text-center"
+              className="  pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-red-500 rounded-md  hover:text-white hover:bg-red-500  duration-.3s  text-center"
             >
               Rejection{" "}
             </button>

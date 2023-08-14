@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Pagination } from "antd";
-import DropDown from "../Components/DropDown";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProdcut, reset, searchByName } from "../states/StoreSlice";
+import { getProdcut, reset, searchByName } from "../states/storeSlice";
 import Loading from "../Components/loading";
 function Supplier() {
   const {

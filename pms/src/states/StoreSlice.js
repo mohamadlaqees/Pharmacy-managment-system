@@ -232,6 +232,7 @@ const storeSlice = createSlice({
       state.error = null;
       state.loading = false;
       state.details = action.payload.data;
+      console.log(action)
     });
     builder.addCase(getProdcutDetails.rejected, (state, action) => {
       state.error = action.payload.message;

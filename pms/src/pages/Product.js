@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 
-import { getProdcutDetails, getRate } from "../states/StoreSlice";
+import { getProdcutDetails, getRate } from "../states/storeSlice";
 import { message } from "antd";
 
 function Product() {
@@ -113,7 +113,7 @@ function Product() {
                     {" "}
                     Dosage form :{" "}
                   </span>
-                  {details.dosage_form}{" "}
+                  {details.dosageForm}{" "}
                 </div>
                 <div className="p-1">
                   <span className="text-blue-600 font-bold">Strength :</span>{" "}

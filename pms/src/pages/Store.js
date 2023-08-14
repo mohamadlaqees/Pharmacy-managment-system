@@ -12,7 +12,7 @@ import {
   searchByDosageForm,
   searchByName,
   searchByRoute,
-} from "../states/StoreSlice";
+} from "../states/storeSlice";
 function Store() {
   const {
     error,

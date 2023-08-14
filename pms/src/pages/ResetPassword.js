@@ -108,7 +108,7 @@ export default function ResetPassword() {
                       type="submit"
                       className="p-1  border-main border-2 text-main rounded-md hover:text-white hover:bg-main hover:border-Hmain duration-.3s"
                     >
-                      Login
+                      Reset
                     </button>
                   </Loading>
                 </div>
