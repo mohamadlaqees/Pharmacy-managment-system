@@ -5,6 +5,7 @@ import ChartReducer from "./ChartSlice";
 import jobSlice from "./jobSlice";
 import SupplySlice from "./SupplySlice";
 import loginSlice from "./loginSlice";
+import orderReducer from './orderSlice'
 const store = configureStore({
   reducer: {
     ChartReducer,
@@ -13,6 +14,7 @@ const store = configureStore({
     jobSlice,
     SupplySlice,
     loginSlice,
+    orderReducer,
   },
 });
 export default store;
