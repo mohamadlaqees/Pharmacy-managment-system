@@ -423,7 +423,7 @@ function Header({ set, check }) {
         <div className="text-gray-500 text-4xl">|</div>
         <div className=" transition-all  " ref={prof}>
           <div
-            className="flex gap-6 cursor-pointer w-40"
+            className="flex gap-6 cursor-pointer w-40 relative"
             onClick={() => setShowP(!showP)}
           >
             <div className="mr-4">
@@ -435,13 +435,13 @@ function Header({ set, check }) {
                 />
               </div>
             </div>
-            <div className=" mt-1 mr-4 relative">
+            <div className=" mt-1 mr-4">
               <span className="block text-sm">
                 {userData.first_name + "," + userData.id}
               </span>
               <span className="text-gray-500 block text-sm">Admin</span>
               <div
-                className={`w-40 h-40 rounded-md bg-slate-100 absolute -right-10 top-11 shadow-md transition duration-.3s overflow-auto ${
+                className={`w-40 h-40 rounded-md bg-slate-100 absolute right-0 top-12 shadow-md transition duration-.3s overflow-auto ${
                   showP ? "opacity-100 visible" : "opacity-0 invisible"
                 } `}
               >

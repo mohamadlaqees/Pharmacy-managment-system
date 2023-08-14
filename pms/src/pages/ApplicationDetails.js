@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { showAppliaction } from "../states/jobSlice";
+import { getCV, showAppliaction } from "../states/jobSlice";
 
 function ApplicationDetails() {
   const [file, setFile] = useState();
@@ -26,9 +26,10 @@ function ApplicationDetails() {
     //     link.parentNode.removeChild(link);
     //   });
   };
-  const { application } = useSelector((state) => state.jobSlice);
+  const { application, CV } = useSelector((state) => state.jobSlice);
   useEffect(() => {
     dispatch(showAppliaction(id));
+    dispatch(getCV(id));
   }, [dispatch, id]);
   return (
     <div className="page">
