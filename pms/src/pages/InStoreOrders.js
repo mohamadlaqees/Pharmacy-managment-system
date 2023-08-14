@@ -1,26 +1,22 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-import React from "react";
-import { Alert, Col, Row } from "react-bootstrap";
-import OrderCard from "../Components/OrderCard";
-import { useState } from "react";
 import { Button, DatePicker, Dropdown, Pagination } from "antd";
+import React, { useEffect, useState } from "react";
+import OrderCard from "../Components/OrderCard";
+import { Alert, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchAllOrders } from "../states/orderSlice";
-
-function MyOrders() {
+import { fetchInStoreOrders } from "../states/orderSlice";
+function InStoreOrders() {
   const [PageNumber, setPageNumber] = useState(1);
   const { userData } = useSelector((state) => state.authSlice);
   const { total, orders } = useSelector((state) => state.orderReducer);
   const userId = userData.id; // authenticated Employee's id
   const dispatch = useDispatch();
   const items = ["Pending", "Review", "progressing", "Paid"].map(
-    (statistic) => {
+    (status) => {
       return {
-        key: statistic,
+        key: status,
         label: (
-          <li key={statistic} onClick={() => {}}>
-            {statistic.toUpperCase()}
+          <li key={status} onClick={() => {}}>
+            {status.toUpperCase()}
           </li>
         ),
       };
@@ -28,7 +24,7 @@ function MyOrders() {
   );
   useEffect(() => {
     if (userId !== undefined) {
-      dispatch(fetchAllOrders({ PageNumber: PageNumber, userID: userId }));
+      dispatch(fetchInStoreOrders( PageNumber));
     } else {
       console.log("userId is  not defined");
     }
@@ -65,7 +61,6 @@ function MyOrders() {
       {console.log(orders)}
 
       {
-        //  <OrderCard products={5}  />
         // map orders from slice
         orders.map((data) => {
           return (
@@ -74,12 +69,12 @@ function MyOrders() {
               status={data.status}
               date={data.date}
               time={data.time}
-              shipping_address={data.shipping_address}
-              orderId={data.order_id}
-              shipping_fees={data.shipping_fees}
-              products={data.products}
-              userId={data.cutormer_id}
               method={data.method}
+            //   shipping_address={data.shipping_address}
+              orderId={data.order_id}
+            //   shipping_fees={data.shipping_fees}
+              products={data.products}
+            //   userId={data.cutormer_id}
             />
           );
         })
@@ -99,4 +94,4 @@ function MyOrders() {
   );
 }
 
-export default MyOrders;
+export default InStoreOrders;

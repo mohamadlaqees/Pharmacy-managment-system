@@ -5,7 +5,7 @@ import { InputNumber } from "antd";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-function ProductTile({ ProductName, data, userId, insideOrder = false }) {
+function ProductTile({ ProductName, data, userId, status }) {
   const dispatch = useDispatch();
   const [subtotal, setsubtotal] = useState(data.subtotal);
   const price = data.price
@@ -47,12 +47,17 @@ function ProductTile({ ProductName, data, userId, insideOrder = false }) {
                 min={1}
                 max={10}
                 defaultValue={data.quantity}
+                disabled={status === "Review" || status === "Progressing"?false:true}
               />
               <span>
                 <i
-                  className="far fa-trash-alt link-danger text-2xl"
+                  className={`far fa-trash-alt ${
+                    status === "Review" || status === "Progressing"
+                      ? "link-danger"
+                      : "disabled"
+                  } text-2xl `}
                   onClick={() => {
-                    // remove_item();
+                    //TODO: remove item form online order or in-store order
                   }}
                 ></i>
               </span>
