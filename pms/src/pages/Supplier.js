@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Pagination } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProdcut, reset, searchByName } from "../states/storeSlice";
+import { getProdcut, reset, searchByName } from "../states/StoreSlice";
 import Loading from "../Components/loading";
 function Supplier() {
   const {

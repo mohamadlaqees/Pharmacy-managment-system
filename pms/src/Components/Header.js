@@ -21,7 +21,7 @@ import {
   setRating,
   setRoute,
   setSearchValue,
-} from "../states/storeSlice";
+} from "../states/StoreSlice";
 
 function Header({ set, check }) {
   const { userData, image } = useSelector((state) => state.authSlice);

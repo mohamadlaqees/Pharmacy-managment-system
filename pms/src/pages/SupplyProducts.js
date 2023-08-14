@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 
-import { getProdcutDetails, getRate } from "../states/storeSlice";
+import { getProdcutDetails, getRate } from "../states/StoreSlice";
 import { message } from "antd";
 import Amount from "../Components/Amount";
 import Loading from "../Components/loading";
-import { purshaceProducts } from "../states/supplySlice";
+import { purshaceProducts } from "../states/SupplySlice";
 
 function SupplyProducts() {
   const { id } = useParams();

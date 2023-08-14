@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 
-import { getProdcutDetails, getRate } from "../states/storeSlice";
+import { getProdcutDetails, getRate } from "../states/StoreSlice";
 import { message } from "antd";
 
 function Product() {
