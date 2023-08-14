@@ -8,7 +8,7 @@ function Profile() {
         <div className="rounded-md bg-white sm:w-80 shadow-md p-3 w-64 md:h-form  ml-auto  mr-auto  md:w-72 mb-4  md:mt-24 md:ml-0 md:mr-0 md:mb-0 ">
           <div className="p-1">
             <img
-              src={image ? image : "images/user.jpg"}
+              src={image ? image : "/images/user.jpg"}
               alt=""
               className="rounded-full w-64 h-64"
             />

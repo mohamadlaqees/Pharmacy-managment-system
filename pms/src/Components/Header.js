@@ -427,9 +427,9 @@ function Header({ set, check }) {
             onClick={() => setShowP(!showP)}
           >
             <div className="">
-              <div className="p-1 mr-2">
+              <div className="p-1 mr-10">
                 <img
-                  src={image ? image : "images/user.jpg"}
+                  src={image ? image : "/images/user.jpg"}
                   alt=""
                   className="rounded-full min-w-fit w-8 min-h-fit h-8"
                 />
