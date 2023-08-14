@@ -1,7 +1,7 @@
 import React from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-function Loading({ loading, children }) {
+function Loading({ loading, children, clss }) {
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -16,11 +16,16 @@ function Loading({ loading, children }) {
     const cloneButton = React.cloneElement(
       children,
       {
-        className:
-          "p-1 border-main  border-2 text-main rounded-md  duration-.3s",
+        className: `${
+          clss !== ""
+            ? clss
+            : "p-1 border-main  border-2 text-main rounded-md  duration-.3s"
+        }`,
       },
-      "Loading ",
-      <Spin indicator={antIcon} />
+      "Loading",
+      <span className="ml-2">
+        <Spin indicator={antIcon} />
+      </span>
     );
     return loading ? cloneButton : children;
   } else {
@@ -30,7 +35,10 @@ function Loading({ loading, children }) {
           "flex gap-2 items-center justify-center mt-2  text-gray-600  h-20 text-3xl "
         }
       >
-        <span>Loading</span> <Spin indicator={antIcon} />
+        <span>Loading</span>{" "}
+        <span className="ml-2">
+          <Spin indicator={antIcon} />
+        </span>
       </span>
     ) : (
       children

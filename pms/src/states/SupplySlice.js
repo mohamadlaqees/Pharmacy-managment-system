@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../Components/axios";
 const initialState = {
-  loading: false,
+  loadingP: false,
   errorP: null,
   successP: null,
+  quantity: 0,
 };
 
 export const purshaceProducts = createAsyncThunk(
@@ -11,13 +12,17 @@ export const purshaceProducts = createAsyncThunk(
   async (item, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-        const { data } = await axios.post("products/create/purchase", {
-        //   products[0][item.id]: item.id,
-        //   products[0][item.quantity]:item.quantity,
-        //   products[0][unit]:item.unit,
-        //   employee_id:item.id,
-        //   pharmacy_id:1
-        });
+      const { data } = await axios.post("products/create/purchase", {
+        products: [
+          {
+            id: item.pId,
+            quantity: item.quantity,
+            unit: item.type,
+          },
+        ],
+        employee_id: item.eId,
+        pharmacy_id: 1,
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -25,7 +30,7 @@ export const purshaceProducts = createAsyncThunk(
   }
 );
 
-const SupplySlice = createSlice({
+const supplySlice = createSlice({
   name: "supply",
   initialState,
   reducers: {
@@ -33,16 +38,19 @@ const SupplySlice = createSlice({
       state.successP = null;
       state.errorP = null;
     },
+    setQuantity: (state, action) => {
+      state.quantity = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(purshaceProducts.pending, (state, action) => {
       state.successP = null;
       state.errorP = null;
-      state.loading = true;
+      state.loadingP = true;
     });
     builder.addCase(purshaceProducts.fulfilled, (state, action) => {
       state.errorP = null;
-      state.loading = false;
+      state.loadingP = false;
       state.successP = action.payload.message;
       console.log(action);
     });
@@ -52,5 +60,5 @@ const SupplySlice = createSlice({
     });
   },
 });
-export default SupplySlice.reducer;
-export const { resetL } = SupplySlice.actions;
+export default supplySlice.reducer;
+export const { resetL, setQuantity } = supplySlice.actions;
