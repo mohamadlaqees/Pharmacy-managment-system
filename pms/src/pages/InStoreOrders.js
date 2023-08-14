@@ -1,13 +1,15 @@
-import { Button, DatePicker, Dropdown, Pagination } from "antd";
+import { Button, DatePicker, Dropdown, Pagination , Spin} from "antd";
 import React, { useEffect, useState } from "react";
 import OrderCard from "../Components/OrderCard";
 import { Alert, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchInStoreOrders } from "../states/orderSlice";
+import { LoadingOutlined } from "@ant-design/icons";
 function InStoreOrders() {
   const [PageNumber, setPageNumber] = useState(1);
   const { userData } = useSelector((state) => state.authSlice);
-  const { total, orders } = useSelector((state) => state.orderReducer);
+  const { total, orders,orderLoading } = useSelector((state) => state.orderReducer);
+  
   const userId = userData.id; // authenticated Employee's id
   const dispatch = useDispatch();
   const items = ["Pending", "Review", "progressing", "Paid"].map(
@@ -29,7 +31,22 @@ function InStoreOrders() {
       console.log("userId is  not defined");
     }
   }, [PageNumber, dispatch, userId, total]);
-
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 24,
+      }}
+      spin
+    />
+  );
+  if (orderLoading) {
+    console.log("loading");
+    return (
+      <center className="d-flex justify-content-center   align-items-center">
+        <Spin indicator={antIcon} spinning={orderLoading} />
+      </center>
+    );
+  }
   return (
     <div>
       <Row className="d-flex justify-content-around mt-2 px-4">

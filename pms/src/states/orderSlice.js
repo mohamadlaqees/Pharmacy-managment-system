@@ -31,7 +31,7 @@ export const fetchInStoreOrders = createAsyncThunk(
 const orderSlice = createSlice({
   name: "orderSlice",
   initialState: {
-    orderLoading: false,
+    orderLoading: true,
     orderError: null,
     orderSuccess: null,
     orders: [],
@@ -48,14 +48,32 @@ const orderSlice = createSlice({
     builder.addCase(fetchAllOrders.fulfilled, (state, action) => {
       state.orders = action.payload.data;
       state.total = action.payload.meta.total;
-      // console.log(state.total);
-    });
+      state.orderError=false
+      state.orderLoading=false
+    }).addCase(fetchAllOrders.pending,(state,action)=>{
+      state.orderLoading=true
+      state.orderError=false
+      state.orders=[]
+    }).addCase(fetchAllOrders.rejected,(state,action)=>{
+      state.orderLoading=false
+      state.orderError=true
+      state.orders=[]
+    })
 
     builder.addCase(fetchInStoreOrders.fulfilled, (state, action) => {
       state.orders = action.payload.data;
       state.total = action.payload.meta.total;
-      // console.log(state.total);
-    });
+      state.orderError=false
+      state.orderLoading=false
+    }).addCase(fetchInStoreOrders.pending,(state,_)=>{
+      state.orderLoading=true
+      state.orderError=false
+      state.orders=[]
+    }).addCase(fetchInStoreOrders.rejected,(state,_)=>{
+      state.orderLoading=false
+      state.orderError=true
+      state.orders=[]
+    })
   },
 });
 export default orderSlice.reducer;
