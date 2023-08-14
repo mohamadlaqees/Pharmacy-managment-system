@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAccount,
+  getImage,
   getUserData,
   setAddress,
   setBirthDate,
@@ -20,7 +21,7 @@ import {
 import { logout } from "../states/loginSlice";
 
 function EditProfile() {
-  const { userData, successA, errorA, image } = useSelector(
+  const { userData, successA, errorA, image ,userId} = useSelector(
     (state) => state.authSlice
   );
   const navigate = useNavigate();
@@ -35,13 +36,14 @@ function EditProfile() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserData());
+    dispatch(getImage(userId));
     if (successA !== null) {
       msg("success", successA);
     }
     if (errorA !== null) {
       msg("error", errorA);
     }
-  }, [errorA, successA, dispatch]);
+  }, [errorA, successA, dispatch,userId]);
   const SignupSchema = Yup.object().shape({
     gender: Yup.string().required("Required"),
     firstName: Yup.string().required("Required").min(2, "Too Short!"),
@@ -69,7 +71,7 @@ function EditProfile() {
       firstName: userData.first_name,
       lastName: userData.last_name,
       gender: userData.gender,
-      budget: userData.money,
+      budget: userData.salary,
       mobile: userData.mobile,
       address: userData.address,
       date: userData.date_of_birth,
