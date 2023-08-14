@@ -38,8 +38,6 @@ export default function PhLogin() {
       dispatch(
         login({ email: formik.values.email, password: formik.values.password })
       );
-      navigate("/dashboard", { replace: true });
-
     },
   });
   React.useEffect(() => {
