@@ -1,8 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import ProductTile from "./ProductTile";
+import { Input } from "antd/lib";
 
-function OrderCard() {
+function OrderCard({
+  products = [],
+  status,
+  date,
+  time,
+  orderId,
+  total,
+  shipping_fees,
+  shipping_address,
+  userId,
+}) {
   const [expanded, setExpanded] = useState(false);
   const bodyRef = useRef(null);
 
@@ -25,10 +36,21 @@ function OrderCard() {
       <Card className="border-primary bg-light">
         <Card.Header className="text-center bg-light border-info">
           <Row>
-            <Col md={5}>Datete</Col>
-            <Col>cost</Col>
-            <Col>status</Col>
-            <Col md={1}>delet</Col>
+            <Col md={4}>{`${date}@${time}`}</Col>
+            <Col>Total: {total}</Col>
+            <Col>{status}</Col>
+            <Col>Fees: {shipping_fees}</Col>
+            <Col md={1}>
+              {console.log(products)}
+              <span>
+                <i
+                  className="far fa-trash-alt link-danger text-2xl"
+                  onClick={() => {
+                    //TODO: remove order
+                  }}
+                ></i>
+              </span>
+            </Col>
           </Row>
         </Card.Header>
         <Card.Body
@@ -39,12 +61,41 @@ function OrderCard() {
             overflow: "hidden",
           }}
         >
-          <ProductTile />
-          <ProductTile />
-          <ProductTile />
-          <ProductTile />
+          <Input
+            // onChange={}
+            disabled={status === "Review" ? false : true}
+            size="large"
+            className="my-1"
+            addonBefore="Shipping Address"
+            defaultValue={shipping_address}
+          />
+          {
+            products.map((product) => {
+              const data = {
+                subtotal: product.subtotal,
+                price:
+                  parseFloat(product.subtotal) / parseFloat(product.quantity),
+                quantity: product.quantity,
+                id: product.productId,
+              };
+              return (
+                <ProductTile
+                  ProductName={product.name}
+                  data={data}
+                  userId={userId}
+                  insideOrder={true}
+                />
+              );
+            })
+            // <ProductTile />
+            // <ProductTile />
+            // <ProductTile />
+          }
         </Card.Body>
-        <Card.Footer onClick={handleExpand} className="text-center shadow-sm bg-light ">
+        <Card.Footer
+          onClick={handleExpand}
+          className="text-center shadow-sm bg-light "
+        >
           {expanded ? (
             <i className="fa fa-chevron-circle-up link-primary" />
           ) : (

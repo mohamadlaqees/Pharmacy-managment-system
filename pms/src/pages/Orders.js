@@ -1,12 +1,30 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from "react";
-import { Alert, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Col, Row } from "react-bootstrap";
 import OrderCard from "../Components/OrderCard";
 import { useState } from "react";
+import { Pagination } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchAllOrders } from "../states/orderSlice";
 
-function Orders() {
+function MyOrders() {
   const [showDate, setShowDate] = useState(false);
   const [showstatuses, SetShowstatuses] = useState(false);
+  const [PageNumber, setPageNumber] = useState(1);
+  const { userData } = useSelector((state) => state.authSlice);
+  const { total, orders } = useSelector((state) => state.orderReducer);
+  const userId = userData.id;// authenticated Employee's id
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userId !== undefined) {
+      dispatch(fetchAllOrders({ PageNumber: PageNumber, userID: userId }));
+    }else{
+      console.log("userId is  not defined")
+    }
+  }, [PageNumber, dispatch, userId, total]);
+
   return (
     <div className="page">
       <Row>
@@ -21,7 +39,7 @@ function Orders() {
             Date
           </button>
           <div
-          className={`w-40 h-30 absolute rounded-md bg-slate-100 
+            className={`w-40 h-30 absolute rounded-md bg-slate-100 
           shadow-md transition duration-.2s overflow-auto ${
             showDate ? "opacity-100 visible z-10" : "opacity-0 invisible"
           } `}
@@ -49,7 +67,7 @@ function Orders() {
             Status
           </button>
           <div
-          className={`w-40 h-auto absolute rounded-md bg-slate-100 
+            className={`w-40 h-auto absolute rounded-md bg-slate-100 
           shadow-md transition duration-.2s overflow-auto ${
             showstatuses ? "opacity-100 visible z-10" : "opacity-0 invisible"
           } `}
@@ -68,29 +86,50 @@ function Orders() {
           </div>
         </Col>
         <Col xs={4}>
-        <InputGroup>
-        <InputGroup.Text
-          id="basic-addon1"
-          class="flex items-center justify-center  bg-secondry text-white p-2 rounded-md cursor-pointer hover:bg-blue-600 duration-.3s"
-        >
-          <i className="fas fa-search"></i>
-        </InputGroup.Text>
-        <Form.Control
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="basic-addon2"
-          style={{
-            boxShadow: "none",
-            border: "2px solid #0d6efc",
-          }}
-        /></InputGroup>
-
+          <Alert
+            className="d-flex justify-content-center align-items-center "
+            style={{ maxHeight: "40px" }}
+          >
+            username
+          </Alert>
         </Col>
       </Row>
-      <OrderCard />
-      <OrderCard />
+      {
+        console.log(orders)
+      }
+
+      {
+        //  <OrderCard products={5}  />
+        //map orders from slice
+        orders.map((data) => {
+          return (
+            <OrderCard
+              total={data.total}
+              status={data.status}
+              date={data.date}
+              time={data.time}
+              shipping_address={data.shipping_address}
+              orderId={data.order_id}
+              shipping_fees={data.shipping_fees}
+              products={data.products}
+              userId={data.cutormer_id}
+            />
+          );
+        })
+      }
+
+      <div className="d-flex justify-center mt-10">
+        <Pagination
+          current={PageNumber}
+          pageSize={10}
+          total={total}
+          onChange={(PN, _) => {
+            setPageNumber(PN);
+          }}
+        />
+      </div>
     </div>
   );
 }
 
-export default Orders;
+export default MyOrders;
