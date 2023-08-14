@@ -35,10 +35,9 @@ export default function PhLogin() {
     },
     validationSchema: SignupSchema,
     onSubmit: async () => {
-      // dispatch(
-      //   login({ email: formik.values.email, password: formik.values.password })
-      // );
-      navigate("dashboard", { replace: true });
+      dispatch(
+        login({ email: formik.values.email, password: formik.values.password })
+      );
     },
   });
   React.useEffect(() => {
