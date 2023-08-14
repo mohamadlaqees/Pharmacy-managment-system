@@ -1,5 +1,6 @@
-import React, { Fragment, useDispatch, useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { checkContext } from "../layout/Dashboard";
 import { resetA } from "../states/authSlice";
 import { logout, resetL } from "../states/loginSlice";
