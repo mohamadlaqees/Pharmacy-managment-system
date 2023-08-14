@@ -35,11 +35,9 @@ export default function PhLogin() {
     },
     validationSchema: SignupSchema,
     onSubmit: async () => {
-      // dispatch(
-      //   login({ email: formik.values.email, password: formik.values.password })
-      // );
-      navigate("/dashboard", { replace: true });
-
+      dispatch(
+        login({ email: formik.values.email, password: formik.values.password })
+      );
     },
   });
   React.useEffect(() => {
@@ -47,7 +45,7 @@ export default function PhLogin() {
       msg("success", successL);
       dispatch(getUserData());
       localStorage.setItem("email", formik.values.email);
-      navigate("/", { replace: true });
+      navigate("dashboard", { replace: true });
     }
     if (errorL !== null) {
       msg("error", errorL);
