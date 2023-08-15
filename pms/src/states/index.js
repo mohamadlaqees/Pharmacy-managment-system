@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
-import storeSlice from "./storeSlice";
+import storeSlice from "./StoreSlice";
 import ChartReducer from "./ChartSlice";
 import jobSlice from "./jobSlice";
-import supplySlice from "./supplySlice";
+import supplySlice from "./SupplySlice";
 import loginSlice from "./loginSlice";
 import orderReducer from "./orderSlice";
 const store = configureStore({

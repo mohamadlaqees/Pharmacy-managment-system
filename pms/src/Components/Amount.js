@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { InputNumber } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setQuantity } from "../states/supplySlice";
+import { setQuantity } from "../states/SupplySlice";
 
 const Amount = ({ show, id, setShow }) => {
   const { quantity } = useSelector((state) => state.supplySlice);

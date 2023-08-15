@@ -56,7 +56,7 @@ function SideBar() {
               </NavLink>
             </li>
             <li className={`link`}>
-              <NavLink className="route" to={"orders"}>
+              <NavLink className="route" to={"orders/all-orders"}>
                 <i className="fa-solid fa-list"></i> {check ? "" : "Orders"}
               </NavLink>
             </li>

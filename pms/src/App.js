@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Reports from "./pages/Reports";
@@ -21,6 +21,8 @@ import JobApplications from "./pages/JobApplications";
 import SupplyProducts from "./pages/SupplyProducts";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import OrderLayout from "./layout/OrderLayout";
+import InStoreOrders from "./pages/InStoreOrders";
 function App() {
   return (
     <div className="App">
@@ -50,7 +52,10 @@ function App() {
             path="supplierContent/SupplyProducts/:id"
             element={<SupplyProducts />}
           />
-          <Route path="orders" element={<Orders />} />
+          <Route path="orders" element={<OrderLayout />}>
+            <Route path="all-orders" element={<Orders/>} />
+            <Route path="in-store-orders" element={<InStoreOrders />} />
+          </Route>
           <Route path="profile" element={<Profile />} />
           <Route path="editProfile" element={<EditProfile />} />
         </Route>
