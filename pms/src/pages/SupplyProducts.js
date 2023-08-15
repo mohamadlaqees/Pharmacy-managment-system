@@ -117,7 +117,9 @@ function SupplyProducts() {
                   <div>
                     <Loading
                       loading={loadingP}
-                      clss={"pt-1 pb-1 pr-20 pl-20  mt-4 flex  border-main  border-2 text-main rounded-md  duration-.3s"}
+                      clss={
+                        "pt-1 pb-1 pr-20 pl-20  mt-4 flex  border-main  border-2 text-main rounded-md  duration-.3s"
+                      }
                     >
                       <button
                         type="submit"

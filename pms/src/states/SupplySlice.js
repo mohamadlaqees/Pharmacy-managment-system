@@ -7,6 +7,27 @@ const initialState = {
   quantity: 0,
 };
 
+export const getPricedProducts = createAsyncThunk(
+  "supply/getPricedProducts ",
+  async (id, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+      const { data } = await axios.post("products/prices", {
+          "products":
+          [
+              {
+                  "id": id
+              },
+                
+          ]
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const purshaceProducts = createAsyncThunk(
   "supply/purshaceProducts",
   async (item, thunkApi) => {
@@ -55,6 +76,22 @@ const supplySlice = createSlice({
       console.log(action);
     });
     builder.addCase(purshaceProducts.rejected, (state, action) => {
+      state.errorP = action.payload.response.data.message;
+      state.successP = null;
+    });
+
+    builder.addCase(getPricedProducts.pending, (state, action) => {
+      state.successP = null;
+      state.errorP = null;
+      state.loadingP = true;
+    });
+    builder.addCase(getPricedProducts.fulfilled, (state, action) => {
+      state.errorP = null;
+      state.loadingP = false;
+      // state.successP = action.payload.message;
+      console.log(action);
+    });
+    builder.addCase(getPricedProducts.rejected, (state, action) => {
       state.errorP = action.payload.response.data.message;
       state.successP = null;
     });
