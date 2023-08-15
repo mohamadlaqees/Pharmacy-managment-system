@@ -32,6 +32,20 @@ function EmployeesContent() {
             Job applications
           </NavLink>
         </div>
+        <div className="text-gray-500 text-2xl">/</div>
+        <div>
+          <NavLink
+            to={`addVacancy`}
+            className="w-72 h-form rounded-md pt-3 mb-3 cursor-pointer transition-all no-underline "
+            style={({ isActive, isPending }) => {
+              return {
+                color: isActive ? "blue" : "gray",
+              };
+            }}
+          >
+            Add vacancy
+          </NavLink>
+        </div>
       </div>
       <Outlet />
     </div>

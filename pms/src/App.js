@@ -23,6 +23,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import OrderLayout from "./layout/OrderLayout";
 import InStoreOrders from "./pages/InStoreOrders";
+import AddVacancy from "./pages/AddVacancy";
 function App() {
   return (
     <div className="App">
@@ -34,6 +35,7 @@ function App() {
           <Route path="employeesContent" element={<EmployeesContent />}>
             <Route path="" element={<Employees />} />
             <Route path="jobApplications" element={<JobApplications />} />
+            <Route path="addVacancy" element={<AddVacancy />} />
           </Route>
           <Route
             path="employeesContent/jobApplications/application/:id"
@@ -53,7 +55,7 @@ function App() {
             element={<SupplyProducts />}
           />
           <Route path="orders" element={<OrderLayout />}>
-            <Route path="all-orders" element={<Orders/>} />
+            <Route path="all-orders" element={<Orders />} />
             <Route path="in-store-orders" element={<InStoreOrders />} />
           </Route>
           <Route path="profile" element={<Profile />} />

@@ -57,12 +57,36 @@ export const acceptApplicant = createAsyncThunk(
     }
   }
 );
+
 export const deleteAppliaction = createAsyncThunk(
   "job/deleteAppliaction",
   async (id, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
       const { data } = await axios.delete(`applicant/${id}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addVaccancies = createAsyncThunk(
+  "job/addVaccancies",
+  async (item, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+      const { data } = await axios.post(`vacancy`, {
+        employee_id: item.id,
+        title: item.title,
+        description: item.desc,
+        type: item.type,
+        salary: item.salary,
+        posting_date: item.Pdate,
+        deadline: item.Ddate,
+        number_of_vacancies: item.nOfV,
+        status: item.status,
+      });
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -83,6 +107,22 @@ const jobSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(addVaccancies.pending, (state, action) => {
+      state.successJ = null;
+      state.errorJ = null;
+      state.loading = true;
+    });
+    builder.addCase(addVaccancies.fulfilled, (state, action) => {
+      state.errorJ = null;
+      state.loading = false;
+      console.log(action);
+    });
+    builder.addCase(addVaccancies.rejected, (state, action) => {
+      state.errorJ = action.response.data.message;
+      state.successJ = null;
+      console.log(action)
+    });
+
     builder.addCase(getJobAppliactions.pending, (state, action) => {
       state.successJ = null;
       state.errorJ = null;
@@ -94,6 +134,7 @@ const jobSlice = createSlice({
       state.applications = action.payload.Applicant;
     });
     builder.addCase(getJobAppliactions.rejected, (state, action) => {
+      state.errorJ = action.response.data.message;
       state.successJ = null;
     });
 
@@ -108,6 +149,7 @@ const jobSlice = createSlice({
       state.application = action.payload.Applicant;
     });
     builder.addCase(showAppliaction.rejected, (state, action) => {
+      state.errorJ = action.response.data.message;
       state.successJ = null;
     });
 
@@ -121,6 +163,7 @@ const jobSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(acceptApplicant.rejected, (state, action) => {
+      state.errorJ = action.response.data.message;
       state.successJ = null;
     });
 
@@ -135,6 +178,7 @@ const jobSlice = createSlice({
       state.CV = action.payload;
     });
     builder.addCase(getCV.rejected, (state, action) => {
+      state.errorJ = action.response.data.message;
       state.successJ = null;
     });
 
@@ -149,6 +193,7 @@ const jobSlice = createSlice({
       state.successJ = action.payload.success;
     });
     builder.addCase(deleteAppliaction.rejected, (state, action) => {
+      state.errorJ = action.response.data.message;
       state.successJ = null;
     });
   },
