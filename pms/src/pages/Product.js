@@ -3,10 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
-import { InputNumber, Rate } from "antd";
+import { InputNumber, Rate, Spin } from "antd";
 
 import { getProdcutDetails, getRate } from "../states/storeSlice";
 import { message } from "antd";
+import {
+  addProductToOrder,
+  deleteProductFromCurrentOrder,
+  inCurrentOrder,
+} from "../utils/AddToCurrentOrder";
+import { addItemToCurrentOrder } from "../states/orderSlice";
 
 function Product() {
   const { id } = useParams();
@@ -16,7 +22,18 @@ function Product() {
   const { details, success, error, numOfRate } = useSelector(
     (state) => state.storeSlice
   );
-
+  const { orderLoading } = useSelector((state) => state.orderReducer);
+  useEffect(() => {
+    console.log("order loading", orderLoading);
+  }, [orderLoading]);
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 24,
+      }}
+      spin
+    />
+  );
   const msg = (type, msg) => {
     switch (type) {
       case "success":
@@ -87,23 +104,44 @@ function Product() {
                 <div className="flex gap-3">
                   {currentOrderId ? (
                     <>
-                    
-                    <InputNumber
-                      min={1}
-                      max={10}
-                      defaultValue={1}
-                      // onChange={changeQuant}
-                      disabled={available ? false : true}
-                    />
-                      <button
-                        className="border-main   border-2  p-1 rounded
-                  duration-.25s  mx-sm-1 hover:bg-main hover:text-white"
-                        onClick={() => {
-                          //handel add to product
-                        }}
-                      >
-                        Add to order number {currentOrderId}
-                      </button>
+                      <InputNumber
+                        min={1}
+                        max={10}
+                        defaultValue={1}
+                        // onChange={changeQuant}
+                        disabled={available ? false : true}
+                      />
+
+                      {inCurrentOrder(details.id) ? (
+                        <Spin indicator={antIcon} spinning={orderLoading}>
+                          <button
+                            onClick={() => {
+                              deleteProductFromCurrentOrder(details.id);
+                            }}
+                            className="border-2 border-danger  hover:text-white hover:bg-danger  rounded-2 p-1"
+                          >
+                            Remove from order number {currentOrderId}
+                          </button>
+                        </Spin>
+                      ) : (
+                        <Spin indicator={antIcon} spinning={orderLoading}>
+                          {console.log("order Loaddign", orderLoading)}
+                          <button
+                            className="border-main   border-2  p-1 rounded
+                                  duration-.25s  mx-sm-1 hover:bg-main hover:text-white"
+                            onClick={() => {
+                              dispatch(
+                                addItemToCurrentOrder({
+                                  orderId: currentOrderId,
+                                  productId: details.id,
+                                })
+                              );
+                            }}
+                          >
+                            Add to order number {currentOrderId}
+                          </button>
+                        </Spin>
+                      )}
                     </>
                   ) : (
                     <span className="block text-center   w-64  p-1 bg-green-500 text-white rounded-md">
