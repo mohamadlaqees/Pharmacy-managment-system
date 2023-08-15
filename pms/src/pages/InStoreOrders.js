@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import OrderCard from "../Components/OrderCard";
 import { Alert, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchInStoreOrders } from "../states/orderSlice";
+import { createNewOrder, fetchInStoreOrders } from "../states/orderSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 function InStoreOrders() {
   const [PageNumber, setPageNumber] = useState(1);
@@ -26,7 +26,10 @@ function InStoreOrders() {
   );
   useEffect(() => {
     if (userId !== undefined) {
+      console.log("fetching orders")
       dispatch(fetchInStoreOrders( PageNumber));
+      console.log("fetched")
+
     } else {
       console.log("userId is  not defined");
     }
@@ -49,11 +52,12 @@ function InStoreOrders() {
   }
   return (
     <div>
-      <Row className="d-flex justify-content-around mt-2 px-4">
-        <Col xs={1} className="p-20px">
+      <Row className="d-flex justify-content-around mt-2  px-4">
+<Col md={1}></Col>
+        <Col  className="">
           <DatePicker size="large" style={{ width: "100%" }} />
         </Col>
-        <Col xs={5}>
+        <Col >
           <Dropdown
             menu={{
               items,
@@ -66,13 +70,22 @@ function InStoreOrders() {
             </Button>
           </Dropdown>
         </Col>
-        <Col xs={4}>
+        <Col >
           <Alert
             className="d-flex justify-content-center align-items-center "
             style={{ maxHeight: "40px" }}
           >
             username
           </Alert>
+        </Col>
+        <Col>
+        <button className="p-2 border-2 border-main bg-main text-white rounded-2"
+        onClick={()=>{
+          dispatch(createNewOrder())
+        }}
+        >
+        Add new order
+        </button>
         </Col>
       </Row>
       {console.log(orders)}
@@ -87,11 +100,8 @@ function InStoreOrders() {
               date={data.date}
               time={data.time}
               method={data.method}
-            //   shipping_address={data.shipping_address}
               orderId={data.order_id}
-            //   shipping_fees={data.shipping_fees}
               products={data.products}
-            //   userId={data.cutormer_id}
             />
           );
         })

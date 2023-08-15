@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import ProductTile from "./ProductTile";
 import { Input } from "antd/lib";
-
+import { useDispatch } from "react-redux";
+import { deleteInStoreOrder } from "../states/orderSlice";
 function OrderCard({
   products = [],
   status,
@@ -17,6 +18,10 @@ function OrderCard({
 }) {
   const [expanded, setExpanded] = useState(false);
   const bodyRef = useRef(null);
+  const dispatch=useDispatch()
+  const handleDeleteOrder= ()=>{
+    dispatch(deleteInStoreOrder(orderId))
+  }
 
   useEffect(() => {
     const cardBody = bodyRef.current;
@@ -52,7 +57,9 @@ function OrderCard({
                       : "disabled"
                   } text-2xl `}
                   onClick={() => {
-                    //TODO: remove order
+                    if(status === "Review" || status === "Progressing"){
+                      handleDeleteOrder()
+                    }
                   }}
                 ></i>
               </span>
