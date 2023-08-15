@@ -3,13 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
-import { Rate } from "antd";
+import { InputNumber, Rate } from "antd";
 
 import { getProdcutDetails, getRate } from "../states/StoreSlice";
 import { message } from "antd";
 
 function Product() {
   const { id } = useParams();
+  const currentOrderId = localStorage.getItem("currentOrderId");
   let available;
   const dispatch = useDispatch();
   const { details, success, error, numOfRate } = useSelector(
@@ -84,9 +85,31 @@ function Product() {
             <div className="flex gap-3 mt-3">
               {available ? (
                 <div className="flex gap-3">
-                  <span className="block text-center   w-64  p-1 bg-green-500 text-white rounded-md">
-                    Available
-                  </span>
+                  {currentOrderId ? (
+                    <>
+                    
+                    <InputNumber
+                      min={1}
+                      max={10}
+                      defaultValue={1}
+                      // onChange={changeQuant}
+                      disabled={available ? false : true}
+                    />
+                      <button
+                        className="border-main   border-2  p-1 rounded
+                  duration-.25s  mx-sm-1 hover:bg-main hover:text-white"
+                        onClick={() => {
+                          //handel add to product
+                        }}
+                      >
+                        Add to order number {currentOrderId}
+                      </button>
+                    </>
+                  ) : (
+                    <span className="block text-center   w-64  p-1 bg-green-500 text-white rounded-md">
+                      Available
+                    </span>
+                  )}
                 </div>
               ) : (
                 <div className="flex gap-3">
