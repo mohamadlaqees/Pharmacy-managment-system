@@ -7,15 +7,13 @@ import Loading from "../Components/loading";
 import { useDispatch, useSelector } from "react-redux";
 import { addVaccancies, resetJ } from "../states/jobSlice";
 import { useNavigate } from "react-router-dom";
-import Amount from "../Components/Amount";
 
 function AddVacancy() {
-  const { loading, successJ, errorJ, applications } = useSelector(
-    (state) => state.jobSlice
-  );
+  const { loading, successJ, errorJ } = useSelector((state) => state.jobSlice);
   const { userId } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   React.useEffect(() => {
     if (successJ !== null) {
       msg("success", "Your  application was sent");
@@ -88,11 +86,13 @@ function AddVacancy() {
       }
     },
   });
+
   const [Jtitle, setJTitle] = useState("");
   const [Jtype, setJType] = useState("");
   const [JStatus, setJStatus] = useState("");
   const [desc, setDesc] = useState("");
   const [nOfV, setNOfV] = useState("");
+
   function getItem(label, key, children, type) {
     return {
       key,
@@ -130,12 +130,14 @@ function AddVacancy() {
   const jobStatus = (item, key) => {
     setJStatus(item.key);
   };
+
   return (
     <div className="bg-white pt-4 pb-4 shadow-md h-fit rounded-md w-full mt-1 relative">
       <div className="absolute top-0 w-full p-1  bg-blue-600 text-white font-bold text-center rounded-md">
         Add vacancy
       </div>
       <div className="absolute bottom-0 w-full h-7  bg-blue-600 text-white font-bold text-center rounded-md"></div>
+
       <div className="bg-white rounded-md p-4 shadow-lg  ">
         <Form onSubmit={formik.handleSubmit}>
           <div className="flex gap-4">
@@ -288,6 +290,7 @@ function AddVacancy() {
               </div>
             </div>
           </div>
+
           <div className="flex mt-4 gap-2 ">
             <div className="d-grid  ">
               <Loading
