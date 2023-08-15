@@ -32,7 +32,7 @@ function Loading({ loading, children, clss }) {
     return loading ? (
       <span
         className={
-          "flex gap-2 items-center justify-center mt-2  text-gray-600  h-20 text-3xl "
+          "flex gap-2 items-center justify-center mt-3 mb-3  text-gray-600  h-20 text-3xl "
         }
       >
         <span>Loading</span>{" "}

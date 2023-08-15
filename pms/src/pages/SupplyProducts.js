@@ -1,26 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { LoadingOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
-
-import { getProdcutDetails, getRate } from "../states/StoreSlice";
+import { getProdcutDetails, getRate } from "../states/storeSlice";
 import { message } from "antd";
 import Amount from "../Components/Amount";
 import Loading from "../Components/loading";
-import { purshaceProducts } from "../states/SupplySlice";
+import {
+  getPricedProductsDetails,
+  purshaceProducts,
+} from "../states/supplySlice";
 
 function SupplyProducts() {
   const { id } = useParams();
-  let available;
   const dispatch = useDispatch();
-  const { details, success, error, numOfRate, loading } = useSelector(
-    (state) => state.storeSlice
-  );
-  const { successP, errorP, loadingP, quantity } = useSelector(
-    (state) => state.supplySlice
-  );
+  const { details, numOfRate } = useSelector((state) => state.storeSlice);
+  const { pricedProductsDetails, successP, errorP, loadingB, quantity } =
+    useSelector((state) => state.supplySlice);
   const { userId } = useSelector((state) => state.authSlice);
 
   const msg = (type, msg) => {
@@ -36,41 +33,40 @@ function SupplyProducts() {
     }
   };
   React.useEffect(() => {
-    if (success !== null) {
-      msg("success", `${success}`);
+    if (successP !== null) {
+      msg("success", `${successP}`);
     }
     if (successP !== null) {
       msg("success", `${successP}`);
     }
 
-    if (error !== null) {
-      msg("error", `${error}`);
+    if (errorP !== null) {
+      msg("error", `${errorP}`);
     }
     if (errorP !== null) {
       msg("error", `${errorP}`);
     }
-  }, [error, errorP, success, successP]);
+  }, [errorP, successP]);
 
   const [show1, setShow1] = useState(false);
   const [show3, setShow3] = useState(false);
 
   useEffect(() => {
+    dispatch(getPricedProductsDetails(+id));
     dispatch(getProdcutDetails(+id));
     if (localStorage.getItem("email")) {
       dispatch(getRate(+id));
     }
   }, [dispatch, id]);
-  if (details.availability) {
-    available = details.availability;
-  }
+
   const purchaseHandler = () => {
+    console.log(id, quantity, pricedProductsDetails.unit, userId);
     if (quantity < 10) {
-      console.log(id, quantity, details.dosageForm, userId);
       dispatch(
         purshaceProducts({
           pId: id,
           quantity,
-          type: details.dosageForm,
+          type: pricedProductsDetails.unit,
           eId: userId,
         })
       );
@@ -89,17 +85,27 @@ function SupplyProducts() {
             <div className="flex justify-between">
               <div>
                 <span className=" block text-sm text-font2">
-                  {details.labeller}
+                  {pricedProductsDetails?.labeller
+                    ? pricedProductsDetails?.labeller
+                    : details.labeller}
                 </span>
                 <span className=" text-font2">
-                  <span className="text-3xl">{details.name}</span>
+                  <span className="text-3xl">
+                    {pricedProductsDetails?.name
+                      ? pricedProductsDetails?.name
+                      : details.name}
+                  </span>
                 </span>
               </div>
               <Rate disabled value={numOfRate} />
             </div>
-            <span className=" mb-1 block mt-4 text-blue-600 text-xl">
-              {`${available ? `${details.price} $` : ""}`}
-            </span>
+            {pricedProductsDetails?.price ? (
+              <span className=" mb-1 block mt-4 text-blue-600 text-xl">
+                {`${pricedProductsDetails?.price} $`}
+              </span>
+            ) : (
+              ""
+            )}
             <div
               className={`h-fit max-h-80 cursor-pointer ${
                 !show3 ? "line-clamp-5" : "overflow-scroll"
@@ -108,37 +114,41 @@ function SupplyProducts() {
             >
               {details?.drug?.description}
             </div>
-            {available ? (
-              <div className="flex gap-5">
-                <div className="flex gap-3  mt-4">
-                  <span className="text-main mt-1"> Quantity: </span> <Amount />
-                </div>
-                <div>
-                  <div>
-                    <Loading
-                      loading={loadingP}
-                      clss={
-                        "pt-1 pb-1 pr-20 pl-20  mt-4 flex  border-main  border-2 text-main rounded-md  duration-.3s"
-                      }
-                    >
-                      <button
-                        type="submit"
-                        className="pt-1 pb-1 pr-20 pl-20  mt-4 border-main border-2 text-main rounded-md hover:text-white hover:bg-Hmain hover:border-Hmain duration-.3s"
-                        onClick={() => purchaseHandler()}
-                      >
-                        Purchase
-                      </button>
-                    </Loading>
+            <div className="flex gap-5">
+              {pricedProductsDetails?.price ? (
+                <>
+                  <div className="flex gap-3  mt-4">
+                    <span className="text-main mt-1"> Quantity: </span>{" "}
+                    <Amount />
                   </div>
+                  <div>
+                    <div>
+                      <Loading
+                        loading={loadingB}
+                        clss={
+                          "pt-1 pb-1 pr-20 pl-20  mt-4 flex  border-main  border-2 text-main rounded-md  duration-.3s"
+                        }
+                      >
+                        <button
+                          type="submit"
+                          className="pt-1 pb-1 pr-20 pl-20  mt-4 border-main border-2 text-main rounded-md hover:text-white hover:bg-Hmain hover:border-Hmain duration-.3s"
+                          onClick={() => purchaseHandler()}
+                        >
+                          Purchase
+                        </button>
+                      </Loading>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="flex gap-3">
+                  <span className="block text-center   w-64  p-1 bg-red-500 text-white rounded-md">
+                    Not available
+                  </span>
                 </div>
-              </div>
-            ) : (
-              <div className="flex gap-3 mt-4">
-                <span className="block text-center   w-64  p-1 bg-red-500 text-white rounded-md">
-                  Not available
-                </span>
-              </div>
-            )}
+              )}
+            </div>
+
             <div className="mt-5">
               <div className="menu" onClick={() => setShow1(!show1)}>
                 <div className="flex justify-between">
@@ -156,20 +166,36 @@ function SupplyProducts() {
                     {" "}
                     Dosage form :{" "}
                   </span>
-                  {details.dosageForm}{" "}
+                  {pricedProductsDetails?.dosage_form
+                    ? pricedProductsDetails?.dosage_form
+                    : details.dosageForm}{" "}
                 </div>
                 <div className="p-1">
                   <span className="text-blue-600 font-bold">Strength :</span>{" "}
-                  {details.strength}{" "}
+                  {pricedProductsDetails?.strength
+                    ? pricedProductsDetails?.strength
+                    : details.strength}{" "}
                 </div>
                 <div className="p-1">
                   <span className="text-blue-600 font-bold">Route :</span>{" "}
-                  {details.route}{" "}
+                  {pricedProductsDetails?.route
+                    ? pricedProductsDetails?.route
+                    : details.route}{" "}
                 </div>
                 <div className="p-1">
                   <span className="text-blue-600 font-bold">Otc :</span>{" "}
-                  {details.otc}{" "}
+                  {pricedProductsDetails?.otc
+                    ? pricedProductsDetails?.otc
+                    : details.otc}{" "}
                 </div>
+                {pricedProductsDetails?.unit ? (
+                  <div className="p-1">
+                    <span className="text-blue-600 font-bold">Unit :</span>{" "}
+                    {pricedProductsDetails?.unit}{" "}
+                  </div>
+                ) : (
+                  ""
+                )}
                 <div className="p-1">
                   <span className="text-blue-600 font-bold">Synonyms :</span>{" "}
                   {` ${details.synonyms ? details.synonyms[1] : ""} , ${

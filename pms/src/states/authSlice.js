@@ -154,7 +154,6 @@ export const setImage = createAsyncThunk(
   async (item, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      console.log(item.image);
       const { data } = await axios.post(
         `users/image`,
         {
@@ -421,7 +420,6 @@ const authSlice = createSlice({
       state.errorA = null;
       state.loadingA = false;
       state.successA = action.payload.message;
-      console.log(action);
     });
     builder.addCase(deleteAccount.rejected, (state, action) => {
       state.errorA = action.payload.response.data.message;

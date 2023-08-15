@@ -92,7 +92,6 @@ const jobSlice = createSlice({
       state.errorJ = null;
       state.loading = false;
       state.applications = action.payload.Applicant;
-      console.log(action);
     });
     builder.addCase(getJobAppliactions.rejected, (state, action) => {
       state.successJ = null;
@@ -107,7 +106,6 @@ const jobSlice = createSlice({
       state.errorJ = null;
       state.loading = false;
       state.application = action.payload.Applicant;
-      console.log(action);
     });
     builder.addCase(showAppliaction.rejected, (state, action) => {
       state.successJ = null;
@@ -121,7 +119,6 @@ const jobSlice = createSlice({
     builder.addCase(acceptApplicant.fulfilled, (state, action) => {
       state.errorJ = null;
       state.loading = false;
-      console.log(action);
     });
     builder.addCase(acceptApplicant.rejected, (state, action) => {
       state.successJ = null;
@@ -136,7 +133,6 @@ const jobSlice = createSlice({
       state.errorJ = null;
       state.loading = false;
       state.CV = action.payload;
-      console.log(action);
     });
     builder.addCase(getCV.rejected, (state, action) => {
       state.successJ = null;
@@ -151,7 +147,6 @@ const jobSlice = createSlice({
       state.errorJ = null;
       state.loading = false;
       state.successJ = action.payload.success;
-      console.log(action);
     });
     builder.addCase(deleteAppliaction.rejected, (state, action) => {
       state.successJ = null;
