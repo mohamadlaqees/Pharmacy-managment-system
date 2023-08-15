@@ -4,6 +4,7 @@ import ProductTile from "./ProductTile";
 import { Input } from "antd/lib";
 import { useDispatch } from "react-redux";
 import { deleteInStoreOrder } from "../states/orderSlice";
+import { useNavigate } from "react-router-dom";
 function OrderCard({
   products = [],
   status,
@@ -18,10 +19,11 @@ function OrderCard({
 }) {
   const [expanded, setExpanded] = useState(false);
   const bodyRef = useRef(null);
-  const dispatch=useDispatch()
-  const handleDeleteOrder= ()=>{
-    dispatch(deleteInStoreOrder(orderId))
-  }
+  const dispatch = useDispatch();
+  const handleDeleteOrder = () => {
+    dispatch(deleteInStoreOrder(orderId));
+  };
+  const navigate=useNavigate()
 
   useEffect(() => {
     const cardBody = bodyRef.current;
@@ -57,8 +59,8 @@ function OrderCard({
                       : "disabled"
                   } text-2xl `}
                   onClick={() => {
-                    if(status === "Review" || status === "Progressing"){
-                      handleDeleteOrder()
+                    if (status === "Review" || status === "Progressing") {
+                      handleDeleteOrder();
                     }
                   }}
                 ></i>
@@ -69,7 +71,6 @@ function OrderCard({
         <Card.Body
           ref={bodyRef}
           style={{
-            
             transition: "height .5s cubic-bezier(0, 1.33, 0.09, 0.99) 0s ",
             overflow: "hidden",
           }}
@@ -105,13 +106,36 @@ function OrderCard({
           })}
         </Card.Body>
         <Card.Footer
-          onClick={handleExpand}
-          className="text-center shadow-sm bg-light "
+          className={`d-flex
+        shadow-sm bg-light  align-items-center ${
+          status === "Review" || status === "Progressing"
+            ? " justify-content-between "
+            : "justify-content-end"
+        }`}
         >
+          <button
+            onClick={() => {
+              localStorage.setItem("currentOrderId", orderId);
+              navigate('/dashboard/store')
+            }}
+            className={`${
+              status === "Review" || status === "Progressing"
+                ? "p-2 border-2 border-main bg-main text-white rounded-2 "
+                : "d-none"
+            }`}
+          >
+            Add products to this order
+          </button>
           {expanded ? (
-            <i className="fa fa-chevron-circle-up link-primary" />
+            <i
+              className="fa fa-chevron-circle-up link-primary text-lg"
+              onClick={handleExpand}
+            />
           ) : (
-            <i className="fa fa-chevron-circle-down link-primary" />
+            <i
+              className="fa fa-chevron-circle-down link-primary text-lg"
+              onClick={handleExpand}
+            />
           )}
         </Card.Footer>
       </Card>
