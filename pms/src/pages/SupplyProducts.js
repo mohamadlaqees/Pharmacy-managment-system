@@ -60,7 +60,6 @@ function SupplyProducts() {
   }, [dispatch, id]);
 
   const purchaseHandler = () => {
-    console.log(id, quantity, pricedProductsDetails.unit, userId);
     if (quantity < 10) {
       dispatch(
         purshaceProducts({

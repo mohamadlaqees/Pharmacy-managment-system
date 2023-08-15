@@ -120,7 +120,6 @@ const jobSlice = createSlice({
     builder.addCase(addVaccancies.rejected, (state, action) => {
       state.errorJ = action.response.data.message;
       state.successJ = null;
-      console.log(action)
     });
 
     builder.addCase(getJobAppliactions.pending, (state, action) => {
@@ -176,6 +175,7 @@ const jobSlice = createSlice({
       state.errorJ = null;
       state.loading = false;
       state.CV = action.payload;
+      console.log(action);
     });
     builder.addCase(getCV.rejected, (state, action) => {
       state.errorJ = action.response.data.message;

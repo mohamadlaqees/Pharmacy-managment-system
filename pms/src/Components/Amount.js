@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { InputNumber } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantity } from "../states/supplySlice";

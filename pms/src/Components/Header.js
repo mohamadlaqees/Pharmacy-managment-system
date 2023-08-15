@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Rate } from "antd";
 import {
   getProdcut,
-  reset,
   setAvailability,
   setBrand,
   setCategory,
