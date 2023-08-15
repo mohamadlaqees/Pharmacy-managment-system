@@ -54,6 +54,7 @@ export const createNewOrder = createAsyncThunk(
     }
   }
 );
+// add item to order ( if method is storely instore store-item , else onlineorder store item)
 // TODO: fetch customer oreders
 // TODO: filter orders based on date and status
 

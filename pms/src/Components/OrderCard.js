@@ -44,7 +44,8 @@ function OrderCard({
       <Card className="border-primary bg-light">
         <Card.Header className="text-center bg-light border-info">
           <Row>
-            <Col md={4}>{`${date}@${time}`}</Col>
+          <Col md={1}>{orderId}</Col>
+            <Col md={3}>{`${date}@${time}`}</Col>
             <Col>Total: {total}</Col>
             <Col>{status}</Col>
             <Col>Fees: {shipping_fees}</Col>
