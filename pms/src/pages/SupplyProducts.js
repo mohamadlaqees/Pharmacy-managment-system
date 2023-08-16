@@ -32,6 +32,7 @@ function SupplyProducts() {
         return "";
     }
   };
+  
   React.useEffect(() => {
     if (successP !== null) {
       msg("success", `${successP}`);
@@ -73,6 +74,7 @@ function SupplyProducts() {
       msg("error", `You can't purchase this huge quantity`);
     }
   };
+
   return (
     <div className="page2">
       <div className="flex flex-wrap gap-5 justify-center items-center max-h-mCont">

@@ -13,6 +13,7 @@ export default function ForgotPassword() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   React.useEffect(() => {
     if (successA !== null) {
       msg("sucesss", successA);
@@ -23,6 +24,7 @@ export default function ForgotPassword() {
       }
     }
   }, [successA, errorA, navigate, dispatch]);
+
   const msg = (type, msg) => {
     switch (type) {
       case "sucesss":
@@ -47,6 +49,7 @@ export default function ForgotPassword() {
       dispatch(forgetPassword({ email: formik.values.email }));
     },
   });
+  
   return (
     <React.Fragment>
       <div className="flex justify-between">

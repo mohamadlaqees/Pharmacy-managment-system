@@ -150,6 +150,7 @@ const supplySlice = createSlice({
       state.errorP = null;
       state.loadingB = false;
       // state.successP = action.payload.message;
+      console.log(action);
     });
     builder.addCase(purshaceProducts.rejected, (state, action) => {
       state.errorP = action.payload.response.data.message;

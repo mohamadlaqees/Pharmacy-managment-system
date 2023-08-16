@@ -4,6 +4,7 @@ import { Rate } from "antd";
 
 function AllProducts({ data, img }) {
   const navigate = useNavigate();
+  
   return data.map((e, inx) => {
     return (
       <div

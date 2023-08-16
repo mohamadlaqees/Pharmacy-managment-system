@@ -28,10 +28,12 @@ function Supplier() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [PN, setPN] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const dataInPage = 15;
   const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     if (searchInput !== "") {
       dispatch(reset());
@@ -55,6 +57,7 @@ function Supplier() {
     otc,
     rating,
   ]);
+
   const onSearch = (value) => {
     setSearchInput(value);
     if (value) {
@@ -69,6 +72,7 @@ function Supplier() {
       onSearch(searchInput);
     }
   };
+
   return (
     <div>
       <div className="bg-white rounded-md p-8 w-full">

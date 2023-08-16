@@ -12,6 +12,7 @@ export default function PhLogin() {
   const { errorL, successL } = useSelector((state) => state.loginSlice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const SignupSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string().required("Required").min(8, "Too Short!"),
@@ -40,6 +41,7 @@ export default function PhLogin() {
       );
     },
   });
+
   React.useEffect(() => {
     if (successL !== null) {
       msg("success", successL);
@@ -51,6 +53,7 @@ export default function PhLogin() {
       msg("error", errorL);
     }
   }, [errorL, successL, dispatch, navigate, formik.values.email]);
+  
   return (
     <React.Fragment>
       <div className="flex justify-between">

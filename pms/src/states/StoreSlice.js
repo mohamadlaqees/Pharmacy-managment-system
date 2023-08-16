@@ -37,6 +37,7 @@ export const getProdcut = createAsyncThunk(
     }
   }
 );
+
 export const getProdcutDetails = createAsyncThunk(
   "store/getProdcutDetails",
   async (id, thunkApi) => {
@@ -64,6 +65,7 @@ export const addRate = createAsyncThunk(
     }
   }
 );
+
 export const getRate = createAsyncThunk(
   "store/getRate",
   async (id, thunkApi) => {
@@ -91,6 +93,7 @@ export const searchByName = createAsyncThunk(
     }
   }
 );
+
 export const searchByBrand = createAsyncThunk(
   "store/searchByBrand",
   async (obj, thunkApi) => {
@@ -105,6 +108,7 @@ export const searchByBrand = createAsyncThunk(
     }
   }
 );
+
 export const searchByCategories = createAsyncThunk(
   "store/searchByCategories",
   async (obj, thunkApi) => {
@@ -119,6 +123,7 @@ export const searchByCategories = createAsyncThunk(
     }
   }
 );
+
 export const searchByDosageForm = createAsyncThunk(
   "store/searchByDosageForm",
   async (obj, thunkApi) => {
@@ -133,6 +138,7 @@ export const searchByDosageForm = createAsyncThunk(
     }
   }
 );
+
 export const searchByRoute = createAsyncThunk(
   "store/searchByRoute",
   async (obj, thunkApi) => {
@@ -249,6 +255,7 @@ const storeSlice = createSlice({
     builder.addCase(addRate.rejected, (state, action) => {
       state.error = action.payload.response.data.message;
     });
+
     builder.addCase(getRate.pending, (state, action) => {
       state.error = null;
       state.loading = true;
@@ -343,6 +350,7 @@ const storeSlice = createSlice({
       state.loading = false;
       state.data = action.payload.data;
       state.total = action.payload.meta.total;
+      console.log(action);
     });
     builder.addCase(getFilteredProducts.rejected, (state, action) => {
       state.success = null;

@@ -18,6 +18,7 @@ export const login = createAsyncThunk("login/login", async (item, thunkApi) => {
     return rejectWithValue(error);
   }
 });
+
 export const logout = createAsyncThunk(
   "login/logout",
   async (item, thunkApi) => {

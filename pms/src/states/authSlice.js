@@ -20,6 +20,7 @@ export const verify = createAsyncThunk(
     }
   }
 );
+
 export const forgetPassword = createAsyncThunk(
   "auth/forgetPassword",
   async (item, thunkApi) => {
@@ -34,6 +35,7 @@ export const forgetPassword = createAsyncThunk(
     }
   }
 );
+
 export const resetPassword = createAsyncThunk(
   "auth/resetPassword",
   async (item, thunkApi) => {
@@ -51,6 +53,7 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
 export const getUserData = createAsyncThunk(
   "auth/getUserData",
   async (_, thunkApi) => {
@@ -78,6 +81,7 @@ export const setFirstName = createAsyncThunk(
     }
   }
 );
+
 export const setLastName = createAsyncThunk(
   "auth/setLastName",
   async (item, thunkApi) => {
@@ -92,6 +96,7 @@ export const setLastName = createAsyncThunk(
     }
   }
 );
+
 export const setGender = createAsyncThunk(
   "auth/setGender",
   async (item, thunkApi) => {
@@ -106,6 +111,7 @@ export const setGender = createAsyncThunk(
     }
   }
 );
+
 export const setMobile = createAsyncThunk(
   "auth/setMobile",
   async (item, thunkApi) => {
@@ -120,6 +126,7 @@ export const setMobile = createAsyncThunk(
     }
   }
 );
+
 export const setAddress = createAsyncThunk(
   "auth/setAddress",
   async (item, thunkApi) => {
@@ -134,6 +141,7 @@ export const setAddress = createAsyncThunk(
     }
   }
 );
+
 export const setBirthDate = createAsyncThunk(
   "auth/setBirthDate",
   async (item, thunkApi) => {

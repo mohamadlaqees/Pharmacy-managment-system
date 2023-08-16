@@ -15,8 +15,7 @@ import {
 } from "../states/storeSlice";
 function Store() {
   const {
-    error,
-    loading,
+
     data,
     total,
     name,
@@ -116,6 +115,7 @@ function Store() {
 
   const dataInPage = 15;
   const [currentPage, setCurrentPage] = useState(1);
+  
   return (
     <div className="page">
       <div className=" grid grid-cols-fluid grid-rows-fluid    ">

@@ -29,6 +29,7 @@ function Header({ set, check }) {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const [placeHolder, setPlaceHolder] = useState("Search");
   const [showF, setShowF] = useState(false);
   const [showS, setShowS] = useState(false);

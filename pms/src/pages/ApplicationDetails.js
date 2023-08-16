@@ -39,6 +39,7 @@ function ApplicationDetails() {
   const acceptHanlder = () => {
     dispatch(acceptApplicant(id));
   };
+  
   return (
     <div className="page">
       <div className="bg-white rounded-md p-4 ">

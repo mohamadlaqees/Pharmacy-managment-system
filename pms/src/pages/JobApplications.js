@@ -8,9 +8,11 @@ function JobApplications() {
   const { loading, applications } = useSelector(
     (state) => state.jobSlice
   );
+
   useEffect(() => {
     dispatch(getJobAppliactions());
   }, [dispatch]);
+  
   return (
     <div className="bg-white pt-4 pb-4 mt-1 shadow-md rounded-md w-full relative ">
       <div className="absolute top-0 w-full p-1  bg-blue-600 text-white font-bold text-center rounded-md">

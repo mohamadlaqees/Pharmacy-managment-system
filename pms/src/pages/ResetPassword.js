@@ -15,6 +15,7 @@ export default function ResetPassword() {
   const navigate = useNavigate();
   const { token } = useParams();
   const [searchParam] = useSearchParams();
+
   React.useEffect(() => {
     if (successA !== null) {
       navigate("/");
@@ -26,6 +27,7 @@ export default function ResetPassword() {
       }
     }
   }, [successA, errorA, navigate, dispatch]);
+
   const msg = (type, msg) => {
     switch (type) {
       case "sucesss":

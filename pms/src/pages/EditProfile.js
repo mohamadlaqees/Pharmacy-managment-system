@@ -24,6 +24,7 @@ function EditProfile() {
   const { userData, successA, errorA, image ,userId} = useSelector(
     (state) => state.authSlice
   );
+
   const navigate = useNavigate();
   const [userImage, setUserImage] = useState({ preview: image, raw: "" });
   const fName = useRef(userData.first_name);
@@ -33,7 +34,9 @@ function EditProfile() {
   const birthDate = useRef(userData.date_of_birth);
   const mobile = useRef(userData.mobile);
   const photo = useRef(image);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getUserData());
     dispatch(getImage(userId));
@@ -44,6 +47,7 @@ function EditProfile() {
       msg("error", errorA);
     }
   }, [errorA, successA, dispatch,userId]);
+
   const SignupSchema = Yup.object().shape({
     gender: Yup.string().required("Required"),
     firstName: Yup.string().required("Required").min(2, "Too Short!"),
@@ -131,6 +135,7 @@ function EditProfile() {
       }
     },
   });
+
   const handleChange = (e) => {
     if (e.target.files.length) {
       setUserImage({
@@ -149,6 +154,7 @@ function EditProfile() {
       "We are sorry to hear that you want to leave us. On the bright side,check your mail in case you want to restore your account."
     );
   };
+  
   return (
     <div className="page2">
       <Form onSubmit={formik.handleSubmit}>

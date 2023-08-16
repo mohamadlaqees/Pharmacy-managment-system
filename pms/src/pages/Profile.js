@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 function Profile() {
   const { userData, image } = useSelector((state) => state.authSlice);
+  
   return (
     <div className="page2">
       <div className="md:flex md:justify-center md:gap-4">

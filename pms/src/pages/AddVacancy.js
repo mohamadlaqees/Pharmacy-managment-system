@@ -24,6 +24,7 @@ function AddVacancy() {
       msg("error", errorJ);
     }
   }, [errorJ, successJ, navigate, dispatch]);
+
   const SignupSchema = Yup.object().shape({
     salary: Yup.number().required("Required"),
     Pdate: Yup.date().required("Required"),
@@ -101,6 +102,7 @@ function AddVacancy() {
       type,
     };
   }
+  
   const title = [
     getItem("Job title", "sub1", [
       getItem("Pharmacy employee", "Pharmacy employee"),

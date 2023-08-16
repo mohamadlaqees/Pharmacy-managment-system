@@ -6,6 +6,7 @@ import { message } from "antd";
 function AllApplications({ data }) {
   const { successJ, errorJ } = useSelector((state) => state.jobSlice);
   const dispatch = useDispatch();
+
   const msg = (type, msg) => {
     switch (type) {
       case "success":
@@ -18,6 +19,7 @@ function AllApplications({ data }) {
         return "";
     }
   };
+
   useEffect(() => {
     if (successJ !== null) {
       msg("success", `The application was deleted`);
@@ -30,6 +32,7 @@ function AllApplications({ data }) {
   const deleteHandler = (id) => {
     dispatch(deleteAppliaction(id));
   };
+
   return data.map((e, inx) => {
     return (
       <div

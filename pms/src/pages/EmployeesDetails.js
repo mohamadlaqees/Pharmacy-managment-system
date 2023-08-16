@@ -13,6 +13,7 @@ function EmployeesDetails() {
   const [Thursday, setThursday] = useState([]);
   const [Friday, setFriday] = useState([]);
   console.log(dayjs(Saturday[0]).format("HH:mm:ss"));
+  
   return (
     <div className="page flex gap-4">
       <div className="rounded-md bg-white shadow-md p-4 h-form w-64  mt-24  ">

@@ -23,11 +23,13 @@ function Product() {
   const currentOrderId = localStorage.getItem("currentOrderId");
   const storely = localStorage.getItem("Storely");
   let available;
+
   const dispatch = useDispatch();
   const { details, success, error, numOfRate } = useSelector(
     (state) => state.storeSlice
   );
   const { orderLoading } = useSelector((state) => state.orderReducer);
+
   useEffect(() => {
     console.log("order loading", orderLoading);
   }, [orderLoading]);
@@ -39,6 +41,7 @@ function Product() {
       spin
     />
   );
+
   const msg = (type, msg) => {
     switch (type) {
       case "success":
@@ -51,6 +54,7 @@ function Product() {
         return "";
     }
   };
+
   React.useEffect(() => {
     if (success !== null) {
       msg("success", `${success}`);
@@ -73,6 +77,7 @@ function Product() {
   if (details.availability) {
     available = details.availability;
   }
+  
   return (
     <div className="page2">
       <div className="flex flex-wrap gap-5 justify-center items-center max-h-mCont">

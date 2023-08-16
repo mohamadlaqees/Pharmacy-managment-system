@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink, Outlet } from "react-router-dom";
 
 function EmployeesContent() {
   return (

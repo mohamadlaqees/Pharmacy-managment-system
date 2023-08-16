@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { checkContext } from "../layout/Dashboard";
 import { resetA } from "../states/authSlice";
 import { logout, resetL } from "../states/loginSlice";
+
 function SideBar() {
   const check = useContext(checkContext);
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ function SideBar() {
     dispatch(resetL());
     localStorage.removeItem("email");
   };
+  
   return (
     <Fragment>
       <div
