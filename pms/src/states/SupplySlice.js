@@ -149,7 +149,7 @@ const supplySlice = createSlice({
     builder.addCase(purshaceProducts.fulfilled, (state, action) => {
       state.errorP = null;
       state.loadingB = false;
-      // state.successP = action.payload.message;
+      state.successP = action.payload.message;
       console.log(action);
     });
     builder.addCase(purshaceProducts.rejected, (state, action) => {

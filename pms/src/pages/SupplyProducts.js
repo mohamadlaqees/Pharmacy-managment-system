@@ -10,6 +10,7 @@ import Loading from "../Components/loading";
 import {
   getPricedProductsDetails,
   purshaceProducts,
+  resetL,
 } from "../states/supplySlice";
 
 function SupplyProducts() {
@@ -32,17 +33,10 @@ function SupplyProducts() {
         return "";
     }
   };
-  
+
   React.useEffect(() => {
     if (successP !== null) {
       msg("success", `${successP}`);
-    }
-    if (successP !== null) {
-      msg("success", `${successP}`);
-    }
-
-    if (errorP !== null) {
-      msg("error", `${errorP}`);
     }
     if (errorP !== null) {
       msg("error", `${errorP}`);
@@ -70,6 +64,7 @@ function SupplyProducts() {
           eId: userId,
         })
       );
+      dispatch(resetL());
     } else {
       msg("error", `You can't purchase this huge quantity`);
     }
