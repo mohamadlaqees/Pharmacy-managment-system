@@ -24,6 +24,7 @@ import ResetPassword from "./pages/ResetPassword";
 import OrderLayout from "./layout/OrderLayout";
 import InStoreOrders from "./pages/InStoreOrders";
 import AddVacancy from "./pages/AddVacancy";
+
 function App() {
   return (
     <div className="App">
@@ -46,21 +47,26 @@ function App() {
             element={<EmployeesDetails />}
           />
           <Route path="stock" element={<Stock />} />
+
           <Route path="supplierContent" element={<SupplierContent />}>
             <Route path="" element={<Supplier />} />
             <Route path="reports" element={<Reports />} />
           </Route>
+
           <Route
             path="supplierContent/SupplyProducts/:id"
             element={<SupplyProducts />}
           />
+
           <Route path="orders" element={<OrderLayout />}>
             <Route path="all-orders" element={<Orders />} />
             <Route path="in-store-orders" element={<InStoreOrders />} />
           </Route>
+          
           <Route path="profile" element={<Profile />} />
           <Route path="editProfile" element={<EditProfile />} />
         </Route>
+
         <Route path="/" element={<Login />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="password-reset/:token" element={<ResetPassword />} />
