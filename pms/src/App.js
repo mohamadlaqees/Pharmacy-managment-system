@@ -24,6 +24,7 @@ import ResetPassword from "./pages/ResetPassword";
 import OrderLayout from "./layout/OrderLayout";
 import InStoreOrders from "./pages/InStoreOrders";
 import AddVacancy from "./pages/AddVacancy";
+import ReportsDetails from "./pages/ReportsDetails";
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
             <Route path="addVacancy" element={<AddVacancy />} />
           </Route>
           <Route
-            path="employeesContent/jobApplications/application/:id"
+            path="employeesContent/jobApplications/:id"
             element={<ApplicationDetails />}
           />
           <Route
@@ -52,17 +53,18 @@ function App() {
             <Route path="" element={<Supplier />} />
             <Route path="reports" element={<Reports />} />
           </Route>
-
+          
           <Route
-            path="supplierContent/SupplyProducts/:id"
-            element={<SupplyProducts />}
+            path="supplierContent/reports/:id"
+            element={<ReportsDetails />}
           />
+          <Route path="supplierContent/:id" element={<SupplyProducts />} />
 
           <Route path="orders" element={<OrderLayout />}>
             <Route path="all-orders" element={<Orders />} />
             <Route path="in-store-orders" element={<InStoreOrders />} />
           </Route>
-          
+
           <Route path="profile" element={<Profile />} />
           <Route path="editProfile" element={<EditProfile />} />
         </Route>

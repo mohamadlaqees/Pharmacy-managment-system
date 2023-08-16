@@ -8,6 +8,8 @@ const initialState = {
   quantity: 0,
   pricedProducts: [],
   pricedProductsDetails: [],
+  purchases: [],
+  purchasesDetails: [],
   total: null,
 };
 
@@ -74,6 +76,32 @@ export const purshaceProducts = createAsyncThunk(
         employee_id: item.eId,
         pharmacy_id: 1,
       });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getPurchases = createAsyncThunk(
+  "supply/getPurchases ",
+  async (PN, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+      const { data } = await axios.get(`purchases?page=${PN}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getPurchasesDetails = createAsyncThunk(
+  "supply/getPurchasesDetails ",
+  async (id, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+      const { data } = await axios.get(`purchases/show/${id}`);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -153,6 +181,39 @@ const supplySlice = createSlice({
       console.log(action);
     });
     builder.addCase(purshaceProducts.rejected, (state, action) => {
+      state.errorP = action.payload.response.data.message;
+      state.successP = null;
+    });
+
+    builder.addCase(getPurchases.pending, (state, action) => {
+      state.successP = null;
+      state.errorP = null;
+      state.loadingP = true;
+    });
+    builder.addCase(getPurchases.fulfilled, (state, action) => {
+      state.errorP = null;
+      state.loadingP = false;
+      state.purchases = action.payload.data;
+      state.total = action.payload.meta.total;
+    });
+    builder.addCase(getPurchases.rejected, (state, action) => {
+      state.errorP = action.payload.response.data.message;
+      state.successP = null;
+    });
+
+    builder.addCase(getPurchasesDetails.pending, (state, action) => {
+      state.successP = null;
+      state.errorP = null;
+      state.loadingP = true;
+    });
+    builder.addCase(getPurchasesDetails.fulfilled, (state, action) => {
+      state.errorP = null;
+      state.loadingP = false;
+      state.successP = action.payload.message;
+      state.purchasesDetails = action.payload.data;
+      console.log(action);
+    });
+    builder.addCase(getPurchasesDetails.rejected, (state, action) => {
       state.errorP = action.payload.response.data.message;
       state.successP = null;
     });

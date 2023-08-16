@@ -7,6 +7,7 @@ const initialState = {
   userData: {},
   image: null,
   userId: null,
+  employeeName: null,
 };
 export const verify = createAsyncThunk(
   "auth/verify",
@@ -252,6 +253,7 @@ const authSlice = createSlice({
       state.loadingA = false;
       state.userData = action.payload;
       state.userId = action.payload.id;
+      state.employeeName = `${action.payload.first_name} ${action.payload.last_name}`;
     });
     builder.addCase(getUserData.rejected, (state, action) => {
       state.errorA = action.payload.message;

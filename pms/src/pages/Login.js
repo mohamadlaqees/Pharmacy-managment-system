@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../states/loginSlice";
 import { getImage, getUserData } from "../states/authSlice";
-export default function PhLogin() {
+
+export default function Login() {
   const { errorL, successL } = useSelector((state) => state.loginSlice);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ export default function PhLogin() {
       msg("error", errorL);
     }
   }, [errorL, successL, dispatch, navigate, formik.values.email]);
-  
+
   return (
     <React.Fragment>
       <div className="flex justify-between">

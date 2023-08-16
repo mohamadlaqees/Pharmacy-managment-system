@@ -72,7 +72,7 @@ function AllApplications({ data }) {
             <i class="fa-solid fa-trash"></i>
           </button>
           <Link
-            to={`application/${e.id}`}
+            to={`${e.id}`}
             className="text-gray-500 hover:text-gray-600 text-xl transition-all"
           >
             <i class="fas fa-folder-open"></i>{" "}

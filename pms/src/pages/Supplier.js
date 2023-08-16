@@ -10,6 +10,7 @@ import {
   getPricedProducts,
   searchPricedProdctsByName,
 } from "../states/supplySlice";
+
 function Supplier() {
   const {
     name,
@@ -26,6 +27,7 @@ function Supplier() {
   const { loadingP, pricedProducts, total } = useSelector(
     (state) => state.supplySlice
   );
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -131,9 +133,7 @@ function Supplier() {
                             className="fa-solid fa-arrow-right"
                             onClick={() =>
                               navigate(
-                                `SupplyProducts/${
-                                  id ? id : product_id ? product_id : ""
-                                }`
+                                `${id ? id : product_id ? product_id : ""}`
                               )
                             }
                           ></i>
