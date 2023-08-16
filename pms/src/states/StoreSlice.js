@@ -278,6 +278,7 @@ const storeSlice = createSlice({
       state.error = null;
       state.loading = false;
       state.data = action.payload.data;
+      console.log(action)
     });
     builder.addCase(searchByName.rejected, (state, action) => {
       state.error = action.payload.response.data.message;

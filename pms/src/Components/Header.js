@@ -29,7 +29,7 @@ function Header({ set, check }) {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [placeHolder, setPlaceHolder] = useState("Search");
   const [showF, setShowF] = useState(false);
   const [showS, setShowS] = useState(false);
@@ -225,7 +225,11 @@ function Header({ set, check }) {
     if (event.key === "Enter") {
       onSearch(searchInput);
       setCheckN(!checkN);
-      dispatch(setName());
+      dispatch(setName(true));
+      dispatch(setBrand(false));
+      dispatch(setCategory(false));
+      dispatch(setDosage(false));
+      dispatch(setRoute(false));
       setCheckB(false);
       setCheckC(false);
       setCheckD(false);

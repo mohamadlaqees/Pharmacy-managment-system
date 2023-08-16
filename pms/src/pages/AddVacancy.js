@@ -102,12 +102,12 @@ function AddVacancy() {
       type,
     };
   }
-  
+
   const title = [
     getItem("Job title", "sub1", [
       getItem("Pharmacy employee", "Pharmacy employee"),
       getItem("Manager", "Manager"),
-      getItem("Delivery Guy", "Delivery Guy"),
+      getItem("Delivery employee", "Delivery Guy"),
     ]),
   ];
   const types = [
