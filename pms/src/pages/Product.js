@@ -12,11 +12,16 @@ import {
   deleteProductFromCurrentOrder,
   inCurrentOrder,
 } from "../utils/AddToCurrentOrder";
-import { addItemToCurrentOrder } from "../states/orderSlice";
+import {
+  UpdateQuantity,
+  addItemToCurrentOrder,
+  deleteItemFromOrder,
+} from "../states/orderSlice";
 
 function Product() {
   const { id } = useParams();
   const currentOrderId = localStorage.getItem("currentOrderId");
+  const storely = localStorage.getItem("Storely");
   let available;
   const dispatch = useDispatch();
   const { details, success, error, numOfRate } = useSelector(
@@ -108,7 +113,15 @@ function Product() {
                         min={1}
                         max={10}
                         defaultValue={1}
-                        // onChange={changeQuant}
+                        onChange={(value) => {
+                          dispatch(
+                            UpdateQuantity({
+                              orderId: currentOrderId,
+                              quantity: value,
+                              productId: details.id,
+                            })
+                          ); 
+                        }}
                         disabled={available ? false : true}
                       />
 
@@ -116,9 +129,26 @@ function Product() {
                         <Spin indicator={antIcon} spinning={orderLoading}>
                           <button
                             onClick={() => {
-                              deleteProductFromCurrentOrder(details.id);
+                              if (storely) {
+                                console.log("storely");
+                                dispatch(
+                                  deleteItemFromOrder({
+                                    orderId: currentOrderId,
+                                    productId: details.id,
+                                    method: "Storely",
+                                  })
+                                );
+                              } else {
+                                dispatch(
+                                  deleteItemFromOrder({
+                                    orderId: currentOrderId,
+                                    productId: details.id,
+                                    method: "",
+                                  })
+                                );
+                              }
                             }}
-                            className="border-2 border-danger  hover:text-white hover:bg-danger  rounded-2 p-1"
+                            className="border-2 border-danger px-3 p-1 hover:text-white hover:bg-danger  rounded-2 p-1"
                           >
                             Remove from order number {currentOrderId}
                           </button>
@@ -127,9 +157,10 @@ function Product() {
                         <Spin indicator={antIcon} spinning={orderLoading}>
                           {console.log("order Loaddign", orderLoading)}
                           <button
-                            className="border-main   border-2  p-1 rounded
+                            className="border-main   border-2  px-3 p-1 rounded
                                   duration-.25s  mx-sm-1 hover:bg-main hover:text-white"
                             onClick={() => {
+                              // console.log(localStorage.getItem("currentOrderId"))
                               dispatch(
                                 addItemToCurrentOrder({
                                   orderId: currentOrderId,
