@@ -12,6 +12,7 @@ module.exports = {
         Hmain: "#1d4ed8",
         email: "#0270e9",
         SReg: "#52b0ed",
+        danger:'#ff0e0e',
       },
       height: {
         photo: "753px",

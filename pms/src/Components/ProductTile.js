@@ -2,8 +2,9 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { InputNumber } from "antd";
 // import { removeItem, updateQuantity } from "../states/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { UpdateQuantity, deleteItemFromOrder } from "../states/orderSlice";
 
 function ProductTile({ ProductName, data, userId, status }) {
   const dispatch = useDispatch();
@@ -43,11 +44,21 @@ function ProductTile({ ProductName, data, userId, status }) {
             >
               <div style={{ marginLeft: "5%" }}> {subtotal}</div>
               <InputNumber
-                // onChange={changeQuant}
+               onChange={(value) => {
+                dispatch(
+                  UpdateQuantity({
+                    orderId: data.orderId,
+                    quantity: value,
+                    productId: data.id,
+                  })
+                ); 
+              }}
                 min={1}
                 max={10}
                 defaultValue={data.quantity}
-                disabled={status === "Review" || status === "Progressing"?false:true}
+                disabled={
+                  status === "Review" || status === "Progressing" ? false : true
+                }
               />
               <span>
                 <i
@@ -57,7 +68,15 @@ function ProductTile({ ProductName, data, userId, status }) {
                       : "disabled"
                   } text-2xl `}
                   onClick={() => {
-                    //TODO: remove item form online order or in-store order
+                    if (status === "Review" || status === "Progressing") {
+                      dispatch(
+                        deleteItemFromOrder({
+                          orderId: data.orderId,
+                          productId: data.id,
+                          method: data.method,
+                        })
+                      );
+                    }
                   }}
                 ></i>
               </span>
