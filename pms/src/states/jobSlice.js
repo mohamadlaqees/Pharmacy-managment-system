@@ -35,16 +35,6 @@ export const showAppliaction = createAsyncThunk(
   }
 );
 
-export const getCV = createAsyncThunk("job/getCV", async (id, thunkApi) => {
-  const { rejectWithValue } = thunkApi;
-  try {
-    const { data } = await axios.get(`getFile/${id}`);
-    return data;
-  } catch (error) {
-    return rejectWithValue(error);
-  }
-});
-
 export const acceptApplicant = createAsyncThunk(
   "job/acceptApplicant",
   async (id, thunkApi) => {
@@ -162,22 +152,6 @@ const jobSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(acceptApplicant.rejected, (state, action) => {
-      state.errorJ = action.response.data.message;
-      state.successJ = null;
-    });
-
-    builder.addCase(getCV.pending, (state, action) => {
-      state.successJ = null;
-      state.errorJ = null;
-      state.loading = true;
-    });
-    builder.addCase(getCV.fulfilled, (state, action) => {
-      state.errorJ = null;
-      state.loading = false;
-      state.CV = action.payload;
-      console.log(action);
-    });
-    builder.addCase(getCV.rejected, (state, action) => {
       state.errorJ = action.response.data.message;
       state.successJ = null;
     });

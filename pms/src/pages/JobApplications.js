@@ -17,7 +17,7 @@ function JobApplications() {
         job applications
       </div>
       <div className="absolute bottom-0 w-full h-7  bg-blue-600 text-white font-bold text-center rounded-md"></div>
-      {applications.length > 0 ? (
+      {applications?.length > 0 ? (
         <Loading loading={loading}>
           <AllApplications data={applications} />
         </Loading>

@@ -2,34 +2,39 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { acceptApplicant, getCV, showAppliaction } from "../states/jobSlice";
+import axios from "../Components/axios";
+import { acceptApplicant, showAppliaction } from "../states/jobSlice";
 
 function ApplicationDetails() {
-  const [file, setFile] = useState();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const downloadFile = (fileName = "CV-PDF-file.pdf") => {
-    // fetch("https://cors-anywhere.herokuapp.com/" + filePath, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/pdf",
-    //   },
-    // })
-    //   .then((response) => response.blob())
-    //   .then((blob) => {
-    //     const url = window.URL.createObjectURL(new Blob([blob]));
-    //     const link = document.createElement("a");
-    //     link.href = url;
-    //     link.download = fileName;
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     link.parentNode.removeChild(link);
-    //   });
-  };
-  const { application, CV } = useSelector((state) => state.jobSlice);
+  const { application } = useSelector((state) => state.jobSlice);
+
+  async function axiosDownloadFile(url, fileName) {
+    try {
+      const response = await axios({
+        url,
+        method: "GET",
+        responseType: "blob",
+      });
+      const href = window.URL.createObjectURL(response.data);
+      const anchorElement = document.createElement("a");
+
+      anchorElement.href = href;
+      anchorElement.download = fileName;
+
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+
+      document.body.removeChild(anchorElement);
+      window.URL.revokeObjectURL(href);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
+
   useEffect(() => {
     dispatch(showAppliaction(id));
-    dispatch(getCV(id));
   }, [dispatch, id]);
   const acceptHanlder = () => {
     dispatch(acceptApplicant(id));
@@ -88,13 +93,10 @@ function ApplicationDetails() {
                   <button
                     type="submit"
                     className=" mt-3 w-64 p-1 m-2 border-blue-500 border-2 text-blue-500 rounded-md hover:text-white hover:bg-blue-500 hover:border-blue-500 duration-.3s  text-center"
-                    onClick={downloadFile()}
+                    onClick={() => axiosDownloadFile(`getFile/${id}`, "CV.pdf")}
                   >
                     Download CV{" "}
                   </button>
-                </div>
-                <div className="mt-1">
-                  {file && `${file.name} - ${file.type}`}
                 </div>
               </div>
             </div>
