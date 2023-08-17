@@ -85,10 +85,14 @@ export const purshaceProducts = createAsyncThunk(
 
 export const getPurchases = createAsyncThunk(
   "supply/getPurchases ",
-  async (PN, thunkApi) => {
+  async (item, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const { data } = await axios.get(`purchases?page=${PN}`);
+      const { data } = await axios.get(
+        `purchases?page=${item.PN}${
+          item.date !== "" ? `&date=${item.date}` : ""
+        } `
+      );
       return data;
     } catch (error) {
       return rejectWithValue(error);
