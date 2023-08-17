@@ -12,9 +12,9 @@ import { LoadingOutlined } from "@ant-design/icons";
 function MyOrders() {
   const [PageNumber, setPageNumber] = useState(1);
   const { userData } = useSelector((state) => state.authSlice);
-  const { total, orders } = useSelector((state) => state.orderReducer);
+  // const { total, orders } = useSelector((state) => state.orderReducer);
   const userId = userData.id; // authenticated Employee's id
-  const { orderLoading, orderError } = useSelector(
+  const { orderLoading, orderError, total, orders } = useSelector(
     (state) => state.orderReducer
   );
   const dispatch = useDispatch();
@@ -32,11 +32,13 @@ function MyOrders() {
   );
   useEffect(() => {
     if (userId !== undefined) {
-      dispatch(fetchAllOrders({ PageNumber: PageNumber, userID: userId }));
+      console.log("fetching all orders")
+      dispatch(fetchAllOrders( PageNumber));
+      console.log("fetched all orders")
     } else {
       console.log("userId is  not defined");
     }
-  }, [PageNumber, dispatch, userId]);
+  }, [PageNumber, dispatch, userId, total]);
   const antIcon = (
     <LoadingOutlined
       style={{

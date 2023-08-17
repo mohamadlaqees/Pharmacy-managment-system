@@ -3,7 +3,7 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import ProductTile from "./ProductTile";
 import { Input } from "antd/lib";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteInStoreOrder } from "../states/orderSlice";
+import { deleteInStoreOrder, deleteOnlineOrder } from "../states/orderSlice";
 import { useNavigate } from "react-router-dom";
 import { Spin } from "antd";
 function OrderCard({
@@ -23,7 +23,8 @@ function OrderCard({
   const dispatch = useDispatch();
   const { itemLoading } = useSelector((state) => state.orderReducer);
   const handleDeleteOrder = () => {
-    dispatch(deleteInStoreOrder(orderId));
+    if (method === "Storely") dispatch(deleteInStoreOrder(orderId));
+    else dispatch(deleteOnlineOrder(orderId));
   };
   const navigate = useNavigate();
   useEffect(() => {}, [itemLoading]);
@@ -54,7 +55,7 @@ function OrderCard({
             <Col>Fees: {shipping_fees}</Col>
             <Col>mehtod: {method}</Col>
             <Col md={1}>
-              {console.log(products)}
+            
               <span>
                 <i
                   className={`far fa-trash-alt ${
@@ -127,7 +128,7 @@ function OrderCard({
               if (method === "Storely") {
                 localStorage.setItem("Storely", true);
               } else {
-                localStorage.setItem("Storely", false);
+                localStorage.removeItem("Storely");
               }
               navigate("/dashboard/store");
             }}
