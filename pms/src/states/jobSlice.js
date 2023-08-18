@@ -14,7 +14,7 @@ export const getJobAppliactions = createAsyncThunk(
   async (item, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const { data } = await axios.get("applicant");
+      const { data } = await axios.get("applications/");
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -27,7 +27,7 @@ export const showAppliaction = createAsyncThunk(
   async (id, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const { data } = await axios.get(`applicant/${id}`);
+      const { data } = await axios.get(`applications/${id}`);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -40,7 +40,7 @@ export const acceptApplicant = createAsyncThunk(
   async (id, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const { data } = await axios.post(`/changeApplicantStatus/${id}`);
+      const { data } = await axios.put(`applications/accept/${id}`);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -48,12 +48,12 @@ export const acceptApplicant = createAsyncThunk(
   }
 );
 
-export const deleteAppliaction = createAsyncThunk(
-  "job/deleteAppliaction",
+export const rejectApplicant = createAsyncThunk(
+  "job/rejectApplicant",
   async (id, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const { data } = await axios.delete(`applicant/${id}`);
+      const { data } = await axios.put(`applications/reject/${id}`);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -66,16 +66,13 @@ export const addVaccancies = createAsyncThunk(
   async (item, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const { data } = await axios.post(`vacancy`, {
-        employee_id: item.id,
+      const { data } = await axios.post(`vacancies/store`, {
         title: item.title,
         description: item.desc,
         type: item.type,
         salary: item.salary,
-        posting_date: item.Pdate,
         deadline: item.Ddate,
         number_of_vacancies: item.nOfV,
-        status: item.status,
       });
       return data;
     } catch (error) {
@@ -91,6 +88,7 @@ const jobSlice = createSlice({
     resetJ: (state, action) => {
       state.successJ = null;
       state.errorJ = null;
+      state.loading = null;
     },
     setUserId: (state, action) => {
       state.userId = action.payload;
@@ -105,7 +103,7 @@ const jobSlice = createSlice({
     builder.addCase(addVaccancies.fulfilled, (state, action) => {
       state.errorJ = null;
       state.loading = false;
-      console.log(action);
+      state.successJ = action.payload.message;
     });
     builder.addCase(addVaccancies.rejected, (state, action) => {
       state.errorJ = action.response.data.message;
@@ -120,7 +118,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobAppliactions.fulfilled, (state, action) => {
       state.errorJ = null;
       state.loading = false;
-      state.applications = action.payload.Applicant;
+      state.applications = action.payload.data;
     });
     builder.addCase(getJobAppliactions.rejected, (state, action) => {
       state.errorJ = action.response.data.message;
@@ -135,7 +133,8 @@ const jobSlice = createSlice({
     builder.addCase(showAppliaction.fulfilled, (state, action) => {
       state.errorJ = null;
       state.loading = false;
-      state.application = action.payload.Applicant;
+      state.application = action.payload.data;
+      console.log(action);
     });
     builder.addCase(showAppliaction.rejected, (state, action) => {
       state.errorJ = action.response.data.message;
@@ -150,23 +149,25 @@ const jobSlice = createSlice({
     builder.addCase(acceptApplicant.fulfilled, (state, action) => {
       state.errorJ = null;
       state.loading = false;
+      state.successJ = action.payload.message;
+      console.log(action);
     });
     builder.addCase(acceptApplicant.rejected, (state, action) => {
       state.errorJ = action.response.data.message;
       state.successJ = null;
     });
 
-    builder.addCase(deleteAppliaction.pending, (state, action) => {
+    builder.addCase(rejectApplicant.pending, (state, action) => {
       state.successJ = null;
       state.errorJ = null;
       state.loading = true;
     });
-    builder.addCase(deleteAppliaction.fulfilled, (state, action) => {
+    builder.addCase(rejectApplicant.fulfilled, (state, action) => {
       state.errorJ = null;
       state.loading = false;
-      state.successJ = action.payload.success;
+      console.log(action);
     });
-    builder.addCase(deleteAppliaction.rejected, (state, action) => {
+    builder.addCase(rejectApplicant.rejected, (state, action) => {
       state.errorJ = action.response.data.message;
       state.successJ = null;
     });

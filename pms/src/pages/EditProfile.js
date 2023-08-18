@@ -74,7 +74,14 @@ function EditProfile() {
     initialValues: {
       firstName: userData.first_name,
       lastName: userData.last_name,
-      gender: userData.gender,
+      gender:
+        userData.gender === "1"
+          ? "Male"
+          : userData.gender === "2"
+          ? "Female"
+          : userData.gender === "3"
+          ? "I prefer not to say"
+          : userData.gender,
       budget: userData.salary,
       mobile: userData.mobile,
       address: userData.address,
@@ -148,6 +155,7 @@ function EditProfile() {
     dispatch(deleteAccount());
     dispatch(logout());
     localStorage.removeItem("email");
+    localStorage.removeItem('type')
     navigate("/ph-login");
     msg(
       "success",

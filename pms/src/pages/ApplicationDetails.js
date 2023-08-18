@@ -1,45 +1,62 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { message } from "antd";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from "../Components/axios";
-import { acceptApplicant, showAppliaction } from "../states/jobSlice";
+import Loading from "../Components/loading";
+import { acceptApplicant, resetJ, showAppliaction } from "../states/jobSlice";
+import { useNavigate } from "react-router-dom";
 
 function ApplicationDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { application } = useSelector((state) => state.jobSlice);
+  const { application, errorJ, successJ, loading } = useSelector(
+    (state) => state.jobSlice
+  );
+  const navigate = useNavigate();
 
-  async function axiosDownloadFile(url, fileName) {
-    try {
-      const response = await axios({
-        url,
-        method: "GET",
-        responseType: "blob",
-      });
-      const href = window.URL.createObjectURL(response.data);
-      const anchorElement = document.createElement("a");
+  const [show1, setShow1] = useState(true);
+  const [show2, setShow2] = useState(true);
 
-      anchorElement.href = href;
-      anchorElement.download = fileName;
-
-      document.body.appendChild(anchorElement);
-      anchorElement.click();
-
-      document.body.removeChild(anchorElement);
-      window.URL.revokeObjectURL(href);
-    } catch (error) {
-      console.log("error: ", error);
+  React.useEffect(() => {
+    if (successJ !== null) {
+      msg("success", successJ);
+      dispatch(resetJ());
+      navigate("dashboard/employeesContent/jobApplications");
     }
-  }
+    if (errorJ !== null) {
+      msg("error", errorJ);
+    }
+  }, [errorJ, successJ, navigate, dispatch]);
+
+  const msg = (type, msg) => {
+    switch (type) {
+      case "success":
+        message.success(msg);
+        break;
+      case "error":
+        message.error(msg);
+        break;
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
     dispatch(showAppliaction(id));
   }, [dispatch, id]);
+
   const acceptHanlder = () => {
+    setShow2(false);
+    dispatch(resetJ());
     dispatch(acceptApplicant(id));
   };
-  
+
+  const rejectHanlder = () => {
+    setShow1(false);
+    dispatch(resetJ());
+    dispatch(acceptApplicant(id));
+  };
+
   return (
     <div className="page">
       <div className="bg-white rounded-md p-4 ">
@@ -50,7 +67,7 @@ function ApplicationDetails() {
             </div>
             <span className="p-2 block text-center text-font2">Jop title:</span>
             <span className="p-2 block text-center text-secondry text-lg">
-              {application.vacancy_type === 1 ? "Pharmacy employee" : ""}
+              {application.vacancy}
             </span>
           </div>
           <div
@@ -61,7 +78,8 @@ function ApplicationDetails() {
               <div className="flex justify-between mb-4 border-b-2 border-slate-100 p-3 text-black">
                 <span className="block">Full name</span>
                 <span className="text-font2  w-72 flex flex-wrap">
-                  {application.first_name} {application.last_name}
+                  {application.applicantFirstName}{" "}
+                  {application.applicantFirstName}
                 </span>
               </div>
               <div className="flex justify-between mb-4 border-b-2 border-slate-100 p-3 text-black">
@@ -90,14 +108,16 @@ function ApplicationDetails() {
                   alt=""
                   className="mr-auto ml-auto rounded-md w-64 h-64"
                 />
-                <div>
-                  <button
-                    type="submit"
-                    className=" mt-3 w-64 p-1 m-2 border-blue-500 border-2 text-blue-500 rounded-md hover:text-white hover:bg-blue-500 hover:border-blue-500 duration-.3s  text-center"
-                    onClick={() => axiosDownloadFile(`getFile/${id}`, "CV.pdf")}
+                <div className=" mt-10 ">
+                  <a
+                    href={application.resume}
+                    download="Example-PDF-document"
+                    target="_blank"
+                    rel="noreferrer"
+                    className=" pt-2 pb-2 pr-10 pl-10 w-64  border-blue-500 border-2  rounded-md  hover:bg-blue-500 hover:text-white hover:border-blue-500 duration-.3s  text-center cursor-pointer no-underline"
                   >
-                    Download CV{" "}
-                  </button>
+                    Download cv
+                  </a>
                 </div>
               </div>
             </div>
@@ -105,21 +125,43 @@ function ApplicationDetails() {
         </div>
         <div className="flex mt-4 gap-2 ">
           <div className="d-grid  ">
-            <button
-              type="submit"
-              className="  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-green-500  rounded-md  hover:text-white hover:bg-green-500  duration-.3s  text-center"
-              onClick={() => acceptHanlder()}
+            <Loading
+              loading={loading}
+              error={errorJ}
+              clss={
+                "  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-green-500  rounded-md  hover:text-white hover:bg-green-500  duration-.3s  text-center"
+              }
             >
-              Acceptance{" "}
-            </button>
+              <button
+                type="submit"
+                className={` ${
+                  show1 ? "block" : "hidden"
+                }  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-green-500  rounded-md  hover:text-white hover:bg-green-500  duration-.3s  text-center`}
+                onClick={() => acceptHanlder()}
+              >
+                Acceptance{" "}
+              </button>
+            </Loading>
           </div>
+
           <div className="d-grid">
-            <button
-              type="submit"
-              className="  pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-red-500 rounded-md  hover:text-white hover:bg-red-500  duration-.3s  text-center"
+            <Loading
+              loading={loading}
+              error={errorJ}
+              clss={
+                "  pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-red-500 rounded-md  hover:text-white hover:bg-red-500  duration-.3s  text-center"
+              }
             >
-              Rejection{" "}
-            </button>
+              <button
+                type="submit"
+                className={`${
+                  show2 ? "block" : "hidden"
+                } pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-red-500 rounded-md  hover:text-white hover:bg-red-500  duration-.3s  text-center`}
+                onClick={() => rejectHanlder()}
+              >
+                Rejection{" "}
+              </button>
+            </Loading>
           </div>
         </div>
       </div>

@@ -50,6 +50,10 @@ function App() {
               path="employeesContent/details/:id"
               element={<EmployeesDetails />}
             />
+            <Route
+              path="dashboard/employeesContent/jobApplications"
+              element={<JobApplications />}
+            />
           </>
 
           <>

@@ -8,11 +8,13 @@ import { logout, resetL } from "../states/loginSlice";
 function SideBar() {
   const check = useContext(checkContext);
   const dispatch = useDispatch();
+
   const logoutHandler = () => {
     dispatch(logout());
     dispatch(resetA());
     dispatch(resetL());
     localStorage.removeItem("email");
+    localStorage.removeItem("type");
   };
 
   return (
@@ -39,19 +41,32 @@ function SideBar() {
                 {check ? "" : "Store"}
               </NavLink>
             </li>
-            <li className={`link`}>
+            <li
+              className={`link ${
+                localStorage.getItem("type") === "employee" ? "hidden" : "block"
+              }`}
+            >
               <NavLink className="route" to={"employeesContent"}>
                 <i className="fa-solid fa-users"></i>
                 {check ? "" : "Employees"}
               </NavLink>
             </li>
-            <li className={`link`}>
+            <li
+              className={`link 
+            ${
+              localStorage.getItem("type") === "employee" ? "hidden" : "block"
+            }`}
+            >
               <NavLink className="route" to={"stock"}>
                 <i className="fa-sharp fa-solid fa-layer-group"></i>
                 {check ? "" : "Stock"}
               </NavLink>
             </li>
-            <li className={`link`}>
+            <li
+              className={`link ${
+                localStorage.getItem("type") === "employee" ? "hidden" : "block"
+              }`}
+            >
               <NavLink className="route" to={"supplierContent"}>
                 <i class="fa-solid fa-truck"></i>
                 {check ? "" : "Supplier"}

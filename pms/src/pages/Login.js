@@ -6,11 +6,14 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout } from "../states/loginSlice";
-import { getImage, getUserData } from "../states/authSlice";
+import { login } from "../states/loginSlice";
+import { getUserData } from "../states/authSlice";
+import Loading from "../Components/loading";
 
 export default function Login() {
-  const { errorL, successL } = useSelector((state) => state.loginSlice);
+  const { errorL, successL, loading } = useSelector(
+    (state) => state.loginSlice
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -95,12 +98,15 @@ export default function Login() {
               />
             </Form.Group>
             <div className="d-grid gap-2 mb-8">
-              <button
-                type="submit"
-                className="p-1 border-main border-2 text-main rounded-md hover:text-white hover:bg-Hmain hover:border-Hmain duration-.3s"
-              >
-                Login
-              </button>
+              <Loading loading={loading} error={errorL}>
+                <button
+                  type="submit"
+                  className="p-1 border-main border-2 text-main rounded-md hover:text-white hover:bg-Hmain hover:border-Hmain duration-.3s"
+                >
+                  Login
+                </button>
+              </Loading>
+
               <span className=" block text-center text-main ">
                 <span>
                   <Link

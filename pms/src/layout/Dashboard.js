@@ -8,12 +8,15 @@ export const checkContext = React.createContext();
 const CheckProvider = checkContext.Provider;
 function Dashboard() {
   const { userId } = useSelector((state) => state.authSlice);
-  const [check, setCheck] = useState(false);
   const dispatch = useDispatch();
+
+  const [check, setCheck] = useState(false);
+
   useEffect(() => {
     dispatch(getUserData());
     dispatch(getImage(userId));
   }, [dispatch, userId]);
+  
   return (
     <Fragment>
       <div className="flex ">

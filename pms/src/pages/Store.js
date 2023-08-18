@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Pagination } from "antd";
+import { message, Pagination } from "antd";
 import AllProducts from "../Components/AllProducts";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +15,8 @@ import {
 } from "../states/storeSlice";
 function Store() {
   const {
-
+    success,
+    error,
     data,
     total,
     name,
@@ -33,22 +34,54 @@ function Store() {
   const dispatch = useDispatch();
   const [PN, setPN] = useState(1);
 
+  const msg = (type, msg) => {
+    switch (type) {
+      case "success":
+        message.success(msg);
+        break;
+      case "error":
+        message.error(msg);
+        break;
+      default:
+        return "";
+    }
+  };
+
+  React.useEffect(() => {
+    if (success !== null) {
+      msg("success", `${success}`);
+    }
+    if (error !== null) {
+      msg("error", `${error}`);
+    }
+  }, [success, error]);
+
   useEffect(() => {
     if (name === true && searchInput !== null) {
       dispatch(reset());
-      dispatch(searchByName({ PN, name: searchInput }));
+      setTimeout(() => {
+        dispatch(searchByName({ PN, name: searchInput }));
+      }, 500);
     } else if (brand === true && searchInput !== null) {
       dispatch(reset());
-      dispatch(searchByBrand({ PN, brand: searchInput }));
+      setTimeout(() => {
+        dispatch(searchByBrand({ PN, brand: searchInput }));
+      }, 500);
     } else if (category === true && searchInput !== null) {
       dispatch(reset());
-      dispatch(searchByCategories({ PN, category: searchInput }));
+      setTimeout(() => {
+        dispatch(searchByCategories({ PN, category: searchInput }));
+      }, 500);
     } else if (dosage === true && searchInput !== null) {
       dispatch(reset());
-      dispatch(searchByDosageForm({ PN, dosage: searchInput }));
+      setTimeout(() => {
+        dispatch(searchByDosageForm({ PN, dosage: searchInput }));
+      }, 500);
     } else if (route === true && searchInput !== null) {
       dispatch(reset());
-      dispatch(searchByRoute({ PN, route: searchInput }));
+      setTimeout(() => {
+        dispatch(searchByRoute({ PN, route: searchInput }));
+      }, 500);
     } else if (maxPrice > 0) {
       dispatch(
         getFilteredProducts({
@@ -57,7 +90,7 @@ function Store() {
           otc: otc !== null ? otc : "",
           maxPrice,
           minPrice,
-          rating: rating !== null ? rating : 0,
+          rating: rating !== null ? rating : "",
         })
       );
     } else if (availability !== null) {
@@ -68,7 +101,7 @@ function Store() {
           otc: otc !== null ? otc : "",
           maxPrice: maxPrice !== null ? maxPrice : "",
           minPrice: minPrice !== null ? minPrice : "",
-          rating: rating !== null ? rating : 0,
+          rating: rating !== null ? rating : "",
         })
       );
     } else if (otc !== null) {
@@ -79,7 +112,7 @@ function Store() {
           otc,
           maxPrice: maxPrice !== null ? maxPrice : "",
           minPrice: minPrice !== null ? minPrice : "",
-          rating: rating !== null ? rating : 0,
+          rating: rating !== null ? rating : "",
         })
       );
     } else if (rating > 0) {
@@ -115,7 +148,7 @@ function Store() {
 
   const dataInPage = 15;
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   return (
     <div className="page">
       <div className=" grid grid-cols-fluid grid-rows-fluid    ">

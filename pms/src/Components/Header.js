@@ -178,8 +178,8 @@ function Header({ set, check }) {
   const setHandler = () => {
     if (range[1] > 0) {
       setDisable(true);
-      dispatch(setMaxPrice(range[1]));
-      dispatch(setMinPrice(range[0]));
+      dispatch(setMaxPrice(+range[1]));
+      dispatch(setMinPrice(+range[0]));
     }
   };
   const resetHandler = () => {
@@ -209,7 +209,7 @@ function Header({ set, check }) {
     dispatch(setOtc(0));
   };
   const onChangeRa = (e) => {
-    dispatch(setRating(e));
+    e === 0 ? dispatch(setRating(null)) : dispatch(setRating(e));
   };
   const onSearch = (value) => {
     if (value) {

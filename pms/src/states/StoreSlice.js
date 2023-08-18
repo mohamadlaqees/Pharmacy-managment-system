@@ -296,6 +296,7 @@ const storeSlice = createSlice({
       state.data = action.payload.data;
     });
     builder.addCase(searchByBrand.rejected, (state, action) => {
+      state.error = action.payload.response.data.message;
       state.success = null;
     });
 
@@ -310,6 +311,7 @@ const storeSlice = createSlice({
       state.data = action.payload.data;
     });
     builder.addCase(searchByCategories.rejected, (state, action) => {
+      state.error = action.payload.response.data.message;
       state.success = null;
     });
 
@@ -324,6 +326,7 @@ const storeSlice = createSlice({
       state.data = action.payload.data;
     });
     builder.addCase(searchByDosageForm.rejected, (state, action) => {
+      state.error = action.payload.response.data.message;
       state.success = null;
     });
 
@@ -338,6 +341,7 @@ const storeSlice = createSlice({
       state.data = action.payload.data;
     });
     builder.addCase(searchByRoute.rejected, (state, action) => {
+      state.error = action.payload.response.data.message;
       state.success = null;
     });
 
@@ -354,6 +358,7 @@ const storeSlice = createSlice({
       console.log(action);
     });
     builder.addCase(getFilteredProducts.rejected, (state, action) => {
+      state.error = action.payload.response.data.message;
       state.success = null;
     });
   },

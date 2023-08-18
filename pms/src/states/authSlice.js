@@ -254,6 +254,7 @@ const authSlice = createSlice({
       state.userData = action.payload;
       state.userId = action.payload.id;
       state.employeeName = `${action.payload.first_name} ${action.payload.last_name}`;
+      localStorage.setItem("type", action.payload.type);
     });
     builder.addCase(getUserData.rejected, (state, action) => {
       state.errorA = action.payload.message;

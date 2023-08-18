@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import AllEmployee from "../Components/AllEmployee";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobAppliactions } from "../states/jobSlice";
+// import { getJobAppliactions } from "../states/jobSlice";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Components/loading";
 function Employees() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, errorJ, successJ, applications } = useSelector(
-    (state) => state.jobSlice
-  );
+  // const { loading, errorJ, successJ, applications } = useSelector(
+  //   (state) => state.jobSlice
+  // );
   useEffect(() => {
-    dispatch(getJobAppliactions());
+    // dispatch(getJobAppliactions());
   }, [dispatch]);
   return (
     <div>

@@ -2,7 +2,7 @@ import React from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
-function Loading({ loading, children, clss }) {
+function Loading({ loading, error, children, clss }) {
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -28,9 +28,9 @@ function Loading({ loading, children, clss }) {
         <Spin indicator={antIcon} />
       </span>
     );
-    return loading ? cloneButton : children;
+    return loading && !error ? cloneButton : children;
   } else {
-    return loading ? (
+    return loading && !error ? (
       <span
         className={
           "flex gap-2 items-center justify-center mt-3 mb-3  text-gray-600  h-20 text-3xl "

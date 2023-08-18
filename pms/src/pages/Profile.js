@@ -22,33 +22,41 @@ function Profile() {
         <div className=" ml-auto mr-auto rounded-md bg-white shadow-md p-3 w-96 md:w-form h-form  md:mt-24  md:ml-0 md:mr-0">
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block">Full name</span>
-            <span className="text-font2 md:mr-40 block">{`${userData.first_name} ${userData.last_name}`}</span>
+            <span className="text-font2  block">{`${userData.first_name} ${userData.last_name}`}</span>
           </div>
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block"> Email</span>
-            <span className="text-font2 md:mr-40 block">{`${userData.email}`}</span>
+            <span className="text-font2 block">{`${userData.email}`}</span>
           </div>
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block">Gender</span>
-            <span className="text-font2 md:mr-40 block">{`${userData.gender}`}</span>
+            <span className="text-font2  block">{`${
+              userData.gender === "1"
+                ? "Male"
+                : userData.gender === "2"
+                ? "Female"
+                : userData.gender === "3"
+                ? "I prefer not to say"
+                : userData.gender
+            }`}</span>
           </div>
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block"> Address</span>
-            <span className="text-font2 md:mr-40 block">{`${userData.address}`}</span>
+            <span className="text-font2  block">{`${userData.address}`}</span>
           </div>
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block"> Budget</span>
-            <span className="text-font2 md:mr-40 block">{`${userData.salary}`}</span>
+            <span className="text-font2  block">{`${userData.salary}`}</span>
           </div>
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block">Mobile</span>
-            <span className="text-font2 md:mr-40 block">{`${
+            <span className="text-font2  block">{`${
               userData.mobile ? userData.mobile : "No phone number"
             }`}</span>
           </div>
           <div className="flex justify-around mb-2  p-3 text-font1">
             <span className="block"> Birth date</span>
-            <span className="text-font2 md:mr-40 block">{`${userData.date_of_birth}`}</span>
+            <span className="text-font2  block">{`${userData.date_of_birth}`}</span>
           </div>
         </div>
       </div>

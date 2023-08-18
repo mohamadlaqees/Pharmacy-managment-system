@@ -5,21 +5,18 @@ import { getJobAppliactions } from "../states/jobSlice";
 import Loading from "../Components/loading";
 function JobApplications() {
   const dispatch = useDispatch();
-  const { loading, applications } = useSelector(
-    (state) => state.jobSlice
-  );
-
+  const { loading, applications } = useSelector((state) => state.jobSlice);
   useEffect(() => {
     dispatch(getJobAppliactions());
   }, [dispatch]);
-  
+
   return (
     <div className="bg-white pt-4 pb-4 mt-1 shadow-md rounded-md w-full relative ">
       <div className="absolute top-0 w-full p-1  bg-blue-600 text-white font-bold text-center rounded-md">
         job applications
       </div>
       <div className="absolute bottom-0 w-full h-7  bg-blue-600 text-white font-bold text-center rounded-md"></div>
-      {applications?.length > 0 ? (
+      {applications.length > 0 ? (
         <Loading loading={loading}>
           <AllApplications data={applications} />
         </Loading>
