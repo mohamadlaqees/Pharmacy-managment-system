@@ -160,12 +160,12 @@ function Product() {
                         </Spin>
                       ) : (
                         <Spin indicator={antIcon} spinning={orderLoading}>
-                          {console.log("order Loaddign", orderLoading)}
+                          {console.log("order Loadign", orderLoading)}
                           <button
                             className="border-main   border-2  px-3 p-1 rounded
                                   duration-.25s  mx-sm-1 hover:bg-main hover:text-white"
                             onClick={() => {
-                              // console.log(localStorage.getItem("currentOrderId"))
+                             
                               dispatch(
                                 addItemToCurrentOrder({
                                   orderId: currentOrderId,

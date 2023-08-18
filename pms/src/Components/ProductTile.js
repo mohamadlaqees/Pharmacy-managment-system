@@ -50,6 +50,7 @@ function ProductTile({ ProductName, data, userId, status }) {
                     orderId: data.orderId,
                     quantity: value,
                     productId: data.id,
+                    method:data.method
                   })
                 ); 
               }}

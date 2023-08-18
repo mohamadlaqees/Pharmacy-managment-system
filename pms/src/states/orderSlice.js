@@ -37,7 +37,7 @@ export const deleteInStoreOrder = createAsyncThunk(
   async (orderId, { rejectWithValue }) => {
     // console.log(item);
     try {
-      const { data } = await axios.delete(
+      await axios.delete(
         `/orders/in-store-orders/delete/${orderId}`
       );
       return orderId;
@@ -62,8 +62,13 @@ export const addItemToCurrentOrder = createAsyncThunk(
   async ({ orderId, productId }, { rejectWithValue }) => {
     console.log("orderId", orderId);
     try {
-      const s = await axios.post(
+      console.log(localStorage.getItem("Storely"))
+      if (localStorage.getItem("Storely"))
+      await axios.post(
         `/orders/in-store-orders/store/${orderId}/${productId}/?quantity=1`
+      );
+      else       await axios.post(
+        `/orders/online-orders/store/${orderId}/${productId}/?quantity=1`
       );
       return { orderId: orderId, productId: productId };
     } catch (error) {
@@ -75,14 +80,16 @@ export const addItemToCurrentOrder = createAsyncThunk(
 
 export const deleteItemFromOrder = createAsyncThunk(
   "deleteItemFromOrder",
-  async ({ orderId, productId, method }, { rejectWithValue }) => {
-    // console.log(item);
+  async ({ orderId, productId, method }, { rejectWithValue }) => {;
     try {
       if (method === "Storely")
         await axios.delete(
           `/orders/in-store-orders/remove/${orderId}/${productId}`
         );
-      else console.log("method is not Storely");
+      else
+        await axios.delete(
+          `/orders/online-orders/remove/${orderId}/${productId}`
+        );
       return productId;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -91,14 +98,32 @@ export const deleteItemFromOrder = createAsyncThunk(
 );
 export const UpdateQuantity = createAsyncThunk(
   "UpdateQuantity",
-  async ({ orderId, productId, quantity }, { rejectWithValue }) => {
+  async ({ orderId, productId, quantity ,method}, { rejectWithValue }) => {
     try {
-      if (localStorage.getItem("Storely"))
+      if (method==="Storely")
         await axios.put(
           `/orders/in-store-orders/update/${orderId}/${productId}?quantity=${quantity}`
         );
-      else console.log("method is not Storely");
+      else
+        await axios.put(
+          `/orders/online-orders/update/${orderId}/${productId}?quantity=${quantity}`
+        );
       return productId;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+//delete online order
+export const deleteOnlineOrder = createAsyncThunk(
+  "deleteOnlineOrder",
+  async (orderId, { rejectWithValue }) => {
+    // console.log(item);
+    try {
+      await axios.delete(
+        `/orders/online-orders/delete/${orderId}`
+      );
+      return orderId;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -179,6 +204,22 @@ const orderSlice = createSlice({
         state.orderLoading = false;
         state.orderError = true;
       });
+      // delete onine order
+      builder
+      .addCase(deleteOnlineOrder.fulfilled, (state, action) => {
+        removeOrder(action.payload); //action.payload is the order id
+        state.orderError = false;
+        state.orderLoading = false;
+        state.total -= 1;
+      })
+      .addCase(deleteOnlineOrder.pending, (state, _) => {
+        state.orderLoading = true;
+        state.orderError = false;
+      })
+      .addCase(deleteOnlineOrder.rejected, (state, _) => {
+        state.orderLoading = false;
+        state.orderError = true;
+      });
     //create new order
     builder
       .addCase(createNewOrder.fulfilled, (state, action) => {
@@ -233,7 +274,6 @@ const orderSlice = createSlice({
       .addCase(UpdateQuantity.fulfilled, (state, _) => {
         state.orderError = false;
         state.itemLoading = false;
-
       })
       .addCase(UpdateQuantity.pending, (state, _) => {
         state.itemLoading = true;
