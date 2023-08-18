@@ -49,7 +49,7 @@ export default function ForgotPassword() {
       dispatch(forgetPassword({ email: formik.values.email }));
     },
   });
-  
+
   return (
     <React.Fragment>
       <div className="flex justify-between">

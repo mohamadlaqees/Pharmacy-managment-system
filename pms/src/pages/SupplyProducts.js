@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Rate } from "antd";
@@ -11,6 +10,7 @@ import {
   getPricedProductsDetails,
   purshaceProducts,
   resetL,
+  setQuantity,
 } from "../states/supplySlice";
 
 function SupplyProducts() {
@@ -114,8 +114,8 @@ function SupplyProducts() {
               {pricedProductsDetails?.price ? (
                 <>
                   <div className="flex gap-3  mt-4">
-                    <span className="text-main mt-1"> Quantity: </span>{" "}
-                    <Amount />
+                    <span className="text-main "> Quantity: </span>{" "}
+                    <Amount value={quantity} show={true} change={setQuantity} />
                   </div>
                   <div>
                     <div>

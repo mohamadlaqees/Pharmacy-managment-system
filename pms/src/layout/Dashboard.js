@@ -13,7 +13,7 @@ function Dashboard() {
   useEffect(() => {
     dispatch(getUserData());
     dispatch(getImage(userId));
-  }, [dispatch,userId]);
+  }, [dispatch, userId]);
   return (
     <Fragment>
       <div className="flex ">

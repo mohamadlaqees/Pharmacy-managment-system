@@ -14,7 +14,7 @@ function SideBar() {
     dispatch(resetL());
     localStorage.removeItem("email");
   };
-  
+
   return (
     <Fragment>
       <div

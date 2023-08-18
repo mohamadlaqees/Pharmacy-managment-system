@@ -21,7 +21,7 @@ import {
 import { logout } from "../states/loginSlice";
 
 function EditProfile() {
-  const { userData, successA, errorA, image ,userId} = useSelector(
+  const { userData, successA, errorA, image, userId } = useSelector(
     (state) => state.authSlice
   );
 
@@ -46,7 +46,7 @@ function EditProfile() {
     if (errorA !== null) {
       msg("error", errorA);
     }
-  }, [errorA, successA, dispatch,userId]);
+  }, [errorA, successA, dispatch, userId]);
 
   const SignupSchema = Yup.object().shape({
     gender: Yup.string().required("Required"),
@@ -154,7 +154,7 @@ function EditProfile() {
       "We are sorry to hear that you want to leave us. On the bright side,check your mail in case you want to restore your account."
     );
   };
-  
+
   return (
     <div className="page2">
       <Form onSubmit={formik.handleSubmit}>
