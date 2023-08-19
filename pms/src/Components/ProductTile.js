@@ -44,43 +44,42 @@ function ProductTile({ ProductName, data, userId, status }) {
             >
               <div style={{ marginLeft: "5%" }}> {subtotal}</div>
               <InputNumber
-               onChange={(value) => {
-                dispatch(
-                  UpdateQuantity({
-                    orderId: data.orderId,
-                    quantity: value,
-                    productId: data.id,
-                    method:data.method
-                  })
-                ); 
-              }}
+                onChange={(value) => {
+                  dispatch(
+                    UpdateQuantity({
+                      orderId: data.orderId,
+                      quantity: value,
+                      productId: data.id,
+                      method: data.method,
+                    })
+                  );
+                }}
                 min={1}
                 max={10}
                 defaultValue={data.quantity}
-                disabled={
-                  status === "Review" || status === "Progressing" ? false : true
-                }
+                disabled={status === "Progressing" ? false : true}
               />
-              <span>
-                <i
-                  className={`far fa-trash-alt ${
-                    status === "Review" || status === "Progressing"
-                      ? "link-danger"
-                      : "disabled"
-                  } text-2xl `}
-                  onClick={() => {
-                    if (status === "Review" || status === "Progressing") {
-                      dispatch(
-                        deleteItemFromOrder({
-                          orderId: data.orderId,
-                          productId: data.id,
-                          method: data.method,
-                        })
-                      );
-                    }
-                  }}
-                ></i>
-              </span>
+              {data.method === "Storely" ? (
+                // <span>
+                //   <i
+                //     className={`far fa-trash-alt ${
+                //       status === "Progressing" ? "link-danger" : "d-none"
+                //     } text-2xl `}
+                //     onClick={() => {
+                //       if (status === "Progressing") {
+                //         dispatch(
+                //           deleteItemFromOrder({
+                //             orderId: data.orderId,
+                //             productId: data.id,
+                //             method: data.method,
+                //           })
+                //         );
+                //       }
+                //     }}
+                //   ></i>
+                // </span>
+                null
+              ) : null}
             </Col>
           </Row>
         </Container>

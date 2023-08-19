@@ -36,6 +36,21 @@ export function inCurrentOrder(productId) {
     return false; // Order doesn't exist, so product can't be in it
   }
 }
+export function isOrderInData(orderId) {
+  // Convert orderId to string for accessing the property
+  const orderIdString = String(orderId);
+
+  // Retrieve and parse the data from localStorage
+  const storedOrdersData = localStorage.getItem("ordersData");
+  const parsedOrders = storedOrdersData ? JSON.parse(storedOrdersData) : {};
+
+  // Check if the parsedOrders object has the given orderId
+  if (parsedOrders.hasOwnProperty(orderIdString)) {
+    return true; // Order exists in data
+  } else {
+    return false; // Order doesn't exist in data
+  }
+}
 export function deleteProductFromCurrentOrder(productId) {
   // Retrieve currentOrderId from localStorage
   const currentOrderId = parseInt(localStorage.getItem("currentOrderId"));
