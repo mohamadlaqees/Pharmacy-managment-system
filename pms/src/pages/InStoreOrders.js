@@ -33,11 +33,11 @@ function InStoreOrders() {
   });
   useEffect(() => {
     if (userId !== undefined) {
-      dispatch(fetchInStoreOrders({PageNumber,date,status}));
+      dispatch(fetchInStoreOrders({ PageNumber, date, status }));
     } else {
       console.log("userId is  not defined");
     }
-  }, [PageNumber, dispatch, userId, total,status,date]);
+  }, [PageNumber, dispatch, userId, total, status, date]);
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -59,21 +59,9 @@ function InStoreOrders() {
       <Row className="d-flex justify-content-around mt-2  px-4">
         <Col md={1}></Col>
         <Col className="">
-          <DatePicker size="large" style={{ width: "100%" }} />
+          {/* <DatePicker size="large" style={{ width: "100%" }} /> */}
         </Col>
-        <Col>
-          <Dropdown
-            menu={{
-              items,
-            }}
-            placement="bottom"
-            arrow
-          >
-            <Button size="large" className=" hover:text-white ">
-              Select Status
-            </Button>
-          </Dropdown>
-        </Col>
+        <Col></Col>
 
         <Col>
           <button

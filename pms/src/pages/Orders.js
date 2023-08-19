@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Button, DatePicker, Dropdown, Pagination, Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchAllOrders } from "../states/orderSlice";
+import { fetchAllOrders, fetchDeliveryBoys } from "../states/orderSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 
 function MyOrders() {
@@ -16,9 +16,10 @@ function MyOrders() {
   const [date, setdate] = useState("");
   // const { total, orders } = useSelector((state) => state.orderReducer);
   const userId = userData.id; // authenticated Employee's id
-  const { orderLoading, orderError, total, orders } = useSelector(
+  const { orderLoading, delivery_boys, total, orders } = useSelector(
     (state) => state.orderReducer
   );
+
   const dispatch = useDispatch();
   const items = ["Rejected", "Dispatched", "Review", "Progressing", "Paid"].map(
     (status1) => {
@@ -37,6 +38,13 @@ function MyOrders() {
       };
     }
   );
+
+  useEffect(() => {
+    if (userId !== undefined) {
+      dispatch(fetchDeliveryBoys());
+    }
+  }, [dispatch,userId]);
+
   useEffect(() => {
     if (userId !== undefined) {
       dispatch(
@@ -45,7 +53,7 @@ function MyOrders() {
     } else {
       console.log("userId is  not defined");
     }
-  }, [PageNumber, dispatch, userId, total, status,date]);
+  }, [PageNumber, dispatch, userId, total, status, date]);
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -62,10 +70,11 @@ function MyOrders() {
       </center>
     );
   }
-
+  console.log("delivery_boys", delivery_boys);
   return (
     <>
       <Row className="d-flex justify-content-around mt-2 px-4">
+        <Col md={1}></Col>
         <Col xs={1} className="p-20px">
           <DatePicker
             size="large"
@@ -74,6 +83,8 @@ function MyOrders() {
               setdate(dateString);
             }}
           />
+        </Col>
+        <Col md={2}>
         </Col>
         <Col xs={5}>
           <Dropdown
@@ -88,18 +99,8 @@ function MyOrders() {
             </Button>
           </Dropdown>
         </Col>
-        <Col xs={4}>
-          <Alert
-            className="d-flex justify-content-center align-items-center "
-            style={{ maxHeight: "40px" }}
-          >
-            username
-          </Alert>
-        </Col>
       </Row>
       {
-        //  <OrderCard products={5}  />
-        // map orders from slice
         orders.map((data) => {
           return (
             <OrderCard
@@ -114,6 +115,7 @@ function MyOrders() {
               userId={data.cutormer_id}
               method={data.method}
               imgs={data.prescriptions}
+              delivery_boys={delivery_boys}
             />
           );
         })
