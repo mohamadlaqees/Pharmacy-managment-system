@@ -21,7 +21,7 @@ function ApplicationDetails() {
     if (successJ !== null) {
       msg("success", successJ);
       dispatch(resetJ());
-      navigate("dashboard/employeesContent/jobApplications");
+      navigate("/dashboard/employeesContent/jobApplications");
     }
     if (errorJ !== null) {
       msg("error", errorJ);
@@ -135,7 +135,7 @@ function ApplicationDetails() {
               <button
                 type="submit"
                 className={` ${
-                  show1 ? "block" : "hidden"
+                  show1 === true ? "block" : "hidden"
                 }  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-green-500  rounded-md  hover:text-white hover:bg-green-500  duration-.3s  text-center`}
                 onClick={() => acceptHanlder()}
               >
@@ -155,7 +155,7 @@ function ApplicationDetails() {
               <button
                 type="submit"
                 className={`${
-                  show2 ? "block" : "hidden"
+                  show2 === true ? "block" : "hidden"
                 } pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-red-500 rounded-md  hover:text-white hover:bg-red-500  duration-.3s  text-center`}
                 onClick={() => rejectHanlder()}
               >

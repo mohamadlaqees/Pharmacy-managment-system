@@ -14,7 +14,7 @@ function SideBar() {
     dispatch(resetA());
     dispatch(resetL());
     localStorage.removeItem("email");
-    localStorage.removeItem("type");
+    localStorage.removeItem("role");
   };
 
   return (
@@ -43,7 +43,9 @@ function SideBar() {
             </li>
             <li
               className={`link ${
-                localStorage.getItem("type") === "employee" ? "hidden" : "block"
+                localStorage.getItem("role") === "pharmacist"
+                  ? "hidden"
+                  : "block"
               }`}
             >
               <NavLink className="route" to={"employeesContent"}>
@@ -54,7 +56,7 @@ function SideBar() {
             <li
               className={`link 
             ${
-              localStorage.getItem("type") === "employee" ? "hidden" : "block"
+              localStorage.getItem("role") === "pharmacist" ? "hidden" : "block"
             }`}
             >
               <NavLink className="route" to={"stock"}>
@@ -64,7 +66,9 @@ function SideBar() {
             </li>
             <li
               className={`link ${
-                localStorage.getItem("type") === "employee" ? "hidden" : "block"
+                localStorage.getItem("role") === "pharmacist"
+                  ? "hidden"
+                  : "block"
               }`}
             >
               <NavLink className="route" to={"supplierContent"}>
