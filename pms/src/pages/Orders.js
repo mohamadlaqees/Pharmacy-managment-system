@@ -12,19 +12,26 @@ import { LoadingOutlined } from "@ant-design/icons";
 function MyOrders() {
   const [PageNumber, setPageNumber] = useState(1);
   const { userData } = useSelector((state) => state.authSlice);
+  const [status, setstatus] = useState("ALL");
+  const [date, setdate] = useState("");
   // const { total, orders } = useSelector((state) => state.orderReducer);
   const userId = userData.id; // authenticated Employee's id
   const { orderLoading, orderError, total, orders } = useSelector(
     (state) => state.orderReducer
   );
   const dispatch = useDispatch();
-  const items = ["Pending", "Review", "progressing", "Paid"].map(
-    (statistic) => {
+  const items = ["Rejected", "Dispatched", "Review", "Progressing", "Paid"].map(
+    (status1) => {
       return {
-        key: statistic,
+        key: status1,
         label: (
-          <li key={statistic} onClick={() => {}}>
-            {statistic.toUpperCase()}
+          <li
+            key={status1}
+            onClick={() => {
+              setstatus(status1);
+            }}
+          >
+            {status1.toUpperCase()}
           </li>
         ),
       };
@@ -32,13 +39,13 @@ function MyOrders() {
   );
   useEffect(() => {
     if (userId !== undefined) {
-      console.log("fetching all orders")
-      dispatch(fetchAllOrders( PageNumber));
-      console.log("fetched all orders")
+      dispatch(
+        fetchAllOrders({ PageNumber: PageNumber, status: status, date: date })
+      );
     } else {
       console.log("userId is  not defined");
     }
-  }, [PageNumber, dispatch, userId, total]);
+  }, [PageNumber, dispatch, userId, total, status,date]);
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -56,67 +63,74 @@ function MyOrders() {
     );
   }
 
-    return (
-      <>
-        <Row className="d-flex justify-content-around mt-2 px-4">
-          <Col xs={1} className="p-20px">
-            <DatePicker size="large" style={{ width: "100%" }} />
-          </Col>
-          <Col xs={5}>
-            <Dropdown
-              menu={{
-                items,
-              }}
-              placement="bottom"
-              arrow
-            >
-              <Button size="large" className=" hover:text-white ">
-                Select Status
-              </Button>
-            </Dropdown>
-          </Col>
-          <Col xs={4}>
-            <Alert
-              className="d-flex justify-content-center align-items-center "
-              style={{ maxHeight: "40px" }}
-            >
-              username
-            </Alert>
-          </Col>
-        </Row>
-        {
-          //  <OrderCard products={5}  />
-          // map orders from slice
-          orders.map((data) => {
-            return (
-              <OrderCard
-                total={data.total}
-                status={data.status}
-                date={data.date}
-                time={data.time}
-                shipping_address={data.shipping_address}
-                orderId={data.order_id}
-                shipping_fees={data.shipping_fees}
-                products={data.products}
-                userId={data.cutormer_id}
-                method={data.method}
-              />
-            );
-          })
-        }
-
-        <div className="d-flex justify-center mt-10">
-          <Pagination
-            current={PageNumber}
-            pageSize={10}
-            total={total}
-            onChange={(PN, _) => {
-              setPageNumber(PN);
+  return (
+    <>
+      <Row className="d-flex justify-content-around mt-2 px-4">
+        <Col xs={1} className="p-20px">
+          <DatePicker
+            size="large"
+            style={{ width: "100%" }}
+            onChange={(date, dateString) => {
+              setdate(dateString);
             }}
           />
-        </div>
-      </>
-    );
+        </Col>
+        <Col xs={5}>
+          <Dropdown
+            menu={{
+              items,
+            }}
+            placement="bottom"
+            arrow
+          >
+            <Button size="large" className=" hover:text-white ">
+              Select Status
+            </Button>
+          </Dropdown>
+        </Col>
+        <Col xs={4}>
+          <Alert
+            className="d-flex justify-content-center align-items-center "
+            style={{ maxHeight: "40px" }}
+          >
+            username
+          </Alert>
+        </Col>
+      </Row>
+      {
+        //  <OrderCard products={5}  />
+        // map orders from slice
+        orders.map((data) => {
+          return (
+            <OrderCard
+              total={data.total}
+              status={data.status}
+              date={data.date}
+              time={data.time}
+              shipping_address={data.shipping_address}
+              orderId={data.order_id}
+              shipping_fees={data.shipping_fees}
+              products={data.products}
+              userId={data.cutormer_id}
+              method={data.method}
+              imgs={data.prescriptions}
+            />
+          );
+        })
+      }
+
+      <div className="d-flex justify-center mt-10">
+        <Pagination
+          current={PageNumber}
+          pageSize={10}
+          total={total}
+          onChange={(PN, _) => {
+            setPageNumber(PN);
+          }}
+        />
+      </div>
+    </>
+  );
 }
 
 export default MyOrders;

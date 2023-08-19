@@ -11,8 +11,26 @@ export const fetchAllOrders = createAsyncThunk(
   async (item, { rejectWithValue }) => {
     // console.log(item);
     try {
-      const { data } = await axios.get(`/orders`);
-      return data;
+      var resp;
+      if (item.status !== "ALL" && item.date !== "") {
+        resp = await axios.get(
+          `/orders?page=${item.PageNumber}&date=${item.date}&status=${item.staus}`
+        );
+      } else if (item.status !== "ALL" && item.date === "") {
+        console.log(`/orders?page=${item.PageNumber}&status=${item.status}`);
+        resp = await axios.get(
+          `/orders?page=${item.PageNumber}&status=${item.status}`
+        );
+        console.log("response", resp);
+      } else if (item.status === "ALL" && item.date !== "") {
+        resp = await axios.get(
+          `/orders?page=${item.PageNumber}&date=${item.date}`
+        );
+      } else {
+        resp = await axios.get(`/orders?page=${item.PageNumber}`);
+      }
+      console.log("resp", resp);
+      return resp.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -20,13 +38,29 @@ export const fetchAllOrders = createAsyncThunk(
 );
 export const fetchInStoreOrders = createAsyncThunk(
   "fetchInStoreOrders",
-  async (PageNumber, { rejectWithValue }) => {
-    // console.log(item);
+  async (item, { rejectWithValue }) => {
+    // console.log(item);  `/orders/in-store-orders/index-desc?${PageNumber}`
     try {
-      const { data } = await axios.get(
-        `/orders/in-store-orders/index-desc?${PageNumber}`
-      );
-      return data;
+      var resp;
+      if (item.status !== "ALL" && item.date !== "") {
+        resp = await axios.get(
+          `/orders/in-store-orders/index-desc?page=${item.PageNumber}&date=${item.date}&status=${item.staus}`
+        );
+      } else if (item.status !== "ALL" && item.date === "") {
+        console.log(`/orders/in-store-orders/index-desc?page=${item.PageNumber}&status=${item.status}`);
+        resp = await axios.get(
+          `/orders/in-store-orders/index-desc?page=${item.PageNumber}&status=${item.status}`
+        );
+        console.log("response", resp);
+      } else if (item.status === "ALL" && item.date !== "") {
+        resp = await axios.get(
+          `/orders/in-store-orders/index-desc?page=${item.PageNumber}&date=${item.date}`
+        );
+      } else {
+        resp = await axios.get(`/orders/in-store-orders/index-desc?page=${item.PageNumber}`);
+      }
+      console.log("resp", resp);
+      return resp.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -37,9 +71,7 @@ export const deleteInStoreOrder = createAsyncThunk(
   async (orderId, { rejectWithValue }) => {
     // console.log(item);
     try {
-      await axios.delete(
-        `/orders/in-store-orders/delete/${orderId}`
-      );
+      await axios.delete(`/orders/in-store-orders/delete/${orderId}`);
       return orderId;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -62,14 +94,15 @@ export const addItemToCurrentOrder = createAsyncThunk(
   async ({ orderId, productId }, { rejectWithValue }) => {
     console.log("orderId", orderId);
     try {
-      console.log(localStorage.getItem("Storely"))
+      console.log(localStorage.getItem("Storely"));
       if (localStorage.getItem("Storely"))
-      await axios.post(
-        `/orders/in-store-orders/store/${orderId}/${productId}/?quantity=1`
-      );
-      else       await axios.post(
-        `/orders/online-orders/store/${orderId}/${productId}/?quantity=1`
-      );
+        await axios.post(
+          `/orders/in-store-orders/store/${orderId}/${productId}/?quantity=1`
+        );
+      else
+        await axios.post(
+          `/orders/online-orders/store/${orderId}/${productId}/?quantity=1`
+        );
       return { orderId: orderId, productId: productId };
     } catch (error) {
       console.log(error);
@@ -80,7 +113,7 @@ export const addItemToCurrentOrder = createAsyncThunk(
 
 export const deleteItemFromOrder = createAsyncThunk(
   "deleteItemFromOrder",
-  async ({ orderId, productId, method }, { rejectWithValue }) => {;
+  async ({ orderId, productId, method }, { rejectWithValue }) => {
     try {
       if (method === "Storely")
         await axios.delete(
@@ -98,9 +131,9 @@ export const deleteItemFromOrder = createAsyncThunk(
 );
 export const UpdateQuantity = createAsyncThunk(
   "UpdateQuantity",
-  async ({ orderId, productId, quantity ,method}, { rejectWithValue }) => {
+  async ({ orderId, productId, quantity, method }, { rejectWithValue }) => {
     try {
-      if (method==="Storely")
+      if (method === "Storely")
         await axios.put(
           `/orders/in-store-orders/update/${orderId}/${productId}?quantity=${quantity}`
         );
@@ -120,9 +153,7 @@ export const deleteOnlineOrder = createAsyncThunk(
   async (orderId, { rejectWithValue }) => {
     // console.log(item);
     try {
-      await axios.delete(
-        `/orders/online-orders/delete/${orderId}`
-      );
+      await axios.delete(`/orders/online-orders/delete/${orderId}`);
       return orderId;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -204,8 +235,8 @@ const orderSlice = createSlice({
         state.orderLoading = false;
         state.orderError = true;
       });
-      // delete onine order
-      builder
+    // delete onine order
+    builder
       .addCase(deleteOnlineOrder.fulfilled, (state, action) => {
         removeOrder(action.payload); //action.payload is the order id
         state.orderError = false;
@@ -254,6 +285,7 @@ const orderSlice = createSlice({
     // remove item from order
     builder
       .addCase(deleteItemFromOrder.fulfilled, (state, action) => {
+        console.log();
         deleteProductFromCurrentOrder(action.payload);
         state.orderError = false;
         state.itemLoading = false;
@@ -267,6 +299,7 @@ const orderSlice = createSlice({
       })
       .addCase(deleteItemFromOrder.rejected, (state, _) => {
         state.itemLoading = false;
+        state.orderLoading = false;
         state.orderError = true;
       });
     // update quantity of a product in an order

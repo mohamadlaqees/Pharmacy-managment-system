@@ -14,11 +14,18 @@ function InStoreOrders() {
 
   const userId = userData.id; // authenticated Employee's id
   const dispatch = useDispatch();
-  const items = ["Pending", "Review", "progressing", "Paid"].map((status) => {
+  const [status, setstatus] = useState("ALL");
+  const [date, setdate] = useState("");
+  const items = ["progressing", "Paid"].map((status) => {
     return {
       key: status,
       label: (
-        <li key={status} onClick={() => {}}>
+        <li
+          key={status}
+          onClick={() => {
+            setstatus(status);
+          }}
+        >
           {status.toUpperCase()}
         </li>
       ),
@@ -26,13 +33,11 @@ function InStoreOrders() {
   });
   useEffect(() => {
     if (userId !== undefined) {
-      console.log("fetching orders");
-      dispatch(fetchInStoreOrders(PageNumber));
-      console.log("fetched");
+      dispatch(fetchInStoreOrders({PageNumber,date,status}));
     } else {
       console.log("userId is  not defined");
     }
-  }, [PageNumber, dispatch, userId, total]);
+  }, [PageNumber, dispatch, userId, total,status,date]);
   const antIcon = (
     <LoadingOutlined
       style={{
@@ -46,14 +51,6 @@ function InStoreOrders() {
     return (
       <center className="d-flex justify-content-center   align-items-center">
         <Spin indicator={antIcon} spinning={orderLoading} />
-      </center>
-    );
-  }
-  console.log("orders")
-  if (orders.length===0) {
-    return (
-      <center className="d-flex justify-content-center   align-items-center">
-        <h3>yow have no orders made yet </h3>
       </center>
     );
   }
@@ -77,14 +74,7 @@ function InStoreOrders() {
             </Button>
           </Dropdown>
         </Col>
-        <Col>
-          <Alert
-            className="d-flex justify-content-center align-items-center "
-            style={{ maxHeight: "40px" }}
-          >
-            username
-          </Alert>
-        </Col>
+
         <Col>
           <button
             className="p-2 border-2 border-main bg-main text-white rounded-2"
@@ -92,12 +82,12 @@ function InStoreOrders() {
               dispatch(createNewOrder());
             }}
           >
-            Add new order
+            Add new order +
           </button>
         </Col>
       </Row>
-      {console.log(orders)}
 
+      {console.log(orders)}
       {
         // map orders from slice
         orders.map((data) => {
@@ -110,6 +100,7 @@ function InStoreOrders() {
               method={data.method}
               orderId={data.order_id}
               products={data.products}
+              imgs={data.prescriptions}
             />
           );
         })
