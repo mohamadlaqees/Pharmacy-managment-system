@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   errorE: null,
   successE: null,
+  employees: [],
 };
 
 export const getEmployees = createAsyncThunk(
@@ -11,7 +12,7 @@ export const getEmployees = createAsyncThunk(
   async (item, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const { data } = await axios.post("auth/logout");
+      const { data } = await axios.get("/employees");
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -20,7 +21,7 @@ export const getEmployees = createAsyncThunk(
 );
 
 const emplyeesSlice = createSlice({
-  name: "employee",
+  name: "employees",
   initialState,
   reducers: {
     resetL: (state, action) => {
@@ -37,7 +38,8 @@ const emplyeesSlice = createSlice({
     builder.addCase(getEmployees.fulfilled, (state, action) => {
       state.errorE = null;
       state.loading = false;
-      state.successE = action.payload.message;
+      state.employees = action.payload.data;
+      console.log(action);
     });
     builder.addCase(getEmployees.rejected, (state, action) => {
       state.errorE = action.payload.response.data.message;
