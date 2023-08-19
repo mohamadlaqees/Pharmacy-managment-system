@@ -47,7 +47,9 @@ export const fetchInStoreOrders = createAsyncThunk(
           `/orders/in-store-orders/index-desc?page=${item.PageNumber}&date=${item.date}&status=${item.staus}`
         );
       } else if (item.status !== "ALL" && item.date === "") {
-        console.log(`/orders/in-store-orders/index-desc?page=${item.PageNumber}&status=${item.status}`);
+        console.log(
+          `/orders/in-store-orders/index-desc?page=${item.PageNumber}&status=${item.status}`
+        );
         resp = await axios.get(
           `/orders/in-store-orders/index-desc?page=${item.PageNumber}&status=${item.status}`
         );
@@ -57,7 +59,9 @@ export const fetchInStoreOrders = createAsyncThunk(
           `/orders/in-store-orders/index-desc?page=${item.PageNumber}&date=${item.date}`
         );
       } else {
-        resp = await axios.get(`/orders/in-store-orders/index-desc?page=${item.PageNumber}`);
+        resp = await axios.get(
+          `/orders/in-store-orders/index-desc?page=${item.PageNumber}`
+        );
       }
       console.log("resp", resp);
       return resp.data;
@@ -73,6 +77,33 @@ export const deleteInStoreOrder = createAsyncThunk(
     try {
       await axios.delete(`/orders/in-store-orders/delete/${orderId}`);
       return orderId;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+export const rejectOrder = createAsyncThunk(
+  "rejectOrder",
+  async ({ orderId, reason }, { rejectWithValue }) => {
+    // console.log(item);
+    try {
+      await axios.put(
+        `/orders/online-orders/reject/${orderId}?reason=${reason}`
+      );
+      return orderId;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+// fetch boys
+export const fetchDeliveryBoys = createAsyncThunk(
+  "fetchDeliveryBoys",
+  async (_, { rejectWithValue }) => {
+    try {
+      const resp = await axios.put(`/orders/delivery_boys`);
+      console.log("delivery boys",resp.data.delivery_boys)
+      return resp.data.delivery_boys;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -172,6 +203,7 @@ const orderSlice = createSlice({
     itemLoading: false,
     orders: [],
     total: 10,
+    delivery_boys: [],
   },
   reducers: {
     resetO: (state, action) => {
@@ -314,6 +346,41 @@ const orderSlice = createSlice({
       })
       .addCase(UpdateQuantity.rejected, (state, _) => {
         state.itemLoading = false;
+        state.orderError = true;
+      });
+    //rejec order
+    builder
+      .addCase(rejectOrder.fulfilled, (state, _) => {
+        state.orderError = false;
+        state.itemLoading = false;
+        state.orderSuccess = true;
+        state.total += 1;
+      })
+      .addCase(rejectOrder.pending, (state, _) => {
+        state.itemLoading = true;
+        state.orderError = false;
+      })
+      .addCase(rejectOrder.rejected, (state, _) => {
+        state.itemLoading = false;
+        state.orderError = true;
+      }); //fetchDeliveryBoys
+    builder
+      .addCase(fetchDeliveryBoys.fulfilled, (state, action) => {
+        state.orderError = false;
+        state.itemLoading = false;
+        state.orderSuccess = true;
+        state.orderLoading = false;
+        state.delivery_boys = action.payload;
+        state.total += 1;
+      })
+      .addCase(fetchDeliveryBoys.pending, (state, _) => {
+        state.itemLoading = true;
+        state.orderLoading = true;
+        state.orderError = false;
+      })
+      .addCase(fetchDeliveryBoys.rejected, (state, _) => {
+        state.itemLoading = false;
+        state.orderLoading = false;
         state.orderError = true;
       });
   },

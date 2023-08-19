@@ -3,13 +3,18 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import ProductTile from "./ProductTile";
 import { Input } from "antd/lib";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteInStoreOrder, deleteOnlineOrder } from "../states/orderSlice";
+import {
+  deleteInStoreOrder,
+  deleteOnlineOrder,
+  rejectOrder,
+} from "../states/orderSlice";
 import { useNavigate } from "react-router-dom";
-import { Spin, message } from "antd";
+import { Button, Dropdown, Spin, message } from "antd";
 import ImageUploader from "./ImageUploader";
 import axios from "./axios";
 import { isOrderInData } from "../utils/AddToCurrentOrder";
 function OrderCard({
+  delivery_boys = [],
   products = [],
   status,
   date,
@@ -35,6 +40,31 @@ function OrderCard({
   const [checkoutButton, setcheckoutButton] = useState(
     orderId === parseInt(localStorage.getItem("currentOrderId"))
   );
+  const items = delivery_boys.map((boy1) => {
+    return {
+      key: boy1,
+      label: (
+        <li
+          className="m-1"
+          key={boy1.first_name}
+          onClick={() => {
+            axios
+              .put(`orders/assign?employee_id=${boy1.id}&order_id=${orderId}`)
+              .then((response1) => {
+                console.log(response1.data);
+                return axios.put(`orders/online-orders/dispatch/${orderId}`);
+              })
+              .then((response2) => {})
+              .catch((error) => {
+                message.error("something went wrong");
+              });
+          }}
+        >
+          {boy1.first_name}
+        </li>
+      ),
+    };
+  });
   async function removePrescriptions() {
     await axios
       .delete(`/orders/in-store-orders/prescriptions/delete/${orderId}`)
@@ -79,8 +109,8 @@ function OrderCard({
   const handleExpand = () => {
     setExpanded(!expanded);
   };
-  function handleReject(){
-    // dispatch(rejectOrder(orderId))
+  function handleReject() {
+    dispatch(rejectOrder({ orderId: orderId, reason: Reason }));
   }
 
   return (
@@ -199,33 +229,37 @@ function OrderCard({
           {method === "Online" ? (
             status === "Review" ? (
               <div>
-                <button className="bg-main text-white p-2 me-5 rounded">
-                  Accept
-                </button>
-                
-                  <button className="bg-danger p-2 text-white rounded"
-                  onClick={()=>{
-                    handleReject()
+                <Dropdown
+                  menu={{
+                    items,
                   }}
-                  >
-                    Reject
-                  </button>
-                  <input
-                    type="text"
-                    placeHolder="Reason to reject"
-                    className="border-2 border-danger rounded h-10"
-                    onChange={(e) => {
-                      setReason(e.target.value);
-                    }}
-                  />
-              </div>
-            ) : (
-              status !== "Rejected" && (
-                <button className="bg-warning text-white p-2 rounded">
-                  Dispatch
+                  placement="bottom"
+                  arrow
+                >
+                  <Button size="large" className=" hover:text-white mr-10 ">
+                    Select delivery agent
+                  </Button>
+                </Dropdown>
+                <button
+                  className="bg-danger p-2 text-white rounded mr-5 px-3"
+                  onClick={() => {
+                    if (Reason !== "") {
+                      handleReject();
+                    }
+                  }}
+                >
+                  Reject
                 </button>
-              )
-            )
+                <input
+                  type="text"
+                  placeHolder="Reason to reject"
+                  className="border-2 border-danger rounded h-10"
+                  onChange={(e) => {
+                    setReason(e.target.value);
+                  }}
+                />
+              </div>
+            ) : null
           ) : null}
           <button
             onClick={() => {
