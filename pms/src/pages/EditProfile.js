@@ -156,7 +156,7 @@ function EditProfile() {
     dispatch(logout());
     localStorage.removeItem("email");
     localStorage.removeItem('type')
-    navigate("/ph-login");
+    navigate("/");
     msg(
       "success",
       "We are sorry to hear that you want to leave us. On the bright side,check your mail in case you want to restore your account."
@@ -212,7 +212,7 @@ function EditProfile() {
             <div className="d-grid gap-2">
               <button
                 type="submit"
-                className=" mt-2 p-1 border-SReg border-2 text-SReg rounded-md hover:text-white hover:bg-SReg hover:border-SReg duration-.3s  text-center"
+                className=" mt-2 p-1 border-main border-2 text-SReg rounded-md hover:text-white hover:bg-Hmain hover:border-Hmain duration-.3s  text-center"
               >
                 Save
               </button>

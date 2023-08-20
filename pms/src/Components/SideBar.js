@@ -73,7 +73,7 @@ function SideBar() {
             >
               <NavLink className="route" to={"supplierContent"}>
                 <i class="fa-solid fa-truck"></i>
-                {check ? "" : "Supplier"}
+                {check ? "" : "Add products"}
               </NavLink>
             </li>
             <li className={`link`}>

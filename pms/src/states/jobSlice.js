@@ -7,6 +7,7 @@ const initialState = {
   applications: [],
   application: [],
   CV: null,
+  loadingA: false,
 };
 
 export const getJobAppliactions = createAsyncThunk(
@@ -144,11 +145,11 @@ const jobSlice = createSlice({
     builder.addCase(acceptApplicant.pending, (state, action) => {
       state.successJ = null;
       state.errorJ = null;
-      state.loading = true;
+      state.loadingA = true;
     });
     builder.addCase(acceptApplicant.fulfilled, (state, action) => {
       state.errorJ = null;
-      state.loading = false;
+      state.loadingA = false;
       state.successJ = action.payload.message;
       console.log(action);
     });

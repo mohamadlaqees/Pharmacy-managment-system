@@ -55,19 +55,15 @@ function SupplyProducts() {
   }, [dispatch, id]);
 
   const purchaseHandler = () => {
-    if (quantity < 10) {
-      dispatch(
-        purshaceProducts({
-          pId: id,
-          quantity,
-          type: pricedProductsDetails.unit,
-          eId: userId,
-        })
-      );
-      dispatch(resetL());
-    } else {
-      msg("error", `You can't purchase this huge quantity`);
-    }
+    dispatch(
+      purshaceProducts({
+        pId: id,
+        quantity,
+        type: pricedProductsDetails.unit,
+        eId: userId,
+      })
+    );
+    dispatch(resetL());
   };
 
   return (

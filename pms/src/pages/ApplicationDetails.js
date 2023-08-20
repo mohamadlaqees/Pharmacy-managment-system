@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function ApplicationDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { application, errorJ, successJ, loading } = useSelector(
+  const { application, errorJ, successJ, loadingA } = useSelector(
     (state) => state.jobSlice
   );
   const navigate = useNavigate();
@@ -126,40 +126,20 @@ function ApplicationDetails() {
         <div className="flex mt-4 gap-2 ">
           <div className="d-grid  ">
             <Loading
-              loading={loading}
+              loading={loadingA}
               error={errorJ}
               clss={
-                "  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-green-500  rounded-md  hover:text-white hover:bg-green-500  duration-.3s  text-center"
+                "  p-1 border-green-500 border-2 text-green-500 rounded-md hover:text-white  duration-.3s"
               }
             >
               <button
                 type="submit"
                 className={` ${
                   show1 === true ? "block" : "hidden"
-                }  pt-2 pl-5 pr-5 pb-2 border-green-500 border-2 text-green-500  rounded-md  hover:text-white hover:bg-green-500  duration-.3s  text-center`}
+                }  p-1 border-green-500 border-2 text-green-500 rounded-md hover:text-white  duration-.3s"`}
                 onClick={() => acceptHanlder()}
               >
                 Acceptance{" "}
-              </button>
-            </Loading>
-          </div>
-
-          <div className="d-grid">
-            <Loading
-              loading={loading}
-              error={errorJ}
-              clss={
-                "  pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-red-500 rounded-md  hover:text-white hover:bg-red-500  duration-.3s  text-center"
-              }
-            >
-              <button
-                type="submit"
-                className={`${
-                  show2 === true ? "block" : "hidden"
-                } pt-2 pl-5 pr-5 pb-2 border-red-500 border-2 text-red-500 rounded-md  hover:text-white hover:bg-red-500  duration-.3s  text-center`}
-                onClick={() => rejectHanlder()}
-              >
-                Rejection{" "}
               </button>
             </Loading>
           </div>
