@@ -1,4 +1,5 @@
 {
+  "homepage": "https://mohamadlaqees.github.io/Pharmacy-managment-system/",
   "dependencies": {
     "bootstrap": "^5.2.3",
     "react-bootstrap": "^2.7.4"
