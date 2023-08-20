@@ -122,7 +122,7 @@ export default function Login() {
         </div>
         <div className="h-full">
           <img
-            src="./images/a.png"
+            src="../images/a.png"
             alt=""
             className="h-photo hidden xl:block "
           />
