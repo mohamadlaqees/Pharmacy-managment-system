@@ -2,7 +2,7 @@
   "homepage": "https://mohamadlaqees.github.io/Pharmacy-managment-system/",
   "name": "pms",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@emotion/react": "^11.11.1",
