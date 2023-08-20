@@ -89,7 +89,7 @@ function App() {
           </>
         </Route>
 
-        <Route path="/Pharmacy-managment-system" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="password-reset/:token" element={<ResetPassword />} />
       </Routes>
