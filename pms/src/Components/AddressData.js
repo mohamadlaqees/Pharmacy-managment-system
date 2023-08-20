@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Button, Col, Container } from "react-bootstrap";
+// "babel-preset-react-app": "@babel/plugin-proposal-private-property-in-object",
 
 function AddressData() {
   return (
