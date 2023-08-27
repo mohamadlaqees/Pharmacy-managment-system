@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { TimePicker } from "antd";
+import user from '../images/user.jpg'
 
 function EmployeesDetails() {
   const [Saturday, setSaturday] = useState([]);
@@ -18,7 +19,7 @@ function EmployeesDetails() {
     <div className="page flex gap-4">
       <div className="rounded-md bg-white shadow-md p-4 h-form w-64  mt-24  ">
         <div className="p-3">
-          <img src="/images/user.jpg" alt="" className="rounded-full" />
+          <img src={user} alt="" className="rounded-full" />
         </div>
         <span className="p-2 block text-center font-bold">Mohammad laqees</span>
         <span className=" block text-center text-font2">User</span>

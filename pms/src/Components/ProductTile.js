@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { InputNumber } from "antd";
+import med from '../images/med.jpg'
 // import { removeItem, updateQuantity } from "../states/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -31,7 +32,7 @@ function ProductTile({ ProductName, data, userId, status }) {
         <Container>
           <Row>
             <Col sm={12} md={7} className="d-flex justify-content-start">
-              <img src="/images/med.jpg" className=" w-20" alt={ProductName} />
+              <img src={med} className=" w-20" alt={ProductName} />
               <div className="ml-2">
                 <div className="fw-bold">{ProductName}</div>
                 {price}

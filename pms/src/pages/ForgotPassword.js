@@ -6,6 +6,7 @@ import { forgetPassword, resetA } from "../states/authSlice";
 import Loading from "../Components/loading";
 import Form from "react-bootstrap/Form";
 import { useFormik } from "formik";
+import background from '../images/a.png'
 import * as Yup from "yup";
 export default function ForgotPassword() {
   const { errorA, successA, loadingA } = useSelector(
@@ -104,7 +105,7 @@ export default function ForgotPassword() {
         </div>
         <div className="h-full">
           <img
-            src="/images/a.png"
+            src={background}
             alt=""
             className="h-photo hidden xl:block "
           />

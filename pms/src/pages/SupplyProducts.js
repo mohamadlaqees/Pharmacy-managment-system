@@ -6,6 +6,8 @@ import { getProdcutDetails, getRate } from "../states/storeSlice";
 import { message } from "antd";
 import Amount from "../Components/Amount";
 import Loading from "../Components/loading";
+import med from '../images/med.jpg'
+
 import {
   getPricedProductsDetails,
   purshaceProducts,
@@ -70,7 +72,7 @@ function SupplyProducts() {
     <div className="page2">
       <div className="flex flex-wrap gap-5 justify-center items-center max-h-mCont">
         <div className=" w-64 h-64 sm:w-form sm:h-form rounded-md p-4 ">
-          <img src="/images/med.jpg" alt="" />
+          <img src={med} alt="" />
         </div>
         <div>
           <div className="p-4 w-details   sm:w-form sm:max-h-mInfo">

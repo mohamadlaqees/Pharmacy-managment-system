@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import Loading from "../Components/loading";
 import { acceptApplicant, resetJ, showAppliaction } from "../states/jobSlice";
 import { useNavigate } from "react-router-dom";
-
+import user from "../images/user.jpg";
+import res from "../images/resume.jpg";
 function ApplicationDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -63,7 +64,7 @@ function ApplicationDetails() {
         <div className="flex gap-4">
           <div className="rounded-md bg-slate-200 shadow-md  w-72 h-form    ">
             <div className="p-3">
-              <img src="/images/user.jpg" alt="" className="rounded-full" />
+              <img src={user} alt="" className="rounded-full" />
             </div>
             <span className="p-2 block text-center text-font2">Jop title:</span>
             <span className="p-2 block text-center text-secondry text-lg">
@@ -104,7 +105,7 @@ function ApplicationDetails() {
             <div className="w-1/2">
               <div className="text-font1 w-job text-center ">
                 <img
-                  src={"/images/resume.jpg"}
+                  src={res}
                   alt=""
                   className="mr-auto ml-auto rounded-md w-64 h-64"
                 />

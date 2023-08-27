@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import user from '../images/user.jpg'
 function AllApplications({ data }) {
   return data?.map((e, inx) => {
     return (
@@ -19,7 +19,7 @@ function AllApplications({ data }) {
         <div className="flex gap-3">
           <div>
             <img
-              src="/images/user.jpg"
+              src={user}
               alt=""
               className="rounded-full w-20 h-20"
             />

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { message, Pagination } from "antd";
 import AllProducts from "../Components/AllProducts";
 import { useDispatch, useSelector } from "react-redux";
+import med from '../images/med.jpg'
 import {
   getFilteredProducts,
   getProdcut,
@@ -152,7 +153,7 @@ function Store() {
   return (
     <div className="page">
       <div className=" grid grid-cols-fluid grid-rows-fluid    ">
-        <AllProducts data={data} img={"/images/med.jpg"}></AllProducts>
+        <AllProducts data={data} img={med}></AllProducts>
       </div>
       <div className="mt-3 p-2   ">
         <ul className="flex justify-center gap-3 ">

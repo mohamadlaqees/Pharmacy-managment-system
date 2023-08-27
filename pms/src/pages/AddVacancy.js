@@ -7,7 +7,7 @@ import Loading from "../Components/loading";
 import { useDispatch, useSelector } from "react-redux";
 import { addVaccancies, resetJ } from "../states/jobSlice";
 import { useNavigate } from "react-router-dom";
-
+import vac from '../images/vacancy.png'
 function AddVacancy() {
   const { loading, successJ, errorJ } = useSelector((state) => state.jobSlice);
   const { userId } = useSelector((state) => state.authSlice);
@@ -123,7 +123,7 @@ function AddVacancy() {
             <div className="rounded-md bg-white shadow-md  w-72 h-form    ">
               <div className=" text-center p-1">
                 <img
-                  src={"/images/vacancy.png"}
+                  src={vac}
                   alt=""
                   className="rounded-full w-64 h-64"
                 />

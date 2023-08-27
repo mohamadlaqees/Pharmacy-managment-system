@@ -10,6 +10,8 @@ import {
   getPricedProducts,
   searchPricedProdctsByName,
 } from "../states/supplySlice";
+import med from '../images/med.jpg'
+
 
 function Supplier() {
   const {
@@ -118,7 +120,7 @@ function Supplier() {
                       <div className="flex gap-3 flex-1">
                         <div>
                           <img
-                            src="/images/med.jpg"
+                            src={med}
                             alt=""
                             className="rounded-full w-20 h-20"
                           />

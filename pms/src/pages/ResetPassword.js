@@ -7,6 +7,8 @@ import Loading from "../Components/loading";
 import Form from "react-bootstrap/Form";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import background from '../images/a.png'
+
 export default function ResetPassword() {
   const { errorA, successA, loadingA } = useSelector(
     (state) => state.authSlice
@@ -120,7 +122,7 @@ export default function ResetPassword() {
         </div>
         <div className="h-full">
           <img
-            src="/images/a.png"
+            src={background}
             alt=""
             className="h-photo hidden xl:block "
           />

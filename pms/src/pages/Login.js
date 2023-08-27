@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../states/loginSlice";
 import { getUserData } from "../states/authSlice";
 import Loading from "../Components/loading";
+import background from '../images/a.png'
 
 export default function Login() {
   const { errorL, successL, loading } = useSelector(
@@ -122,7 +123,7 @@ export default function Login() {
         </div>
         <div className="h-full">
           <img
-            src="/images/a.png"
+            src={background}
             alt=""
             className="h-photo hidden xl:block "
           />

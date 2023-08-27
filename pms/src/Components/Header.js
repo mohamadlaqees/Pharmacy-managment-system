@@ -6,6 +6,8 @@ import { Checkbox } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import user from '../images/user.jpg'
+
 import { Rate } from "antd";
 import {
   getProdcut,
@@ -433,7 +435,7 @@ function Header({ set, check }) {
             <div className="mr-4">
               <div className="p-1">
                 <img
-                  src={image ? image : "/images/user.jpg"}
+                  src={image ? image : user}
                   alt=""
                   className="rounded-full min-w-fit w-8 min-h-fit h-8"
                 />
