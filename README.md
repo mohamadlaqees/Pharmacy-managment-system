@@ -103,16 +103,4 @@ Adjust names to match your backend and slices.
 - Use the centralized axios instance (if present) to configure base URL and interceptors.
 - Keep forms in Formik + Yup for consistent validation.
 
-## CI / Deployment
-- Provide a GitHub Actions workflow to install dependencies, run tests and build the app (example workflow can be added at .github/workflows/ci.yml).
-- Deploy the `pms/build` folder to static hosts (Netlify, Vercel, S3 + CloudFront) or integrate into a full-stack deployment.
 
-## Contributing
-- Create issues for bugs/feature requests.
-- Use feature branches and pull requests.
-- Run tests and lint before opening a PR.
-
-## License
-- Add a LICENSE file (e.g., MIT) and include license summary here.
-
-If desired, a condensed README can be placed at the repository root linking to this file and to pms/src for developer docs.
