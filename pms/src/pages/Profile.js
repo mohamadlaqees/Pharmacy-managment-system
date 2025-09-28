@@ -47,7 +47,7 @@ function Profile() {
           </div>
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block"> Budget</span>
-            <span className="text-font2  block">{`${userData.salary}`}</span>
+            <span className="text-font2  block">{`${userData.money?userData.money:userData.salary?userData.salary:'no budget'}`}</span>
           </div>
           <div className="flex justify-around mb-2 border-b-2 border-slate-100 p-3 text-font1">
             <span className="block">Mobile</span>

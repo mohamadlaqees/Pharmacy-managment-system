@@ -52,7 +52,7 @@ function EditProfile() {
     gender: Yup.string().required("Required"),
     firstName: Yup.string().required("Required").min(2, "Too Short!"),
     lastName: Yup.string().required("Required").min(2, "Too Short!"),
-    budget: Yup.number().required("Required"),
+    // budget: Yup.number().required("Required"),
     mobile: Yup.number().notRequired(),
     address: Yup.string().required("Required"),
     date: Yup.date().required("Required"),
@@ -82,7 +82,7 @@ function EditProfile() {
           : userData.gender === "3"
           ? "I prefer not to say"
           : userData.gender,
-      budget: userData.salary,
+      budget: userData.money?userData.money:userData.salary?userData.salary:'no budget',
       mobile: userData.mobile,
       address: userData.address,
       date: userData.date_of_birth,

@@ -252,6 +252,7 @@ const authSlice = createSlice({
       state.errorA = null;
       state.loadingA = false;
       state.userData = action.payload;
+      console.log(action.payload)
       state.userId = action.payload.id;
       state.employeeName = `${action.payload.first_name} ${action.payload.last_name}`;
       localStorage.setItem("role", action.payload.role);
